@@ -7,9 +7,6 @@
 
 package frc.robot;
 
-import frc.robot.commands.BallArm.*;
-import frc.robot.commands.Elevator.*;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -54,21 +51,11 @@ public class OperatorInterface {
     operator10 = new JoystickButton(operatorStick, 10);
     // operator11 = new JoystickButton(operatorStick, 11);
     operator12 = new JoystickButton(operatorStick, 12);
-
-    left6.whenPressed(new ShootBallSequence());
-
-    right3.whenPressed(new TiltElevatorForward());
-    right2.whenPressed(new TiltElevatorBack());
   
     // operator7.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_HIGH_PRESET));
     // operator9.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_MIDDLE_PRESET));
     // operator11.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_LOW_PRESET));
-    
-    operator3.whenPressed(new ContractBallArm());
-    operator5.whenPressed(new ExtendBallArm());
-
-    operator10.whenPressed(new TiltBallArmUp());
-    operator12.whenPressed(new TiltBallArmDown());
+  
   }
 
   /**
