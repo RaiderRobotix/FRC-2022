@@ -7,7 +7,7 @@
 
 package frc.robot.commands.DriveBase;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveBase;
 
@@ -38,7 +38,7 @@ public class Turn extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  private void execute() {
     if ((turningClockwise && drives.getGyroAngle() > targetAngle)
       || (!turningClockwise && drives.getGyroAngle() < targetAngle)
       || (Math.abs(drives.getGyroAngle() - targetAngle) < Constants.TURN_TOLERANCE)) {

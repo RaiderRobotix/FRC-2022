@@ -7,10 +7,10 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autonomous.*;
+//import frc.robot.commands.Autonomous.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -28,14 +28,13 @@ import java.util.ArrayList;
  */
 public class Robot extends TimedRobot {
 
-  private final OperatorInterface oi;
   private final Compressor compressor;
 
   private final DriveBase drives;
-  private final Vision vision;
+  //private final Vision vision;
 
   private SendableChooser<Command> autonomousChooser;
-  private Command autonomousCommand;
+  //private Command autonomousCommand;
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -43,13 +42,11 @@ public class Robot extends TimedRobot {
    */
 
   Robot() {
-    this.oi = OperatorInterface.getInstance();
 
     this.compressor = new Compressor(Constants.PCM_CAN_ADDRESS);
     this.compressor.setClosedLoopControl(true);
 
     this.drives = DriveBase.getInstance();
-    this.vision = Vision.getInstance();
   }
 
   @Override
@@ -78,7 +75,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    Scheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
 
     ArrayList<String[]> subsystemCanIdFirmwarePairs = new ArrayList<>();
     subsystemCanIdFirmwarePairs.addAll(this.drives.getCanIdFirmwarePairs());
@@ -102,9 +99,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     super.autonomousInit();
-
-    autonomousCommand = autonomousChooser.getSelected();
-    autonomousCommand.start();
   }
 
   /**
@@ -112,7 +106,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
   }
 
   /**
@@ -120,7 +114,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    Scheduler.getInstance().run();
+    CommandScheduler.getInstance().run();
     
     SmartDashboard.putNumber("Ultrasonic", this.drives.getUltrasonicDistance());
   }
