@@ -4,7 +4,7 @@ import frc.robot.Constants;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 
 import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.CANEncoder;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 import java.util.ArrayList;
 
-public class DriveBase extends Subsystem {
+public class DriveBase implements Subsystem {
   
   private static DriveBase m_instance;
 
@@ -23,8 +23,8 @@ public class DriveBase extends Subsystem {
   private final CANSparkMax rightFrontSpark;
   private final CANSparkMax rightBackSpark;
 
-  private final CANEncoder leftEncoder;
-  private final CANEncoder rightEncoder;
+  private final RelativeEncoder leftEncoder;
+  private final RelativeEncoder rightEncoder;
 
   private double leftDistance;
   private double rightDistance;

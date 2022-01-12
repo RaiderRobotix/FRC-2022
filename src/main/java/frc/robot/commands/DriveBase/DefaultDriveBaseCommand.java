@@ -7,11 +7,11 @@
 
 package frc.robot.commands.DriveBase;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveBase;
 
-public class DefaultDriveBaseCommand extends Command {
+public class DefaultDriveBaseCommand extends CommandBase {
 
   private DriveBase drives;
   private OperatorInterface oi;
@@ -19,7 +19,7 @@ public class DefaultDriveBaseCommand extends Command {
   public DefaultDriveBaseCommand() {
     // Use requires() here to declare subsystem dependencies
     drives = DriveBase.getInstance();
-    requires(drives);
+    addRequirements(drives);
   }
 
   // Called just before this Command runs the first time

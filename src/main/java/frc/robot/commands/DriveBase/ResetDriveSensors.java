@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands.DriveBase;
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj2.command.TimedCommand;
 import frc.robot.subsystems.DriveBase;
 
 /**

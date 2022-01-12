@@ -8,11 +8,11 @@
 package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveBase;
 
-public class DriveStraight extends Command {
+public class DriveStraight extends CommandBase {
 
   private DriveBase drives;
   private boolean goingForward;
@@ -28,7 +28,7 @@ public class DriveStraight extends Command {
     goingForward = targetDistance > 0;
 
     drives = DriveBase.getInstance();
-    requires(drives);
+    addRequirements(drives);
   }
 
   // Called just before this Command runs the first time
