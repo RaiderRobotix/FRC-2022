@@ -6,12 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands.DriveBase;
+
+//TODO find a equivilant of wpilibj.command.TimedCommand for wpilibj2
 import edu.wpi.first.wpilibj2.command.TimedCommand;
+
 import frc.robot.subsystems.DriveBase;
 
 /**
  * Add your docs here.
  */
+
+//TODO find a equivialant class
 public class ResetDriveSensors extends TimedCommand {
   
   private DriveBase drives;
