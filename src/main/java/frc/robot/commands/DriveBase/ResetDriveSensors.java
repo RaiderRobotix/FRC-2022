@@ -28,25 +28,21 @@ public class ResetDriveSensors extends TimedCommand {
   }
 
   // Called just before this Command runs the first time
-  @Override
   protected void initialize() {
     drives.resetEncoders();
     drives.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
-  @Override
   protected void execute() {
   }
 
   // Called once after timeout
-  @Override
   protected void end() {
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
-  @Override
   protected void interrupted() {
   }
 }

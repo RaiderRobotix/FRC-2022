@@ -126,11 +126,8 @@ public class DriveBase implements Subsystem {
     return pairs;
   }
 
-  @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     setDefaultCommand(new DefaultDriveBaseCommand());
   }
-  // DriveBase.setDefaultCommand(new DefaultDriveBaseCommand());
-  // CommandScheduler.getInstance().setDefaultCommand
 }
