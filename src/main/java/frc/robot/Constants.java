@@ -89,8 +89,8 @@ public final class Constants {
   public static final double ALLOWED_ELEVATOR_DEVIATION = 1.0; // in inches
   
   // ELEVATOR PRESET HEIGHT POSITIONS
-  public static final double ELEVATOR_LOW_PRESET = 1.0; // TODO
-  public static final double ELEVATOR_MIDDLE_PRESET = 56.0; // TODO
+  public static final double ELEVATOR_LOW_PRESET = 1.0; // TODOs
+  public static final double ELEVATOR_MIDDLE_PRESET = 56.0; // TODOs
   public static final double ELEVATOR_HIGH_PRESET = 84; // TODOs
 
   // BALL ARM WRIST PRESET POSITIONS

@@ -8,7 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+// import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class OperatorInterface {
@@ -20,17 +20,17 @@ public class OperatorInterface {
   private final Joystick rightStick;
   private final Joystick operatorStick;
 
-  private final JoystickButton 
-    operator3,
-    operator5,
-    // operator7,
-    // operator9,
-    operator10,
-    // operator11,
-    operator12,
-    left6,
-    right2,
-    right3;
+  // private final JoystickButton 
+  //   operator3,
+  //   operator5,
+  //   operator7,
+  //   operator9,
+  //   operator10,
+  //   operator11,
+  //   operator12,
+  //   left6,
+  //   right2,
+  //   right3;
 
 
   private OperatorInterface() {
@@ -39,18 +39,18 @@ public class OperatorInterface {
     this.rightStick = new Joystick(Constants.RIGHT_JOYSTICK_PORT);
     this.operatorStick = new Joystick(Constants.OPERATOR_JOYSTICK_PORT);
     
-    left6 = new JoystickButton(leftStick, 6);
+    // left6 = new JoystickButton(leftStick, 6);
 
-    right2 = new JoystickButton(rightStick, 2);
-    right3 = new JoystickButton(rightStick, 3);
+    // right2 = new JoystickButton(rightStick, 2);
+    // right3 = new JoystickButton(rightStick, 3);
 
-    operator3 = new JoystickButton(operatorStick, 3);
-    operator5 = new JoystickButton(operatorStick, 5);
+    // operator3 = new JoystickButton(operatorStick, 3);
+    // operator5 = new JoystickButton(operatorStick, 5);
     // operator7 = new JoystickButton(operatorStick, 7);
     // operator9 = new JoystickButton(operatorStick, 9);
-    operator10 = new JoystickButton(operatorStick, 10);
+    // operator10 = new JoystickButton(operatorStick, 10);
     // operator11 = new JoystickButton(operatorStick, 11);
-    operator12 = new JoystickButton(operatorStick, 12);
+    // operator12 = new JoystickButton(operatorStick, 12);
   
     // operator7.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_HIGH_PRESET));
     // operator9.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_MIDDLE_PRESET));
