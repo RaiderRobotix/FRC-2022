@@ -33,7 +33,7 @@ public class DriveStraight extends CommandBase {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     this.isDone = false;
     this.drives.resetEncoders();
     this.drives.resetGyro();
@@ -45,7 +45,7 @@ public class DriveStraight extends CommandBase {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
+  public void execute() {
     double leftSpeed = this.startSpeed;
     double rightSpeed = this.startSpeed;
 
@@ -79,7 +79,7 @@ public class DriveStraight extends CommandBase {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return isDone;
   }
 

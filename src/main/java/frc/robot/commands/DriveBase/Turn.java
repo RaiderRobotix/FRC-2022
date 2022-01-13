@@ -31,14 +31,14 @@ public class Turn extends CommandBase {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  public void initialize() {
     isDone = false;
     drives.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  private void execute() {
+  public void execute() {
     if ((turningClockwise && drives.getGyroAngle() > targetAngle)
       || (!turningClockwise && drives.getGyroAngle() < targetAngle)
       || (Math.abs(drives.getGyroAngle() - targetAngle) < Constants.TURN_TOLERANCE)) {
@@ -52,7 +52,7 @@ public class Turn extends CommandBase {
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     return isDone;
   }
 
