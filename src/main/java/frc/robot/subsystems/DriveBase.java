@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 import java.util.ArrayList;
@@ -130,4 +131,6 @@ public class DriveBase implements Subsystem {
     // Set the default command for a subsystem here.
     setDefaultCommand(new DefaultDriveBaseCommand());
   }
+  // DriveBase.setDefaultCommand(new DefaultDriveBaseCommand());
+  // CommandScheduler.getInstance().setDefaultCommand
 }
