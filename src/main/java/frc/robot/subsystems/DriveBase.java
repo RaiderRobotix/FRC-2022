@@ -20,10 +20,10 @@ public class DriveBase implements Subsystem {
   
   private static DriveBase m_instance;
 
-  private final CANSparkMax leftFrontSpark;
-  private final CANSparkMax leftBackSpark;
-  private final CANSparkMax rightFrontSpark;
-  private final CANSparkMax rightBackSpark;
+  public final CANSparkMax leftFrontSpark;
+  public final CANSparkMax leftBackSpark;
+  public final CANSparkMax rightFrontSpark;
+  public final CANSparkMax rightBackSpark;
 
   private final RelativeEncoder leftEncoder;
   private final RelativeEncoder rightEncoder;

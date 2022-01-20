@@ -32,7 +32,10 @@ public class Robot extends TimedRobot {
   private final Compressor compressor;
 
   private final DriveBase drives;
+
   //private final Vision vision;
+
+  private final OperatorInterface oi;
 
   private SendableChooser<Command> autonomousChooser;
   //private Command autonomousCommand;
@@ -44,10 +47,11 @@ public class Robot extends TimedRobot {
 
   Robot() {
 
-    this.compressor = new Compressor(Constants.PCM_CAN_ADDRESS, PneumaticsModuleType.REVPH);
+    this.compressor = new Compressor(Constants.PCM_CAN_ADDRESS, PneumaticsModuleType.CTREPCM);
     // this.compressor.setClosedLoopControl(1, true);
 
     this.drives = DriveBase.getInstance();
+    this.oi = OperatorInterface.getInstance();
   }
 
   @Override
@@ -72,6 +76,20 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Left Encoder", this.drives.getLeftDistance());
     SmartDashboard.putNumber("Right Encoder", this.drives.getRightDistance());
     SmartDashboard.putNumber("Gyro Angle", this.drives.getGyroAngle());
+
+    SmartDashboard.putNumber("Left Joystick Y", this.oi.getLeftY());
+    SmartDashboard.putNumber("Right Joystick Y", this.oi.getRightY());
+
+		SmartDashboard.putBoolean("Left-back following?", this.drives.leftBackSpark.isFollower());
+		SmartDashboard.putBoolean("Left-front following?", this.drives.leftFrontSpark.isFollower());
+		SmartDashboard.putBoolean("Right-back following?", this.drives.rightBackSpark.isFollower());
+		SmartDashboard.putBoolean("Right-front following?", this.drives.rightFrontSpark.isFollower());
+
+		SmartDashboard.putNumber("Right-front set speed", this.drives.rightFrontSpark.get());
+		SmartDashboard.putNumber("Right-back set speed", this.drives.rightBackSpark.get());
+		SmartDashboard.putNumber("Left-front set speed", this.drives.leftFrontSpark.get());
+		SmartDashboard.putNumber("Left-back set speed", this.drives.leftBackSpark.get());
+
   }
 
   @Override
