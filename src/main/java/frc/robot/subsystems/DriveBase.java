@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import frc.robot.Constants;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 
@@ -11,12 +12,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 import java.util.ArrayList;
 
-public class DriveBase implements Subsystem {
+public class DriveBase extends SubsystemBase {
   
   private static DriveBase m_instance;
 
@@ -39,15 +40,14 @@ public class DriveBase implements Subsystem {
   private DriveBase() {
     this.leftFrontSpark = new CANSparkMax(Constants.LEFT_FRONT_DRIVE_CAN_ID, MotorType.kBrushless);
     this.leftBackSpark = new CANSparkMax(Constants.LEFT_BACK_DRIVE_CAN_ID, MotorType.kBrushless);
-    this.rightFrontSpark
-      = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_CAN_ID, MotorType.kBrushless);
+    this.rightFrontSpark = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_CAN_ID, MotorType.kBrushless);
     this.rightBackSpark = new CANSparkMax(Constants.RIGHT_BACK_DRIVE_CAN_ID, MotorType.kBrushless);
 
     this.leftFrontSpark.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontSpark.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
 
-    leftBackSpark.follow(leftFrontSpark);
-    rightBackSpark.follow(rightFrontSpark);
+    this.leftBackSpark.follow(leftFrontSpark);
+    this.rightBackSpark.follow(rightFrontSpark);
 
     leftEncoder = leftFrontSpark.getEncoder();
     rightEncoder = rightFrontSpark.getEncoder();
@@ -59,12 +59,14 @@ public class DriveBase implements Subsystem {
 
     navX = new AHRS(Port.kUSB1);
     headingYaw = 0.0;
+
   }
 
   /**
    * @return The DriveBase singleton.
    */
   public static DriveBase getInstance() {
+    System.out.println("made singleton class");
     if (m_instance == null) {
       m_instance = new DriveBase();
     }
@@ -129,6 +131,6 @@ public class DriveBase implements Subsystem {
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DefaultDriveBaseCommand());
+    setDefaultCommand(new DefaultDriveBaseCommand(this.m_instance));
   }
 }

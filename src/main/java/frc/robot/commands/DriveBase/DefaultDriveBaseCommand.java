@@ -14,29 +14,32 @@ import frc.robot.subsystems.DriveBase;
 
 public class DefaultDriveBaseCommand extends CommandBase {
 
-  private DriveBase drives;
+  private final DriveBase drives;
   private OperatorInterface oi;
 
-  public DefaultDriveBaseCommand() {
+  public DefaultDriveBaseCommand(DriveBase x) {
+    drives = x;
     // Use requires() here to declare subsystem dependencies
-    drives = DriveBase.getInstance();
     addRequirements(drives);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
+    System.out.println("executing");
+//    drives.setSpeed(-1.0 * this.oi.getLeftY(), -1.0 * this.oi.getRightY());
+    drives.setSpeed(-0.3, 0.3);
 
-    if (oi.getRightButton(Constants.SENSOR_RESET_BUTTON)) {
-      drives.resetGyro();
-      drives.resetEncoders();
-    }
+//    if (this.oi.getRightButton(Constants.SENSOR_RESET_BUTTON)) {
+//      drives.resetGyro();
+//      drives.resetEncoders();
+//    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
