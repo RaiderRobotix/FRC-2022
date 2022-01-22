@@ -46,8 +46,8 @@ public class DriveBase extends SubsystemBase {
     this.leftFrontSpark.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontSpark.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
 
-    this.leftBackSpark.follow(leftFrontSpark);
-    this.rightBackSpark.follow(rightFrontSpark);
+    this.leftBackSpark.follow(leftFrontSpark,false);
+    this.rightBackSpark.follow(rightFrontSpark, false);
 
     leftEncoder = leftFrontSpark.getEncoder();
     rightEncoder = rightFrontSpark.getEncoder();

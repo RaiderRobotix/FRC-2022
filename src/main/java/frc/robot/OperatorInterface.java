@@ -71,12 +71,17 @@ public class OperatorInterface {
 
   public double getLeftY() {
     double ret = leftStick.getY();
-    if (Math.abs(ret) > Constants.JOYSTICK_DEADBAND) {
-      return ret;
-    }
+     System.out.println("ret: " + ret);
+     if(ret < 0){
+       ret = ret * -1;
+     }
+     if ( ret > Constants.JOYSTICK_DEADBAND) {
+       return ret;
+     }
 
-    return 0.0;
+     return 0.0;
   }
+
 
   public double getRightY() {
     double ret = rightStick.getY();

@@ -63,6 +63,11 @@ public class Robot extends TimedRobot {
     autonomousChooser = new SendableChooser<Command>();
     
     SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
+
+    this.drives.leftBackSpark.restoreFactoryDefaults();
+    this.drives.leftFrontSpark.restoreFactoryDefaults();
+    this.drives.rightBackSpark.restoreFactoryDefaults();
+    this.drives.rightFrontSpark.restoreFactoryDefaults();
   }
 
   /**
