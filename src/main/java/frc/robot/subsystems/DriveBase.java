@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import frc.robot.Constants;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 
@@ -11,7 +10,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -21,10 +19,10 @@ public class DriveBase extends SubsystemBase {
   
   private static DriveBase m_instance;
 
-  public final CANSparkMax leftFrontSpark;
-  public final CANSparkMax leftBackSpark;
-  public final CANSparkMax rightFrontSpark;
-  public final CANSparkMax rightBackSpark;
+  private final CANSparkMax leftFrontSpark;
+  private final CANSparkMax leftBackSpark;
+  private final CANSparkMax rightFrontSpark;
+  private final CANSparkMax rightBackSpark;
 
   private final RelativeEncoder leftEncoder;
   private final RelativeEncoder rightEncoder;
@@ -43,17 +41,22 @@ public class DriveBase extends SubsystemBase {
     this.rightFrontSpark = new CANSparkMax(Constants.RIGHT_FRONT_DRIVE_CAN_ID, MotorType.kBrushless);
     this.rightBackSpark = new CANSparkMax(Constants.RIGHT_BACK_DRIVE_CAN_ID, MotorType.kBrushless);
 
+    this.leftBackSpark.restoreFactoryDefaults();
+    this.leftFrontSpark.restoreFactoryDefaults();
+    this.rightBackSpark.restoreFactoryDefaults();
+    this.rightFrontSpark.restoreFactoryDefaults();
+
     this.leftFrontSpark.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontSpark.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
 
     this.leftBackSpark.follow(leftFrontSpark,false);
     this.rightBackSpark.follow(rightFrontSpark, false);
 
-    leftEncoder = leftFrontSpark.getEncoder();
-    rightEncoder = rightFrontSpark.getEncoder();
+    this.leftEncoder = leftFrontSpark.getEncoder();
+    this.rightEncoder = rightFrontSpark.getEncoder();
 
-    leftDistance = this.getLeftEncoder();
-    rightDistance = this.getRightEncoder();
+    this.leftDistance = this.getLeftEncoder();
+    this.rightDistance = this.getRightEncoder();
 
     ultrasonic = new AnalogInput(0);
 
@@ -81,6 +84,17 @@ public class DriveBase extends SubsystemBase {
   public void setSpeed(double leftSpeed, double rightSpeed) {
     this.leftFrontSpark.set(leftSpeed);
     this.rightFrontSpark.set(rightSpeed);
+  }
+ 
+  public double getSpeed(int CANID) {
+    double speed = 0;
+    switch (CANID) {
+      case 1: speed = leftFrontSpark.get();
+      case 2: speed = leftBackSpark.get();
+      case 3: speed = rightBackSpark.get();
+      case 4: speed = rightFrontSpark.get();
+    }
+    return speed;
   }
 
   private double getLeftEncoder() {

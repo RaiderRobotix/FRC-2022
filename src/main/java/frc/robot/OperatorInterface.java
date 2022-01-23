@@ -8,7 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-// import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 
 public class OperatorInterface {
@@ -20,14 +20,14 @@ public class OperatorInterface {
   private final Joystick rightStick;
   private final Joystick operatorStick;
 
-  // private final JoystickButton 
+  private final JoystickButton operator12;
   //   operator3,
   //   operator5,
   //   operator7,
   //   operator9,
   //   operator10,
   //   operator11,
-  //   operator12,
+     
   //   left6,
   //   right2,
   //   right3;
@@ -50,7 +50,7 @@ public class OperatorInterface {
     // operator9 = new JoystickButton(operatorStick, 9);
     // operator10 = new JoystickButton(operatorStick, 10);
     // operator11 = new JoystickButton(operatorStick, 11);
-    // operator12 = new JoystickButton(operatorStick, 12);
+    operator12 = new JoystickButton(operatorStick, 12);
   
     // operator7.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_HIGH_PRESET));
     // operator9.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_MIDDLE_PRESET));

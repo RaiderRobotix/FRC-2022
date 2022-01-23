@@ -8,7 +8,6 @@
 package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.OperatorInterface;
 import frc.robot.subsystems.DriveBase;
 
@@ -27,35 +26,20 @@ public class DefaultDriveBaseCommand extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    drives.leftBackSpark.follow(drives.leftFrontSpark);
-    drives.rightBackSpark.follow(drives.rightFrontSpark);
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    // System.out.println("executing");
-    // double left = -1.0 * this.oi.getLeftY();
-    // double right = -1.0 * this.oi.getRightY();
-    // if ((String.valueOf(right) != null) && (String.valueOf(left) != null)) {
-    //   drives.setSpeed(-1.0 * this.oi.getLeftY(), -1.0 * this.oi.getRightY());
 
-    // }
-    // else {
-    //   drives.setSpeed(0);
-    // }
-    // System.out.println("OI left Y:" + this.oi.getLeftY());
-   // System.out.print("OI right Y: " + oi.getRightY());
     try{
       drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
     }
     catch (NullPointerException e) {
-      double test = (double) oi.getRightY();
       drives.setSpeed(0);
 
     }
-    //this.drives.setSpeed(-0.3, 0.3);
 
     // if (this.oi.getRightButton(Constants.SENSOR_RESET_BUTTON)) {
     //   drives.resetGyro();

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
+import frc.robot.commands.Intake.DefaultIntakeCommand;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,8 @@ public class Robot extends TimedRobot {
 
   private final OperatorInterface oi;
 
+  private final Intake intake;
+
   private SendableChooser<Command> autonomousChooser;
   //private Command autonomousCommand;
 
@@ -51,23 +54,22 @@ public class Robot extends TimedRobot {
 
     this.drives = DriveBase.getInstance();
     this.oi = OperatorInterface.getInstance();
+    this.intake = Intake.getInstance();
+
     CommandScheduler.getInstance().registerSubsystem(this.drives);
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
+
+    CommandScheduler.getInstance().registerSubsystem(this.intake);
+    this.intake.setDefaultCommand(new DefaultIntakeCommand());
 
   }
 
   @Override
   public void robotInit() {
-    //compressor.enableDigital();
 
     autonomousChooser = new SendableChooser<Command>();
     
     SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
-
-    this.drives.leftBackSpark.restoreFactoryDefaults();
-    this.drives.leftFrontSpark.restoreFactoryDefaults();
-    this.drives.rightBackSpark.restoreFactoryDefaults();
-    this.drives.rightFrontSpark.restoreFactoryDefaults();
   }
 
   /**
@@ -80,22 +82,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("Left Encoder", this.drives.getLeftDistance());
-    SmartDashboard.putNumber("Right Encoder", this.drives.getRightDistance());
+    SmartDashboard.putNumber("LEncoder Distance", this.drives.getLeftDistance());
+    SmartDashboard.putNumber("REncoder Distance", this.drives.getRightDistance());
     SmartDashboard.putNumber("Gyro Angle", this.drives.getGyroAngle());
 
-    SmartDashboard.putNumber("Left Joystick Y", this.oi.getLeftY());
-    SmartDashboard.putNumber("Right Joystick Y", this.oi.getRightY());
+    SmartDashboard.putNumber("LJoystick Y", this.oi.getLeftY());
+    SmartDashboard.putNumber("RJoystick Y", this.oi.getRightY());
 
-    SmartDashboard.putBoolean("Left-back following?", this.drives.leftBackSpark.isFollower());
-    SmartDashboard.putBoolean("Left-front following?", this.drives.leftFrontSpark.isFollower());
-    SmartDashboard.putBoolean("Right-back following?", this.drives.rightBackSpark.isFollower());
-    SmartDashboard.putBoolean("Right-front following?", this.drives.rightFrontSpark.isFollower());
+    SmartDashboard.putNumber("Right-Front Speed", this.drives.getSpeed(4));
+    SmartDashboard.putNumber("Right-Back Speed", this.drives.getSpeed(3));
+    SmartDashboard.putNumber("Left-Front Speed", this.drives.getSpeed(1));
+    SmartDashboard.putNumber("Left-Back speed", this.drives.getSpeed(2));
 
-    SmartDashboard.putNumber("Right-front set speed", this.drives.rightFrontSpark.get());
-    SmartDashboard.putNumber("Right-back set speed", this.drives.rightBackSpark.get());
-    SmartDashboard.putNumber("Left-front set speed", this.drives.leftFrontSpark.get());
-    SmartDashboard.putNumber("Left-back set speed", this.drives.leftBackSpark.get());
+    SmartDashboard.putBoolean("Intake Spinning?", this.intake.isRotating());
+    SmartDashboard.putBoolean("Intake Inverted?", this.intake.isInverted());
 
   }
 

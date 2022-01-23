@@ -15,8 +15,7 @@ public final class Constants {
   public static final int ELEVATOR_LEFT_CAN_ID = 9;
   public static final int ELEVATOR_RIGHT_CAN_ID = 10;
 
-  public static final int BOTTOM_ROLLER_CAN_ID = 7;
-  public static final int TOP_ROLLER_CAN_ID = 8;
+  public static final int INTAKE_ROLLER_CAN_ID = 7;
 
   public static final int WRIST_PWM = 0;
 
@@ -33,7 +32,8 @@ public final class Constants {
   public static final int SWITCH_BOX_PORT = 3;
 
   public static final double JOYSTICK_DEADBAND = 0.15;
-  public static final int OPERATOR_OVERRIDE_BUTTON = 8;
+  public static final int OPERATOR_ROLLER_REVERSE_BUTTON = 12;
+  public static final int OPERATOR_ROLLER_BUTTON = 11;
 
   public static final int SENSOR_RESET_BUTTON = 9;
   public static final int HATCH_RELEASE_BUTTON = 11;
