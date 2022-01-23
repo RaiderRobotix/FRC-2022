@@ -131,6 +131,6 @@ public class DriveBase extends SubsystemBase {
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new DefaultDriveBaseCommand(this.m_instance));
+    setDefaultCommand(new DefaultDriveBaseCommand());
   }
 }

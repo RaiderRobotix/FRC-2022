@@ -1,0 +1,19 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/DriveBase": "Subsystem",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/navX-Sensor[2]": "Gyro",
+      "/SmartDashboard/Autonomous mode chooser": "String Chooser"
+    }
+  },
+  "NetworkTables": {
+    "LiveWindow": {
+      "open": true
+    },
+    "SmartDashboard": {
+      "open": true
+    }
+  }
+}

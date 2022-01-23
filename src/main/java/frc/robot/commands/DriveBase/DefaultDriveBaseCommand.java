@@ -15,10 +15,11 @@ import frc.robot.subsystems.DriveBase;
 public class DefaultDriveBaseCommand extends CommandBase {
 
   private final DriveBase drives;
-  private OperatorInterface oi;
+  private final OperatorInterface oi;
 
-  public DefaultDriveBaseCommand(DriveBase x) {
-    drives = x;
+  public DefaultDriveBaseCommand() {
+    drives = DriveBase.getInstance();
+    oi = OperatorInterface.getInstance();
     // Use requires() here to declare subsystem dependencies
     addRequirements(drives);
   }
@@ -45,11 +46,12 @@ public class DefaultDriveBaseCommand extends CommandBase {
     //   drives.setSpeed(0);
     // }
     // System.out.println("OI left Y:" + this.oi.getLeftY());
-    // System.out.print("OI right Y:" + this.oi.getRightY());
+   // System.out.print("OI right Y: " + oi.getRightY());
     try{
-      drives.setSpeed(-1.0 * this.oi.getLeftY(), -1.0 * this.oi.getRightY());
+      drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
     }
     catch (NullPointerException e) {
+      double test = (double) oi.getRightY();
       drives.setSpeed(0);
 
     }

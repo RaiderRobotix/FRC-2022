@@ -71,10 +71,7 @@ public class OperatorInterface {
 
   public double getLeftY() {
     double ret = leftStick.getY();
-     System.out.println("ret: " + ret);
-     if(ret < 0){
-       ret = ret * -1;
-     }
+    ret = Math.abs(ret);
      if ( ret > Constants.JOYSTICK_DEADBAND) {
        return ret;
      }
@@ -85,11 +82,10 @@ public class OperatorInterface {
 
   public double getRightY() {
     double ret = rightStick.getY();
-    if (Math.abs(ret) > Constants.JOYSTICK_DEADBAND) 
-    {
+    ret = Math.abs(ret);
+    if ( ret > Constants.JOYSTICK_DEADBAND) {
       return ret;
     }
-
     return 0.0;
   }
 

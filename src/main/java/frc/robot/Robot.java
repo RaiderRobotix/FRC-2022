@@ -52,7 +52,7 @@ public class Robot extends TimedRobot {
     this.drives = DriveBase.getInstance();
     this.oi = OperatorInterface.getInstance();
     CommandScheduler.getInstance().registerSubsystem(this.drives);
-    this.drives.setDefaultCommand(new DefaultDriveBaseCommand(this.drives));
+    this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
 
   }
 
