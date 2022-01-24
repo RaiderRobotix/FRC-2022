@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.Autonomous.CrossInitializationLine;
+import frc.robot.commands.Autonomous.CrossLineAndShoot;
+import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 import frc.robot.commands.Intake.DefaultIntakeCommand;
 
@@ -40,6 +43,8 @@ public class Robot extends TimedRobot {
   private final Intake intake;
 
   private SendableChooser<Command> autonomousChooser;
+  private Command autonomousCommand;
+
   //private Command autonomousCommand;
 
   /**
@@ -68,6 +73,9 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     autonomousChooser = new SendableChooser<Command>();
+    autonomousChooser.setDefaultOption("Do Nothing", new DoNothing());
+    autonomousChooser.addOption("Cross Initialization Line", new CrossInitializationLine());
+    autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
     
     SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
   }
@@ -125,6 +133,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     super.autonomousInit();
+
+    autonomousCommand = autonomousChooser.getSelected();
+    autonomousCommand.initialize();;
+    
   }
 
   /**
