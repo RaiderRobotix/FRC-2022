@@ -12,10 +12,10 @@ public final class Constants {
 
   public static final int PCM_CAN_ADDRESS = 0;
 
-  public static final int ELEVATOR_LEFT_CAN_ID = 9;
-  public static final int ELEVATOR_RIGHT_CAN_ID = 10;
-
+  //TODO Find the correct CANID values
   public static final int INTAKE_ROLLER_CAN_ID = 7;
+  public static final int SHOOTER_CONVEYOR_CAN_ID = 8;
+  public static final int SHOOTER_SHOOTER_CAN_ID = 6;
 
   public static final int WRIST_PWM = 0;
 

@@ -16,6 +16,7 @@ public final class Intake extends SubsystemBase {
 	private Intake() {
 		this.rollerSpark = new CANSparkMax(Constants.INTAKE_ROLLER_CAN_ID, MotorType.kBrushed);
         this.isRotating = false;
+		//TODO determine if motor needs to be inverted
         
 	}
 
@@ -26,8 +27,9 @@ public final class Intake extends SubsystemBase {
 		return m_instance;
 	}
 
-	public void startRoller(boolean inversed) {
-        this.rollerSpark.setInverted(inversed);
+	public void startRoller(boolean inverted) {
+        this.rollerSpark.setInverted(inverted);
+		//TODO find out what speed the roller should be spinning at
 		this.rollerSpark.set(0.5);
         this.isRotating = true;
 	}
