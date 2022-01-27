@@ -27,13 +27,15 @@ public class DefaultIntakeCommand extends CommandBase {
   @Override
   public void execute() {
 
-    if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_ROLLER_REVERSE_BUTTON)) {
-      System.out.println("Turning roller on, speed = " + intake.getSpeed());
+    if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_REVERSE_BUTTON)) {
       intake.startRoller(true);
+      System.out.println("Roller on, speed = " + intake.getSpeed());
+
     }
     if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_BUTTON)) {
-      System.out.println("Roller off, speed = " + intake.getSpeed());
       intake.startRoller(false);
+      System.out.println("Roller off, speed = " + intake.getSpeed());
+
     }
 
   }

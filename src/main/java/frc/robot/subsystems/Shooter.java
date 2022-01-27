@@ -32,25 +32,20 @@ public final class Shooter extends SubsystemBase {
     }
 
 
-    public void moveConveyor(boolean inverted) {
+    public void toggleConveyor(boolean state, boolean inverted) {
         this.conveyorSpark.setInverted(inverted);
         //TODO determine appropriate conveyor speed
-        this.conveyorSpark.set(0.5);
+        if (state) {
+            this.conveyorSpark.set(0.5);
+        }
+        else {
+            this.conveyorSpark.set(0.0);
+        }
     }
 
-    public void stopConveyor() {
-        this.conveyorSpark.set(0.0);
-    }
-
-    public void startShooter(double speed) {
-        //TODO determine appropriate shooter speed
+    public void setShooterSpeed(double speed) {
         this.shooterSpark.set(speed);
         this.isShooterRotating = true;
-    }
-
-    public void stopShooter() {
-        this.shooterSpark.set(0.0);
-        this.isShooterRotating = false;
     }
 
     public double getConveyorSpeed() { return conveyorSpark.get(); }

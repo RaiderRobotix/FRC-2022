@@ -34,9 +34,11 @@ public final class Constants {
   public static final double JOYSTICK_DEADBAND = 0.15;
   public static final int OPERATOR_ROLLER_REVERSE_BUTTON = 12;
   public static final int OPERATOR_ROLLER_BUTTON = 11;
+  public static final int SHOOTER_START_BUTTON = 9;
+  public static final int SHOOTER_STOP_BUTTON = 10;
 
-  public static final int SENSOR_RESET_BUTTON = 9;
-  public static final int HATCH_RELEASE_BUTTON = 11;
+  public static final int SENSOR_RESET_BUTTON = 8;
+  public static final int HATCH_RELEASE_BUTTON = 7;
 
   /**
    * DRIVEBASE.
