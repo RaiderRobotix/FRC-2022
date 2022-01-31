@@ -49,8 +49,13 @@ public class DriveBase extends SubsystemBase {
     this.leftFrontSpark.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontSpark.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
 
-    this.leftBackSpark.follow(leftFrontSpark,false);
-    this.rightBackSpark.follow(rightFrontSpark, false);
+    this.leftFrontSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    this.leftBackSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    this.rightBackSpark.setIdleMode(CANSparkMax.IdleMode.kCoast);
+    this.rightFrontSpark.setIdleMode(CANSparkMax.IdleMode.kCoast);
+
+    this.leftBackSpark.follow(leftFrontSpark);
+    this.rightBackSpark.follow(rightFrontSpark);
 
     this.leftEncoder = leftFrontSpark.getEncoder();
     this.rightEncoder = rightFrontSpark.getEncoder();
@@ -69,7 +74,6 @@ public class DriveBase extends SubsystemBase {
    * @return The DriveBase singleton.
    */
   public static DriveBase getInstance() {
-    System.out.println("made singleton class");
     if (m_instance == null) {
       m_instance = new DriveBase();
     }
@@ -87,14 +91,23 @@ public class DriveBase extends SubsystemBase {
   }
  
   public double getSpeed(int CANID) {
-    double speed = 0;
     switch (CANID) {
-      case 1: speed = leftFrontSpark.get();
-      case 2: speed = leftBackSpark.get();
-      case 3: speed = rightBackSpark.get();
-      case 4: speed = rightFrontSpark.get();
+      case 1: return leftFrontSpark.get();
+      case 2: return leftBackSpark.get();
+      case 3: return rightBackSpark.get();
+      case 4: return rightFrontSpark.get();
     }
-    return speed;
+    return 0.0;
+  }
+
+  public double getTemp(int CANID) {
+    switch (CANID) {
+      case 1: return leftFrontSpark.getMotorTemperature();
+      case 2: return leftBackSpark.getMotorTemperature();
+      case 3: return rightBackSpark.getMotorTemperature();
+      case 4: return rightFrontSpark.getMotorTemperature();
+    }
+    return 0.0;
   }
 
   private double getLeftEncoder() {

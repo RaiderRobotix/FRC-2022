@@ -97,10 +97,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("LJoystick Y", this.oi.getLeftY());
     SmartDashboard.putNumber("RJoystick Y", this.oi.getRightY());
 
-    SmartDashboard.putNumber("Right-Front Speed", this.drives.getSpeed(4));
-    SmartDashboard.putNumber("Right-Back Speed", this.drives.getSpeed(3));
-    SmartDashboard.putNumber("Left-Front Speed", this.drives.getSpeed(1));
-    SmartDashboard.putNumber("Left-Back speed", this.drives.getSpeed(2));
+    SmartDashboard.putNumber("Right-Front Speed", this.drives.getSpeed(Constants.RIGHT_FRONT_DRIVE_CAN_ID));
+    SmartDashboard.putNumber("Right-Back Speed", this.drives.getSpeed(Constants.RIGHT_BACK_DRIVE_CAN_ID));
+    SmartDashboard.putNumber("Left-Front Speed", this.drives.getSpeed(Constants.LEFT_FRONT_DRIVE_CAN_ID));
+    SmartDashboard.putNumber("Left-Back speed", this.drives.getSpeed(Constants.LEFT_BACK_DRIVE_CAN_ID));
 
     SmartDashboard.putBoolean("Intake Spinning?", this.intake.isRotating());
     SmartDashboard.putBoolean("Intake Inverted?", this.intake.isInverted());

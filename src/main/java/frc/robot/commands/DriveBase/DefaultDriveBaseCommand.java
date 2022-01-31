@@ -33,13 +33,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
   @Override
   public void execute() {
 
-    try{
-      drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
-    }
-    catch (NullPointerException e) {
-      drives.setSpeed(0);
-
-    }
+    drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
 
     // if (this.oi.getRightButton(Constants.SENSOR_RESET_BUTTON)) {
     //   drives.resetGyro();
