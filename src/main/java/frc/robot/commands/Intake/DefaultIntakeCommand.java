@@ -28,12 +28,12 @@ public class DefaultIntakeCommand extends CommandBase {
   public void execute() {
 
     if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_REVERSE_BUTTON)) {
-      intake.startRoller(true);
+      intake.startRoller();
       System.out.println("Roller on, speed = " + intake.getSpeed());
 
     }
     if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_BUTTON)) {
-      intake.startRoller(false);
+      intake.stopRoller();
       System.out.println("Roller off, speed = " + intake.getSpeed());
 
     }

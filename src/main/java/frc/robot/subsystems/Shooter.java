@@ -37,15 +37,14 @@ public final class Shooter extends SubsystemBase {
     }
 
 
-    public void toggleConveyor(boolean state, boolean inverted) {
-        this.conveyorSpark.setInverted(inverted);
+    public void startConveyor() {
         //TODO determine appropriate conveyor speed
-        if (state) {
-            this.conveyorSpark.set(0.5);
-        }
-        else {
-            this.conveyorSpark.set(0.0);
-        }
+        this.conveyorSpark.set(0.1);
+
+    }
+
+    public void stopConveyor() {
+        this.conveyorSpark.set(0.0);
     }
 
     public void setShooterSpeed(double speed) {
@@ -54,10 +53,15 @@ public final class Shooter extends SubsystemBase {
         this.isShooterRotating = true;
     }
 
+    public void setShooterInverted(boolean state) {
+        shooterTalon.setInverted(state);
+
+    }
+
     public double getConveyorSpeed() { return conveyorSpark.get(); }
 
     //TODO determine how to return shooter speed correctly
-    public double getShooterSpeed() { return shooterTalon.getMotorOutputPercent(); }
+    public double getShooterSpeed() { return shooterTalon.getSelectedSensorVelocity(); }
 
     public boolean isConveyorInverted() { return conveyorSpark.getInverted(); }
 

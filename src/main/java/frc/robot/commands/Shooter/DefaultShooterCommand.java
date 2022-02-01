@@ -28,14 +28,17 @@ public class DefaultShooterCommand extends CommandBase {
         //TODO add buttons for shooting at different speeds
         if (oi.getOperatorButton(Constants.SHOOTER_START_BUTTON)) {
             //TODO determine acceptable speed
-            shooter.setShooterSpeed(0.5);
+            shooter.setShooterSpeed(0.3);
             //TODO figure out how to wait for shooter to get up to speed
-            shooter.toggleConveyor(true, true);
+            while (shooter.getShooterSpeed() < 0.25) {
+
+            }
+            shooter.startConveyor();
             System.out.println("Turning shooter on, speed = " + shooter.getShooterSpeed());
         }
 
         if (oi.getOperatorButton(Constants.SHOOTER_STOP_BUTTON)) {
-            shooter.toggleConveyor(false, true);
+            shooter.stopConveyor();
             shooter.setShooterSpeed(0);
         }
 
@@ -50,7 +53,7 @@ public class DefaultShooterCommand extends CommandBase {
     // Called once after isFinished returns true
     public void end() {
         shooter.setShooterSpeed(0);
-        shooter.toggleConveyor(false, true);
+        shooter.stopConveyor();
     }
 
     // Called when another command which requires one or more of the same

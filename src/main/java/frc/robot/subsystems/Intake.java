@@ -27,10 +27,9 @@ public final class Intake extends SubsystemBase {
 		return m_instance;
 	}
 
-	public void startRoller(boolean inverted) {
-        this.rollerSpark.setInverted(inverted);
+	public void startRoller() {
 		//TODO find out what speed the roller should be spinning at
-		this.rollerSpark.set(0.5);
+		this.rollerSpark.set(0.1);
         this.isRotating = true;
 	}
 
@@ -42,6 +41,10 @@ public final class Intake extends SubsystemBase {
 	public double getSpeed() {
         return rollerSpark.get();
 
+	}
+
+	public void setInverted(boolean state) {
+		rollerSpark.setInverted(state);
 	}
 
     public boolean isInverted() {

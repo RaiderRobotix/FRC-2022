@@ -35,8 +35,8 @@ public class ToggleIntake extends CommandBase{
 
     // Called once after isFinished returns true
     public void end() {
-        if (state) {
-            intake.startRoller(this.inverted);
+        if (this.state) {
+            intake.startRoller();
         } else {
             intake.stopRoller();
         }
