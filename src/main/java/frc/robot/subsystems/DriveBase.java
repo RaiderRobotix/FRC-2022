@@ -9,6 +9,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -26,6 +28,8 @@ public class DriveBase extends SubsystemBase {
 
   private final RelativeEncoder leftEncoder;
   private final RelativeEncoder rightEncoder;
+
+  private final PowerDistribution examplePD = new PowerDistribution(5, ModuleType.kRev);
 
   private double leftDistance;
   private double rightDistance;
@@ -46,13 +50,19 @@ public class DriveBase extends SubsystemBase {
     this.rightBackSpark.restoreFactoryDefaults();
     this.rightFrontSpark.restoreFactoryDefaults();
 
+    this.leftBackSpark.clearFaults();
+    this.rightBackSpark.clearFaults();
+    this.leftFrontSpark.clearFaults();
+    this.rightFrontSpark.clearFaults();
+    examplePD.clearStickyFaults();
+
     this.leftFrontSpark.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontSpark.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
 
     this.leftFrontSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    this.leftBackSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
+    this.leftBackSpark.setIdleMode(CANSparkMax.IdleMode.kCoast);
     this.rightBackSpark.setIdleMode(CANSparkMax.IdleMode.kCoast);
-    this.rightFrontSpark.setIdleMode(CANSparkMax.IdleMode.kCoast);
+    this.rightFrontSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
     this.leftBackSpark.follow(leftFrontSpark);
     this.rightBackSpark.follow(rightFrontSpark);
