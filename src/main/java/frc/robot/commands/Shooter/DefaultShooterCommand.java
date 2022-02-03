@@ -26,7 +26,7 @@ public class DefaultShooterCommand extends CommandBase {
 
         //TODO add buttons for shooting at different speeds
         if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
-            shooter.setShooterSpeed(-0.33);
+            shooter.setShooterSpeed(-0.6);
             //TODO figure out how to wait for shooter to get up to speed
             // while (shooter.getShooterSpeed() < 0.25) {
 
@@ -35,14 +35,17 @@ public class DefaultShooterCommand extends CommandBase {
             // System.out.println("Turning shooter on, speed = " + shooter.getShooterSpeed());
         }
         else if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON)) {
-            shooter.setShooterSpeed(0.7);
+            shooter.setShooterSpeed(0.6);
         }
         else {
             shooter.setShooterSpeed(0.0);
         }
 
 
-        if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON)) {
+        if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
+            shooter.startConveyorInverted();
+        }
+        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON)) {
             shooter.startConveyor();
         }
         else {
