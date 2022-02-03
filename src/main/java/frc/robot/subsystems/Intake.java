@@ -1,20 +1,19 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.Constants;
-
+import frc.robot.commands.Intake.DefaultIntakeCommand;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public final class Intake extends SubsystemBase {
 	private static Intake m_instance;
 
-	private final CANSparkMax rollerSpark;
+	private final Spark rollerSpark;
 
 	private boolean isRotating = false;  
 
 	private Intake() {
-		this.rollerSpark = new CANSparkMax(Constants.INTAKE_ROLLER_CAN_ID, MotorType.kBrushed);
+		this.rollerSpark = new Spark(Constants.INTAKE_PWM);
         this.isRotating = false;
 		//TODO determine if motor needs to be inverted
         
@@ -29,7 +28,7 @@ public final class Intake extends SubsystemBase {
 
 	public void startRoller() {
 		//TODO find out what speed the roller should be spinning at
-		this.rollerSpark.set(0.1);
+		this.rollerSpark.set(1.0);
         this.isRotating = true;
 	}
 
@@ -52,7 +51,16 @@ public final class Intake extends SubsystemBase {
 
 	}
 
+	public void startRollerInverted() {
+		rollerSpark.set(-0.2);
+	}
+
 	public boolean isRotating(){
 		return isRotating;
+	}
+
+	public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		setDefaultCommand(new DefaultIntakeCommand());
 	}
 }

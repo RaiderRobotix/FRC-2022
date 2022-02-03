@@ -20,6 +20,7 @@ import frc.robot.commands.Autonomous.CrossLineAndShoot;
 import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 import frc.robot.commands.Intake.DefaultIntakeCommand;
+import frc.robot.commands.Shooter.DefaultShooterCommand;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,8 @@ public class Robot extends TimedRobot {
 
   private final Intake intake;
 
+  private final Shooter shooter;
+
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
 
@@ -60,6 +63,7 @@ public class Robot extends TimedRobot {
     this.drives = DriveBase.getInstance();
     this.oi = OperatorInterface.getInstance();
     this.intake = Intake.getInstance();
+    this.shooter = Shooter.getInstance();
 
     CommandScheduler.getInstance().registerSubsystem(this.drives);
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
@@ -67,13 +71,16 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().registerSubsystem(this.intake);
     this.intake.setDefaultCommand(new DefaultIntakeCommand());
 
+    CommandScheduler.getInstance().registerSubsystem(this.shooter);
+    this.shooter.setDefaultCommand(new DefaultShooterCommand());
+
   }
 
   @Override
   public void robotInit() {
 
     autonomousChooser = new SendableChooser<Command>();
-    autonomousChooser.setDefaultOption("Do Nothing", new DoNothing());
+    autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
     autonomousChooser.addOption("Cross Initialization Line", new CrossInitializationLine());
     autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
     
@@ -90,20 +97,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("LEncoder Distance", this.drives.getLeftDistance());
-    SmartDashboard.putNumber("REncoder Distance", this.drives.getRightDistance());
-    SmartDashboard.putNumber("Gyro Angle", this.drives.getGyroAngle());
-
-    SmartDashboard.putNumber("LJoystick Y", this.oi.getLeftY());
-    SmartDashboard.putNumber("RJoystick Y", this.oi.getRightY());
-
-    SmartDashboard.putNumber("Right-Front Speed", this.drives.getSpeed(Constants.RIGHT_FRONT_DRIVE_CAN_ID));
-    SmartDashboard.putNumber("Right-Back Speed", this.drives.getSpeed(Constants.RIGHT_BACK_DRIVE_CAN_ID));
-    SmartDashboard.putNumber("Left-Front Speed", this.drives.getSpeed(Constants.LEFT_FRONT_DRIVE_CAN_ID));
-    SmartDashboard.putNumber("Left-Back speed", this.drives.getSpeed(Constants.LEFT_BACK_DRIVE_CAN_ID));
-
-    SmartDashboard.putBoolean("Intake Spinning?", this.intake.isRotating());
-    SmartDashboard.putBoolean("Intake Inverted?", this.intake.isInverted());
 
   }
 
@@ -134,8 +127,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     super.autonomousInit();
 
-    autonomousCommand = autonomousChooser.getSelected();
-    autonomousCommand.initialize();;
+    autonomousCommand = new CrossInitializationLine();
+    autonomousCommand.initialize();
+
     
   }
 

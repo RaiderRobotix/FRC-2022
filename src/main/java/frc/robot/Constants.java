@@ -10,12 +10,12 @@ public final class Constants {
   public static final int RIGHT_FRONT_DRIVE_CAN_ID = 4;
   public static final int RIGHT_BACK_DRIVE_CAN_ID = 3;
 
-  //TODO Find the correct CANID values
-  public static final int INTAKE_ROLLER_CAN_ID = 7;
-  public static final int SHOOTER_CONVEYOR_CAN_ID = 8;
-  public static final int SHOOTER_SHOOTER_CAN_ID = 6;
+  //TODO Find the correct CAN ID values
+  public static final int SHOOTER_CAN_ID = 6;
 
-  // public static final int WRIST_PWM = 0;
+  public static final int INTAKE_PWM = 0;
+  public static final int CONVEYOR_PWM = 3;
+
 
   // Pneumatic Solenoid Ports
   public static final int ELEVATOR_TILT_SOLENOID = 0;
@@ -24,16 +24,17 @@ public final class Constants {
   /**
    * OPERATOR INTERFACE.
    */
-  public static final int LEFT_JOYSTICK_PORT = 0;
-  public static final int RIGHT_JOYSTICK_PORT = 1;
+  public static final int LEFT_JOYSTICK_PORT = 1;
+  public static final int RIGHT_JOYSTICK_PORT = 0;
   public static final int OPERATOR_JOYSTICK_PORT = 2;
   public static final int SWITCH_BOX_PORT = 3;
 
   public static final double JOYSTICK_DEADBAND = 0.15;
-  public static final int OPERATOR_ROLLER_REVERSE_BUTTON = 12;
-  public static final int OPERATOR_ROLLER_BUTTON = 11;
-  public static final int SHOOTER_START_BUTTON = 9;
-  public static final int SHOOTER_STOP_BUTTON = 10;
+  public static final int OPERATOR_REVERSE_BUTTON = 2;
+  public static final int OPERATOR_ROLLER_BUTTON = 12;
+  public static final int OPERATOR_CONVEYOR_BUTTON = 11;
+  public static final int OPERATOR_SHOOTER_BUTTON = 1;
+
 
   public static final int SENSOR_RESET_BUTTON = 8;
   public static final int HATCH_RELEASE_BUTTON = 7;

@@ -56,7 +56,7 @@ public class DriveBase extends SubsystemBase {
     this.rightFrontSpark.clearFaults();
     examplePD.clearStickyFaults();
 
-    this.leftFrontSpark.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
+    this.leftBackSpark.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontSpark.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
 
     this.leftFrontSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
@@ -66,6 +66,12 @@ public class DriveBase extends SubsystemBase {
 
     this.leftBackSpark.follow(leftFrontSpark);
     this.rightBackSpark.follow(rightFrontSpark);
+
+    this.leftFrontSpark.setSmartCurrentLimit(80);
+    this.rightFrontSpark.setSmartCurrentLimit(80);
+    this.leftBackSpark.setSmartCurrentLimit(80);
+    this.rightBackSpark.setSmartCurrentLimit(80);
+
 
     this.leftEncoder = leftFrontSpark.getEncoder();
     this.rightEncoder = rightFrontSpark.getEncoder();

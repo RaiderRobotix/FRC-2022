@@ -3,8 +3,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import frc.robot.Constants;
+import frc.robot.commands.Shooter.DefaultShooterCommand;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,18 +17,18 @@ public final class Shooter extends SubsystemBase {
     private static Shooter m_instance;
 
     //Belt that brings balls up the shooter tower
-    private final CANSparkMax conveyorSpark;
+    private final Spark conveyorSpark;
     //Fast-spinning motor that launches the balls
     private final TalonSRX shooterTalon;
 
     private boolean isShooterRotating;
 
-
     private Shooter() {
         //TODO determine if these motors need to be inverted
-        this.conveyorSpark = new CANSparkMax(Constants.SHOOTER_CONVEYOR_CAN_ID, MotorType.kBrushed);
+        this.conveyorSpark = new Spark(Constants.CONVEYOR_PWM);
+        this.conveyorSpark.setInverted(true);
         //TODO identify Talon motor CAN ID and update in constants file
-        this.shooterTalon = new TalonSRX(0);
+        this.shooterTalon = new TalonSRX(Constants.SHOOTER_CAN_ID);
         this.isShooterRotating = false;
 
     }
@@ -39,7 +43,7 @@ public final class Shooter extends SubsystemBase {
 
     public void startConveyor() {
         //TODO determine appropriate conveyor speed
-        this.conveyorSpark.set(0.1);
+        this.conveyorSpark.set(1.0);
 
     }
 
@@ -68,4 +72,9 @@ public final class Shooter extends SubsystemBase {
     public boolean isShooterInverted() { return shooterTalon.getInverted();}
 
     public boolean isShooterRotating(){ return isShooterRotating;}
+
+    public void initDefaultCommand() {
+		// Set the default command for a subsystem here.
+		setDefaultCommand(new DefaultShooterCommand());
+	}
 }

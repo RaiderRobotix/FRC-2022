@@ -8,6 +8,7 @@
 package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.OperatorInterface;
 import frc.robot.subsystems.DriveBase;
 
@@ -35,10 +36,10 @@ public class DefaultDriveBaseCommand extends CommandBase {
 
     drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
 
-    // if (this.oi.getRightButton(Constants.SENSOR_RESET_BUTTON)) {
-    //   drives.resetGyro();
-    //   drives.resetEncoders();
-    // }
+    if (oi.getRightButton(Constants.SENSOR_RESET_BUTTON)) {
+      drives.resetGyro();
+      drives.resetEncoders();
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -14,7 +14,6 @@ public class DefaultIntakeCommand extends CommandBase {
   public DefaultIntakeCommand() {
     intake = Intake.getInstance();
     oi = OperatorInterface.getInstance();
-
     addRequirements(intake);
   }
 
@@ -26,17 +25,16 @@ public class DefaultIntakeCommand extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-
-    if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_REVERSE_BUTTON)) {
+    if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
+      intake.startRollerInverted();
+    }
+    else if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_BUTTON)) {
       intake.startRoller();
-      System.out.println("Roller on, speed = " + intake.getSpeed());
-
-    }
-    if (oi.getOperatorButton(Constants.OPERATOR_ROLLER_BUTTON)) {
+    } 
+    else {
       intake.stopRoller();
-      System.out.println("Roller off, speed = " + intake.getSpeed());
-
     }
+    
 
   }
 

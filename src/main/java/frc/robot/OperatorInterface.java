@@ -9,31 +9,36 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Shooter.DefaultShooterCommand;
+import frc.robot.commands.Intake.DefaultIntakeCommand;
+
+import frc.robot.subsystems.Intake;
 
 
 public class OperatorInterface {
 
   private static OperatorInterface m_instance;
+  //private final Intake intake;
 
   // Joysticks
   private final Joystick leftStick;
   private final Joystick rightStick;
   private final Joystick operatorStick;
 
-  //private final JoystickButton operator12;
-  //   operator3,
-  //   operator5,
-  //   operator7,
-  //   operator9,
+  private final JoystickButton operator1;
+  private final JoystickButton operator2;
+  private final JoystickButton operator3;
+  private final JoystickButton operator4;
+  private final JoystickButton operator5;
+  private final JoystickButton operator6;
+  private final JoystickButton operator7;
+  private final JoystickButton operator8;
+  private final JoystickButton operator9;
+  private final JoystickButton operator10;
   private final JoystickButton operator11;
   private final JoystickButton operator12;
 
 
-     
-  //   left6,
-  //   right2,
-  //   right3;
 
 
   private OperatorInterface() {
@@ -42,22 +47,21 @@ public class OperatorInterface {
     this.rightStick = new Joystick(Constants.RIGHT_JOYSTICK_PORT);
     this.operatorStick = new Joystick(Constants.OPERATOR_JOYSTICK_PORT);
     
-    // left6 = new JoystickButton(leftStick, 6);
-
-    // right2 = new JoystickButton(rightStick, 2);
-    // right3 = new JoystickButton(rightStick, 3);
-
-    // operator3 = new JoystickButton(operatorStick, 3);
-    // operator5 = new JoystickButton(operatorStick, 5);
-    // operator7 = new JoystickButton(operatorStick, 7);
-    // operator9 = new JoystickButton(operatorStick, 9);
-    // operator10 = new JoystickButton(operatorStick, 10);
-    operator11 = new JoystickButton(operatorStick, 11);
-    operator12 = new JoystickButton(operatorStick, 12);
+    this.operator1 = new JoystickButton(operatorStick, 1);
+    this.operator2 = new JoystickButton(operatorStick, 2);
+    this.operator3 = new JoystickButton(operatorStick, 3);
+    this.operator4 = new JoystickButton(operatorStick, 4);
+    this.operator5 = new JoystickButton(operatorStick, 5);
+    this.operator6 = new JoystickButton(operatorStick, 6);
+    this.operator7 = new JoystickButton(operatorStick, 7);
+    this.operator8 = new JoystickButton(operatorStick, 8);
+    this.operator9 = new JoystickButton(operatorStick, 9);
+    this.operator10 = new JoystickButton(operatorStick, 10);
+    this.operator11 = new JoystickButton(operatorStick, 11);
+    this.operator12 = new JoystickButton(operatorStick, 12);
   
-    // operator7.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_HIGH_PRESET));
-    // operator9.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_MIDDLE_PRESET));
-    // operator11.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_LOW_PRESET));
+   // operator11.whenPressed(new IntakeCommand());
+   // operator11.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_LOW_PRESET));
   
   }
 
