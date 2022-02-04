@@ -12,6 +12,8 @@ public final class Constants {
 
   //TODO Find the correct CAN ID values
   public static final int SHOOTER_CAN_ID = 6;
+  public static final int LEFT_ELEVATOR_MOTOR_CAN_ID = 7;
+  public static final int RIGHT_ELEVATOR_MOTOR_CAN_ID = 8;
 
   public static final int INTAKE_PWM = 0;
   public static final int CONVEYOR_PWM = 3;
@@ -20,6 +22,13 @@ public final class Constants {
   // Pneumatic Solenoid Ports
   public static final int ELEVATOR_TILT_SOLENOID = 0;
   public static final int HATCH_GRABBER_SOLENOID = 7;
+
+
+  /**
+   * Climber
+   */
+  public static final boolean LEFT_ELEVATOR_MOTOR_INVERTED = false;
+  public static final boolean RIGHT_ELEVATOR_MOTOR_INVERTED = false;
 
   /**
    * OPERATOR INTERFACE.
@@ -63,8 +72,7 @@ public final class Constants {
   public static final double INCHES_PER_REVOLUTION = GEAR_RATIO * TIRE_CIRCUMFERENCE;
   //public static final double INCHES_PER_COUNT = INCHES_PER_REVOLUTION / COUNTS_PER_REVOLUTION;
   public static final double ELEVATOR_INCHES_PER_REVOLUTION = 29.125;
-   public static final double ELEVATOR_INCHES_PER_COUNT
-       = ELEVATOR_INCHES_PER_REVOLUTION / COUNTS_PER_REVOLUTION;
+   public static final double ELEVATOR_INCHES_PER_COUNT = ELEVATOR_INCHES_PER_REVOLUTION / COUNTS_PER_REVOLUTION;
 
   /**
    * ELEVATOR.
@@ -75,8 +83,7 @@ public final class Constants {
   
   // Elevator range and tolerance constants
   public static final double ELEVATOR_UP_SCALED_RANGE_START = 20.0;
-  public static final double ELEVATOR_UP_SCALED_RANGE_END
-      = 0.5 * ELEVATOR_UP_SCALED_RANGE_START;
+  public static final double ELEVATOR_UP_SCALED_RANGE_END = 0.5 * ELEVATOR_UP_SCALED_RANGE_START;
   public static final double ELEVATOR_SCALE_START_SPEED = 1.0;
   public static final double ELEVATOR_SCALE_END_SPEED = 0.8;
 
