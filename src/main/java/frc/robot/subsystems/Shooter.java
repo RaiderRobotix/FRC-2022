@@ -24,7 +24,6 @@ public final class Shooter extends SubsystemBase {
     private boolean isShooterRotating;
 
     private Shooter() {
-        //TODO determine if these motors need to be inverted
         this.conveyorSpark = new Spark(Constants.CONVEYOR_PWM);
         this.conveyorSpark.setInverted(true);
         //TODO identify Talon motor CAN ID and update in constants file
@@ -42,7 +41,6 @@ public final class Shooter extends SubsystemBase {
 
 
     public void startConveyor() {
-        //TODO determine appropriate conveyor speed
         this.conveyorSpark.set(1.0);
 
     }
@@ -56,7 +54,6 @@ public final class Shooter extends SubsystemBase {
     }
 
     public void setShooterSpeed(double speed) {
-        //TODO determine what type of input speed should be
         this.shooterTalon.set(ControlMode.PercentOutput, speed);
         this.isShooterRotating = true;
     }

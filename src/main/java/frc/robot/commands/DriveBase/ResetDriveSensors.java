@@ -20,7 +20,6 @@ public class ResetDriveSensors extends CommandBase {
   private DriveBase drives;
 
   public ResetDriveSensors() {
-    // TODO why was there a timeout here?
     drives = DriveBase.getInstance();
     addRequirements(drives);
   }
