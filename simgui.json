@@ -1,8 +1,19 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "SPARK MAX [1]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/DriveBase": "Subsystem",
+      "/LiveWindow/Intake": "Subsystem",
+      "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/navX-Sensor[2]": "Gyro",
       "/SmartDashboard/Autonomous mode chooser": "String Chooser"
@@ -13,6 +24,9 @@
       "open": true
     },
     "SmartDashboard": {
+      "Autonomous mode chooser": {
+        "open": true
+      },
       "open": true
     }
   }

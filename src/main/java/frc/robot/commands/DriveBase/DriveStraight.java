@@ -73,7 +73,6 @@ public class DriveStraight extends CommandBase {
     } else {
       drives.setSpeed(leftSpeed, rightSpeed);
     }
-    
   }
 
   // Make this return true when this Command no longer needs to run execute()

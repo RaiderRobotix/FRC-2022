@@ -81,7 +81,6 @@ public class Robot extends TimedRobot {
 
     autonomousChooser = new SendableChooser<Command>();
     autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
-    autonomousChooser.addOption("Cross Initialization Line", new CrossInitializationLine());
     autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
     
     SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
@@ -127,8 +126,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     super.autonomousInit();
 
-    autonomousCommand = new CrossInitializationLine();
-    autonomousCommand.initialize();
+    autonomousCommand = autonomousChooser.getSelected();
+    autonomousCommand.schedule();
 
     
   }
