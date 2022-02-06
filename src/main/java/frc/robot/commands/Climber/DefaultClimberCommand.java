@@ -1,12 +1,18 @@
 package frc.robot.commands.Climber;
 
 import frc.robot.subsystems.Climber;
+import frc.robot.Constants;
+import frc.robot.OperatorInterface;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DefaultClimberCommand extends CommandBase {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-   
+    private Climber climber;
+    private OperatorInterface oi;
+
     public DefaultClimberCommand() {
+        climber = Climber.getInstance();
+        oi = OperatorInterface.getInstance();
     }
 
     // Called when the command is initially scheduled.
@@ -17,6 +23,20 @@ public class DefaultClimberCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_OVERRIDE)){
+            climber.setElevatorSpeed(oi.getOperatorY());
+        }
+
+        if(oi.getOperatorButton(Constants.OPERATOR_ARM_OVERRIDE)){
+            climber.setArmSpeed(oi.getOperatorY());
+        }
+        
+        //TODO fix how grabbers work
+        if(oi.getOperatorButton(Constants.OPERATOR_GRABBER_BUTTON)){
+            climber.setGrabberSpeed(0.5);
+        }else {
+            climber.setGrabberSpeed(0.0);
+        }
     }
 
     // Called once the command ends or is interrupted.

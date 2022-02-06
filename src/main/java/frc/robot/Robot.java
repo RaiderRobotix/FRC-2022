@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
 import frc.robot.commands.Autonomous.DoNothing;
+import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 import frc.robot.commands.Intake.DefaultIntakeCommand;
 import frc.robot.commands.Shooter.DefaultShooterCommand;
@@ -45,6 +46,8 @@ public class Robot extends TimedRobot {
 
   private final Shooter shooter;
 
+  private final Climber climber;
+
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
 
@@ -64,6 +67,7 @@ public class Robot extends TimedRobot {
     this.oi = OperatorInterface.getInstance();
     this.intake = Intake.getInstance();
     this.shooter = Shooter.getInstance();
+    this.climber = Climber.getInstance();
 
     CommandScheduler.getInstance().registerSubsystem(this.drives);
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
@@ -73,6 +77,9 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().registerSubsystem(this.shooter);
     this.shooter.setDefaultCommand(new DefaultShooterCommand());
+
+    CommandScheduler.getInstance().registerSubsystem(this.climber);
+    this.climber.setDefaultCommand(new DefaultClimberCommand());
 
   }
 
