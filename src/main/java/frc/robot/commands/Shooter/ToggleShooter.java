@@ -1,21 +1,22 @@
-package frc.robot.commands.Intake;
+package frc.robot.commands.Shooter;
 
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
-public class ToggleIntake extends CommandBase{
-    private Intake intake;
+public class ToggleShooter extends CommandBase{
+    private Shooter shooter;
     private boolean inverted;
 
     //Roller on or off
     private boolean state;
 
-    public ToggleIntake(boolean roller_state, boolean roller_inverted) {
-        intake = Intake.getInstance();
-        inverted = roller_inverted;
-        state = roller_state;
-        addRequirements(intake);
+    public ToggleShooter(boolean shooter_state, boolean shooter_inverted) {
+        shooter = Shooter.getInstance();
+        inverted = shooter_inverted;
+        state = shooter_state;
+        addRequirements(shooter);
     }
 
     // Called just before this Command runs the first time
@@ -35,9 +36,11 @@ public class ToggleIntake extends CommandBase{
     // Called once after isFinished returns true
     public void end() {
         if (this.state) {
-            intake.startRoller();
+            shooter.startConveyor();
+            shooter.setShooterSpeed(0.75);
         } else {
-            intake.stopRoller();
+            shooter.stopConveyor();
+            shooter.setShooterSpeed(0);
         }
     }
 
