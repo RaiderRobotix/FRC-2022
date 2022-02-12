@@ -45,8 +45,8 @@ public class Climber extends SubsystemBase {
         this.leftGrabberMotor = new TalonSRX(Constants.LEFT_GRABBER_CAN_ID);
         this.rightGrabberMotor = new TalonSRX(Constants.RIGHT_GRABBER_CAN_ID);
 
-        this.leftElevatorMotor = new CANSparkMax(Constants.LEFT_FRONT_DRIVE_CAN_ID, MotorType.kBrushless);
-        this.rightElevatorMotor = new CANSparkMax(Constants.LEFT_BACK_DRIVE_CAN_ID, MotorType.kBrushless);
+        this.leftElevatorMotor = new CANSparkMax(Constants.LEFT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
+        this.rightElevatorMotor = new CANSparkMax(Constants.RIGHT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
         this.armMotor = new CANSparkMax(Constants.ARM_CAN_ID, MotorType.kBrushless);
 
         this.leftElevatorMotor.restoreFactoryDefaults();

@@ -13,6 +13,7 @@ public class DefaultClimberCommand extends CommandBase {
     public DefaultClimberCommand() {
         climber = Climber.getInstance();
         oi = OperatorInterface.getInstance();
+        addRequirements(climber);
     }
 
     // Called when the command is initially scheduled.
