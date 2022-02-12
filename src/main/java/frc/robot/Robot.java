@@ -20,6 +20,7 @@ import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
 import frc.robot.commands.Autonomous.CrossLineAndShootDiagonal;
 import frc.robot.commands.Autonomous.DoNothing;
+import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 import frc.robot.commands.Intake.DefaultIntakeCommand;
 import frc.robot.commands.Shooter.DefaultShooterCommand;
@@ -46,6 +47,8 @@ public class Robot extends TimedRobot {
   private final Intake intake;
 
   private final Shooter shooter;
+
+  private final Climber climber;
 
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
@@ -76,6 +79,7 @@ public class Robot extends TimedRobot {
     this.oi = OperatorInterface.getInstance();
     this.intake = Intake.getInstance();
     this.shooter = Shooter.getInstance();
+    this.climber = Climber.getInstance();
 
     this.autonPicker = new Joystick(Constants.OPERATOR_JOYSTICK_PORT);
     
@@ -95,6 +99,9 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().registerSubsystem(this.shooter);
     this.shooter.setDefaultCommand(new DefaultShooterCommand());
 
+    CommandScheduler.getInstance().registerSubsystem(this.climber);
+    this.climber.setDefaultCommand(new DefaultClimberCommand());
+
   }
 
   @Override
@@ -102,7 +109,6 @@ public class Robot extends TimedRobot {
 
     autonomousChooser = new SendableChooser<Command>();
     autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
-    autonomousChooser.addOption("Cross Initialization Line", new CrossInitializationLine());
     autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
     autonomousChooser.addOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
 

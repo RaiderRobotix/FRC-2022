@@ -35,7 +35,6 @@ public class ToggleIntake extends CommandBase{
     // Called repeatedly when this Command is scheduled to run
 
     public void execute() {
-
     }
 
     // Called once after isFinished returns true

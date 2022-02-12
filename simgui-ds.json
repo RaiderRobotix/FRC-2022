@@ -7,8 +7,8 @@
           "incKey": 68
         },
         {
-          "decKey": 87,
-          "incKey": 83
+          "decKey": 50,
+          "incKey": 49
         },
         {
           "decKey": 69,
@@ -91,10 +91,10 @@
   ],
   "robotJoysticks": [
     {
-      "guid": "030000006d04000014c2000000000000"
+      "guid": "Keyboard1"
     },
     {
-      "guid": "030000006d04000014c2000000000000"
+      "guid": "Keyboard2"
     }
   ]
 }

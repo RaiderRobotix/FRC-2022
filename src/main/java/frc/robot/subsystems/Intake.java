@@ -14,9 +14,7 @@ public final class Intake extends SubsystemBase {
 
 	private Intake() {
 		this.rollerSpark = new Spark(Constants.INTAKE_PWM);
-        this.isRotating = false;
-		//TODO determine if motor needs to be inverted
-        
+        this.isRotating = false;        
 	}
 
 	public static Intake getInstance() {
@@ -27,7 +25,6 @@ public final class Intake extends SubsystemBase {
 	}
 
 	public void startRoller() {
-		//TODO find out what speed the roller should be spinning at
 		this.rollerSpark.set(1.0);
         this.isRotating = true;
 	}

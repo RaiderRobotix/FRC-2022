@@ -5,11 +5,14 @@
         "header": {
           "open": true
         }
+<<<<<<< HEAD
       },
       "SPARK MAX [4]": {
         "header": {
           "open": true
         }
+=======
+>>>>>>> 0b5566efe78c17084aeb50b4f88966f408993126
       }
     }
   },

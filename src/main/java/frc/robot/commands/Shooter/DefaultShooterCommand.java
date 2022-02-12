@@ -24,7 +24,6 @@ public class DefaultShooterCommand extends CommandBase {
     @Override
     public void execute() {
 
-        //TODO add buttons for shooting at different speeds
         if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.setShooterSpeed(-0.75);
             //TODO figure out how to wait for shooter to get up to speed
