@@ -11,12 +11,14 @@ package frc.robot;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
+import frc.robot.commands.Autonomous.CrossLineAndShootDiagonal;
 import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 import frc.robot.commands.Intake.DefaultIntakeCommand;
@@ -48,6 +50,16 @@ public class Robot extends TimedRobot {
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
 
+  private final Joystick autonPicker;
+
+  private final JoystickButton operator1;
+  private final JoystickButton operator2;
+  private final JoystickButton operator3;
+  private final JoystickButton operator4;
+  private final JoystickButton operator5;
+  private final JoystickButton operator6;
+ 
+
   //private Command autonomousCommand;
 
   /**
@@ -64,6 +76,15 @@ public class Robot extends TimedRobot {
     this.oi = OperatorInterface.getInstance();
     this.intake = Intake.getInstance();
     this.shooter = Shooter.getInstance();
+
+    this.autonPicker = new Joystick(Constants.OPERATOR_JOYSTICK_PORT);
+    
+    this.operator1 = new JoystickButton(autonPicker, 1);
+    this.operator2 = new JoystickButton(autonPicker, 2);
+    this.operator3 = new JoystickButton(autonPicker, 3);
+    this.operator4 = new JoystickButton(autonPicker, 4);
+    this.operator5 = new JoystickButton(autonPicker, 5);
+    this.operator6 = new JoystickButton(autonPicker, 6);
 
     CommandScheduler.getInstance().registerSubsystem(this.drives);
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
@@ -83,6 +104,8 @@ public class Robot extends TimedRobot {
     autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
     autonomousChooser.addOption("Cross Initialization Line", new CrossInitializationLine());
     autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
+    autonomousChooser.addOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
+
     
     SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
   }
@@ -126,11 +149,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     super.autonomousInit();
-
-    autonomousCommand = new CrossInitializationLine();
-    autonomousCommand.initialize();
-
-    
+    autonomousCommand = autonomousChooser.getSelected();
+    autonomousCommand.schedule();
   }
 
   /**

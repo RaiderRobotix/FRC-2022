@@ -48,7 +48,7 @@ public class DriveStraight extends CommandBase {
     double leftSpeed = this.startSpeed;
     double rightSpeed = this.startSpeed;
 
-    if ((goingForward && (getDistanceTraveledSinceStart() > this.targetDistance)
+   if ((goingForward && (getDistanceTraveledSinceStart() > this.targetDistance)
       || (!goingForward && (getDistanceTraveledSinceStart() < this.targetDistance))
       || (Math.abs(getDistanceTraveledSinceStart() - this.targetDistance) < Constants.DRIVE_STRAIGHT_DISTANCE_TOLERANCE))) {
       drives.setSpeed(0.0);
@@ -73,7 +73,8 @@ public class DriveStraight extends CommandBase {
     } else {
       drives.setSpeed(leftSpeed, rightSpeed);
     }
-    
+  
+    System.out.println("Left: "+ leftSpeed + "Right: " + rightSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()

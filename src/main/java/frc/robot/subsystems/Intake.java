@@ -52,7 +52,7 @@ public final class Intake extends SubsystemBase {
 	}
 
 	public void startRollerInverted() {
-		rollerSpark.set(-0.2);
+		rollerSpark.set(-1.0);
 	}
 
 	public boolean isRotating(){

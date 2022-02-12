@@ -17,22 +17,24 @@ import frc.robot.commands.Shooter.ToggleShooter;
 
 
 
-public class CrossLineAndShoot extends SequentialCommandGroup {
+public class CrossLineAndShootDiagonal extends SequentialCommandGroup {
   /**
    * Add your docs here.
    */
-  public CrossLineAndShoot() {
+  public CrossLineAndShootDiagonal() {
     //Pickup ball and turn
     addCommands(new ToggleIntake(true));
-    addCommands(new DriveStraight(95.0, 0.3));
+    addCommands(new DriveStraight(100.0, 0.3));
     addCommands(new ToggleIntake(false));
     addCommands(new WaitCommand(0.5));
     addCommands(new Turn(180, 0.3));
 
     //Drive straight then shoot
     addCommands(new WaitCommand(0.3));
-    addCommands(new DriveStraight(95.0, 0.3));
+    addCommands(new DriveStraight(100.0, 0.3));
     addCommands(new WaitCommand(1));
+    addCommands(new Turn(-45, 0.3));
+    addCommands(new WaitCommand(0.3));
     addCommands(new ToggleShooter(true));
     addCommands(new WaitCommand(2));
     addCommands(new ToggleIntake(true));
