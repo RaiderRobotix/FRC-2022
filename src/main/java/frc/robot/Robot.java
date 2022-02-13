@@ -53,16 +53,6 @@ public class Robot extends TimedRobot {
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
 
-  private final Joystick autonPicker;
-
-  private final JoystickButton operator1;
-  private final JoystickButton operator2;
-  private final JoystickButton operator3;
-  private final JoystickButton operator4;
-  private final JoystickButton operator5;
-  private final JoystickButton operator6;
- 
-
   //private Command autonomousCommand;
 
   /**
@@ -81,14 +71,6 @@ public class Robot extends TimedRobot {
     this.shooter = Shooter.getInstance();
     this.climber = Climber.getInstance();
 
-    this.autonPicker = new Joystick(Constants.OPERATOR_JOYSTICK_PORT);
-    
-    this.operator1 = new JoystickButton(autonPicker, 1);
-    this.operator2 = new JoystickButton(autonPicker, 2);
-    this.operator3 = new JoystickButton(autonPicker, 3);
-    this.operator4 = new JoystickButton(autonPicker, 4);
-    this.operator5 = new JoystickButton(autonPicker, 5);
-    this.operator6 = new JoystickButton(autonPicker, 6);
 
     CommandScheduler.getInstance().registerSubsystem(this.drives);
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
@@ -155,8 +137,20 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     super.autonomousInit();
+
+    switch (oi.getAutonChosen()) {
+      case 0:
+        autonomousChooser.setDefaultOption("Do Nothing", new DoNothing());
+      case 1:
+        autonomousChooser.setDefaultOption("Cross Initalization Line", new CrossInitializationLine());
+      case 3:
+        autonomousChooser.setDefaultOption("Cross Line and Shoot", new CrossLineAndShoot());
+      case 4:
+        autonomousChooser.setDefaultOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
+    }
     autonomousCommand = autonomousChooser.getSelected();
     autonomousCommand.schedule();
+    
   }
 
   /**
@@ -165,6 +159,8 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     CommandScheduler.getInstance().run();
+
+
   }
 
   /**

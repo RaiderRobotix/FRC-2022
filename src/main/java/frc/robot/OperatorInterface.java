@@ -24,6 +24,7 @@ public class OperatorInterface {
   private final Joystick leftStick;
   private final Joystick rightStick;
   private final Joystick operatorStick;
+  private final Joystick switchBox;
 
   private final JoystickButton operator1;
   private final JoystickButton operator2;
@@ -46,6 +47,7 @@ public class OperatorInterface {
     this.leftStick = new Joystick(Constants.LEFT_JOYSTICK_PORT);
     this.rightStick = new Joystick(Constants.RIGHT_JOYSTICK_PORT);
     this.operatorStick = new Joystick(Constants.OPERATOR_JOYSTICK_PORT);
+    this.switchBox = new Joystick(Constants.SWITCH_BOX_PORT);
     
     this.operator1 = new JoystickButton(operatorStick, 1);
     this.operator2 = new JoystickButton(operatorStick, 2);
@@ -113,6 +115,33 @@ public class OperatorInterface {
 
   public boolean getOperatorButton(int button) {
     return this.operatorStick.getRawButton(button);
+  }
+
+  public boolean getSwitchBox(int button) {
+    switch (button) {
+      case 1:
+        return switchBox.getRawButton(5);
+      case 2:
+        return switchBox.getRawButton(12);
+      case 3:
+        return switchBox.getRawButton(7);
+      case 4:
+        return switchBox.getRawButton(11);
+      case 5:
+        return switchBox.getRawButton(6);
+      case 6:
+        return switchBox.getRawButton(8);
+      default:
+        return false;
+    }
+  }
+
+  public short getAutonChosen() {
+    short ret = 0;
+    for (int i = 1; i <= 6; i++)
+      if (getSwitchBox(i))
+        ret += 1 << i - 1;
+    return ret;
   }
 
   public boolean getOperatorTrigger() {
