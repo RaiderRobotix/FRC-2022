@@ -4,7 +4,6 @@ import frc.robot.Constants;
 import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 
-import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -126,9 +125,17 @@ public class Climber extends SubsystemBase {
         this.rightGrabberMotor.set(ControlMode.PercentOutput, speed);
     }
 
-    public void setGrabberInverted(boolean state) {
-        leftGrabberMotor.setInverted(state);
-        rightGrabberMotor.setInverted(state);
+    public void setGrabberInverted(boolean leftState, boolean rightState) {
+        leftGrabberMotor.setInverted(leftState);
+        rightGrabberMotor.setInverted(rightState);
+    }
+
+    public void stepGrabber() {
+        while(getLeftElevatorDistance() <= 0.5){
+            setGrabberSpeed(0.1);
+        }
+        leftElevatorEncoder.setPosition(0);
+        rightElevatorEncoder.setPosition(0);
     }
 
     public double getGrabberSpeed() {

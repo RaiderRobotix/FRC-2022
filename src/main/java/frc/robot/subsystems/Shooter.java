@@ -1,8 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
@@ -26,7 +25,6 @@ public final class Shooter extends SubsystemBase {
     private Shooter() {
         this.conveyorSpark = new Spark(Constants.CONVEYOR_PWM);
         this.conveyorSpark.setInverted(true);
-        //TODO identify Talon motor CAN ID and update in constants file
         this.shooterTalon = new TalonSRX(Constants.SHOOTER_CAN_ID);
         this.isShooterRotating = false;
 
