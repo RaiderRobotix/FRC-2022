@@ -23,9 +23,8 @@ public class OperatorInterface {
   // Joysticks
   private final Joystick leftStick;
   private final Joystick rightStick;
-  //TODO Make Private again
-  public final Joystick operatorStick;
-  public final Joystick switchBox;
+  private final Joystick operatorStick;
+  private final Joystick switchBox;
 
   private final JoystickButton operator1;
   private final JoystickButton operator2;
@@ -39,13 +38,6 @@ public class OperatorInterface {
   private final JoystickButton operator10;
   private final JoystickButton operator11;
   private final JoystickButton operator12;
-
-  private final JoystickButton switchBox1;
-  private final JoystickButton switchBox2;
-  private final JoystickButton switchBox3;
-  private final JoystickButton switchBox4;
-  private final JoystickButton switchBox5;
-  private final JoystickButton switchBox6;
 
 
 
@@ -69,13 +61,6 @@ public class OperatorInterface {
     this.operator10 = new JoystickButton(operatorStick, 10);
     this.operator11 = new JoystickButton(operatorStick, 11);
     this.operator12 = new JoystickButton(operatorStick, 12);
-    
-    this.switchBox1 = new JoystickButton(switchBox, 1);
-    this.switchBox2 = new JoystickButton(switchBox, 2);
-    this.switchBox3 = new JoystickButton(switchBox, 3);
-    this.switchBox4 = new JoystickButton(switchBox, 4);
-    this.switchBox5 = new JoystickButton(switchBox, 5);
-    this.switchBox6 = new JoystickButton(switchBox, 6);
 
    // operator11.whenPressed(new IntakeCommand());
    // operator11.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_LOW_PRESET));
@@ -132,20 +117,21 @@ public class OperatorInterface {
     return this.operatorStick.getRawButton(button);
   }
 
+  //TODO Find correct raw button values
   public boolean getSwitchBox(int button) {
     switch (button) {
       case 1:
-        return switchBox.getRawButton(5);
+        return switchBox.getRawButton(1);
       case 2:
-        return switchBox.getRawButton(12);
+        return switchBox.getRawButton(2);
       case 3:
-        return switchBox.getRawButton(7);
+        return switchBox.getRawButton(3);
       case 4:
-        return switchBox.getRawButton(11);
+        return switchBox.getRawButton(4);
       case 5:
-        return switchBox.getRawButton(6);
+        return switchBox.getRawButton(5);
       case 6:
-        return switchBox.getRawButton(8);
+        return switchBox.getRawButton(6);
       default:
         return false;
     }

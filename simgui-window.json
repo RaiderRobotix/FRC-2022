@@ -1,16 +1,46 @@
 {
   "MainWindow": {
     "GLOBAL": {
-      "height": "1123",
-      "maximized": "0",
+      "height": "1132",
+      "maximized": "1",
       "style": "0",
       "userScale": "2",
-      "width": "958",
-      "xpos": "961",
-      "ypos": "33"
+      "width": "1920",
+      "xpos": "0",
+      "ypos": "25"
     }
   },
   "Window": {
+    "###/FMSInfo": {
+      "Collapsed": "0",
+      "Pos": "372,473",
+      "Size": "169,167"
+    },
+    "###/LiveWindow/DriveBase": {
+      "Collapsed": "0",
+      "Pos": "567,335",
+      "Size": "123,69"
+    },
+    "###/LiveWindow/Ungrouped/Scheduler": {
+      "Collapsed": "0",
+      "Pos": "326,192",
+      "Size": "400,200"
+    },
+    "###/SmartDashboard/Autonomous mode chooser": {
+      "Collapsed": "0",
+      "Pos": "353,465",
+      "Size": "254,54"
+    },
+    "###Analog Inputs": {
+      "Collapsed": "0",
+      "Pos": "640,20",
+      "Size": "260,71"
+    },
+    "###Encoders": {
+      "Collapsed": "0",
+      "Pos": "774,605",
+      "Size": "85,48"
+    },
     "###FMS": {
       "Collapsed": "0",
       "Pos": "5,596",
@@ -28,7 +58,7 @@
     },
     "###Keyboard 1 Settings": {
       "Collapsed": "0",
-      "Pos": "264,86",
+      "Pos": "250,78",
       "Size": "331,618"
     },
     "###Keyboard 2 Settings": {
@@ -43,17 +73,32 @@
     },
     "###NetworkTables": {
       "Collapsed": "0",
-      "Pos": "276,305",
+      "Pos": "35,229",
       "Size": "828,204"
     },
     "###Other Devices": {
-      "Collapsed": "1",
-      "Pos": "19,938",
-      "Size": "276,767"
+      "Collapsed": "0",
+      "Pos": "874,23",
+      "Size": "407,1028"
+    },
+    "###PWM Outputs": {
+      "Collapsed": "0",
+      "Pos": "517,7",
+      "Size": "110,81"
+    },
+    "###Plot <0>": {
+      "Collapsed": "0",
+      "Pos": "250,51",
+      "Size": "700,400"
+    },
+    "###RoboRIO": {
+      "Collapsed": "0",
+      "Pos": "224,162",
+      "Size": "193,192"
     },
     "###System Joysticks": {
       "Collapsed": "0",
-      "Pos": "5,386",
+      "Pos": "12,340",
       "Size": "192,218"
     },
     "###Timing": {

@@ -12,6 +12,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -70,7 +71,6 @@ public class Robot extends TimedRobot {
     this.intake = Intake.getInstance();
     this.shooter = Shooter.getInstance();
     this.climber = Climber.getInstance();
-
 
     CommandScheduler.getInstance().registerSubsystem(this.drives);
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
@@ -146,10 +146,7 @@ public class Robot extends TimedRobot {
         autonomousCommand = new CrossLineAndShoot();
       case 3:
         autonomousCommand = new CrossLineAndShootDiagonal();
-      default:
-        autonomousCommand = new DoNothing();
     }
-    
     autonomousCommand.schedule();
     
   }

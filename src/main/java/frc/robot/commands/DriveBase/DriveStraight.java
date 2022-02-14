@@ -74,7 +74,7 @@ public class DriveStraight extends CommandBase {
       drives.setSpeed(leftSpeed, rightSpeed);
     }
   
-    System.out.println("Left: "+ leftSpeed + "Right: " + rightSpeed);
+    // System.out.println("Left: "+ leftSpeed + "Right: " + rightSpeed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
