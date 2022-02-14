@@ -31,13 +31,11 @@ public class DefaultClimberCommand extends CommandBase {
         if(oi.getOperatorButton(Constants.OPERATOR_ARM_OVERRIDE)){
             climber.setArmSpeed(oi.getOperatorY());
         }
-        
         //TODO fix how grabbers work
         if(oi.getOperatorButton(Constants.OPERATOR_GRABBER_BUTTON)){
-            climber.setGrabberSpeed(0.5);
-        }else {
-            climber.setGrabberSpeed(0.0);
+            climber.stepGrabber();
         }
+
     }
 
     // Called once the command ends or is interrupted.

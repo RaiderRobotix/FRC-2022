@@ -137,18 +137,19 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     super.autonomousInit();
-
     switch (oi.getAutonChosen()) {
       case 0:
-        autonomousChooser.setDefaultOption("Do Nothing", new DoNothing());
+        autonomousCommand = new DoNothing();
       case 1:
-        autonomousChooser.setDefaultOption("Cross Initalization Line", new CrossInitializationLine());
+        autonomousCommand = new CrossInitializationLine();
+      case 2:
+        autonomousCommand = new CrossLineAndShoot();
       case 3:
-        autonomousChooser.setDefaultOption("Cross Line and Shoot", new CrossLineAndShoot());
-      case 4:
-        autonomousChooser.setDefaultOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
+        autonomousCommand = new CrossLineAndShootDiagonal();
+      default:
+        autonomousCommand = new DoNothing();
     }
-    autonomousCommand = autonomousChooser.getSelected();
+    
     autonomousCommand.schedule();
     
   }
@@ -159,8 +160,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     CommandScheduler.getInstance().run();
-
-
   }
 
   /**

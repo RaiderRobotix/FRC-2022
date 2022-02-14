@@ -1,24 +1,47 @@
 {
   "HALProvider": {
     "Other Devices": {
+      "SPARK MAX [11]": {
+        "header": {
+          "open": true
+        }
+      },
       "SPARK MAX [1]": {
         "header": {
           "open": true
         }
-<<<<<<< HEAD
+      },
+      "SPARK MAX [2]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [3]": {
+        "header": {
+          "open": true
+        }
       },
       "SPARK MAX [4]": {
         "header": {
           "open": true
         }
-=======
->>>>>>> 0b5566efe78c17084aeb50b4f88966f408993126
+      },
+      "SPARK MAX [7]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [8]": {
+        "header": {
+          "open": true
+        }
       }
     }
   },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Climber": "Subsystem",
       "/LiveWindow/DriveBase": "Subsystem",
       "/LiveWindow/Intake": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
@@ -27,30 +50,7 @@
       "/SmartDashboard/Autonomous mode chooser": "String Chooser"
     }
   },
-  "NetworkTables": {
-    "LiveWindow": {
-      ".status": {
-        "open": true
-      },
-      "DriveBase": {
-        "open": true
-      },
-      "Intake": {
-        "open": true
-      },
-      "Shooter": {
-        "open": true
-      },
-      "Ungrouped": {
-        "open": true
-      },
-      "open": true
-    },
-    "SmartDashboard": {
-      "Autonomous mode chooser": {
-        "open": true
-      },
-      "open": true
-    }
+  "NetworkTables View": {
+    "visible": false
   }
 }

@@ -23,8 +23,9 @@ public class OperatorInterface {
   // Joysticks
   private final Joystick leftStick;
   private final Joystick rightStick;
-  private final Joystick operatorStick;
-  private final Joystick switchBox;
+  //TODO Make Private again
+  public final Joystick operatorStick;
+  public final Joystick switchBox;
 
   private final JoystickButton operator1;
   private final JoystickButton operator2;
@@ -38,6 +39,13 @@ public class OperatorInterface {
   private final JoystickButton operator10;
   private final JoystickButton operator11;
   private final JoystickButton operator12;
+
+  private final JoystickButton switchBox1;
+  private final JoystickButton switchBox2;
+  private final JoystickButton switchBox3;
+  private final JoystickButton switchBox4;
+  private final JoystickButton switchBox5;
+  private final JoystickButton switchBox6;
 
 
 
@@ -61,7 +69,14 @@ public class OperatorInterface {
     this.operator10 = new JoystickButton(operatorStick, 10);
     this.operator11 = new JoystickButton(operatorStick, 11);
     this.operator12 = new JoystickButton(operatorStick, 12);
-  
+    
+    this.switchBox1 = new JoystickButton(switchBox, 1);
+    this.switchBox2 = new JoystickButton(switchBox, 2);
+    this.switchBox3 = new JoystickButton(switchBox, 3);
+    this.switchBox4 = new JoystickButton(switchBox, 4);
+    this.switchBox5 = new JoystickButton(switchBox, 5);
+    this.switchBox6 = new JoystickButton(switchBox, 6);
+
    // operator11.whenPressed(new IntakeCommand());
    // operator11.whenPressed(new RaiseElevatorToHeight(Constants.ELEVATOR_LOW_PRESET));
   
@@ -136,12 +151,12 @@ public class OperatorInterface {
     }
   }
 
-  public short getAutonChosen() {
-    short ret = 0;
+  public int getAutonChosen() {
     for (int i = 1; i <= 6; i++)
-      if (getSwitchBox(i))
-        ret += 1 << i - 1;
-    return ret;
+      if (getSwitchBox(i)){
+        return i;
+      }
+    return 0;
   }
 
   public boolean getOperatorTrigger() {
