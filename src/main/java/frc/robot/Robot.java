@@ -168,7 +168,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    System.out.println("Line Breaker: " + lineBreaker.get());
+    System.out.println("Line Breaker: " + linebreaker.get());
 
     CommandScheduler.getInstance().run();
     
