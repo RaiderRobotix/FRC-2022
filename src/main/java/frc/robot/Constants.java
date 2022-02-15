@@ -55,6 +55,8 @@ public final class Constants {
   public static final int OPERATOR_ELEVATOR_OVERRIDE = 7;
   public static final int OPERATOR_ARM_OVERRIDE = 8;
 
+  public static final int RIGHT_SHOOTER_BUTTON = 1;
+
 
 
   public static final int SENSOR_RESET_BUTTON = 8;

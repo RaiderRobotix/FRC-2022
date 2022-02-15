@@ -1,13 +1,17 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 import frc.robot.OperatorInterface;
+import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
 public class DefaultShooterCommand extends CommandBase {
     private Shooter shooter;
     private OperatorInterface oi;
+
+    private final DigitalInput lineBreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
 
     public DefaultShooterCommand() {
         shooter = Shooter.getInstance();
@@ -44,9 +48,16 @@ public class DefaultShooterCommand extends CommandBase {
         if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.startConveyorInverted();
         }
-        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON)) {
+        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get()) {
             shooter.startConveyor();
         }
+        else {
+            shooter.stopConveyor();
+        }
+
+        if(oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && !lineBreaker.get()) {
+            shooter.startConveyor();
+        } 
         else {
             shooter.stopConveyor();
         }

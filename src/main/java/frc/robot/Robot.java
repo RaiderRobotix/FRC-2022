@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
 
   private final Climber climber;
 
-  private final DigitalInput linebreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
+  // private final DigitalInput linebreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
 
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
@@ -168,7 +168,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    System.out.println("Line Breaker: " + linebreaker.get());
+    // System.out.println("Line Breaker: " + linebreaker.get());
 
     CommandScheduler.getInstance().run();
     
