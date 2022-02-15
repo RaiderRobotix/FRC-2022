@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
 import frc.robot.commands.Autonomous.CrossLineAndShootDiagonal;
@@ -50,6 +52,8 @@ public class Robot extends TimedRobot {
   private final Shooter shooter;
 
   private final Climber climber;
+
+  private final DigitalInput linebreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
 
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
@@ -164,6 +168,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    System.out.println("Line Breaker: " + lineBreaker.get());
 
     CommandScheduler.getInstance().run();
     

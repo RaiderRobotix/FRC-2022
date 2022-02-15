@@ -21,12 +21,14 @@ public final class Constants {
   public static final int INTAKE_PWM = 0;
   public static final int CONVEYOR_PWM = 3;
 
+  public static final int LINE_BREAKER_DIO = 0;
+
 
   // Pneumatic Solenoid Ports
   public static final int ELEVATOR_TILT_SOLENOID = 0;
   public static final int HATCH_GRABBER_SOLENOID = 7;
 
-
+ 
   /**
    * Climber
    */
