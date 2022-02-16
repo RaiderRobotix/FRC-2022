@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
 import frc.robot.commands.Autonomous.CrossLineAndShootDiagonal;
+import frc.robot.commands.Autonomous.CrossLineAndShootThree;
 import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
@@ -97,6 +98,7 @@ public class Robot extends TimedRobot {
     autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
     autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
     autonomousChooser.addOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
+    autonomousChooser.addOption("Cross Line and Shoot Three Balls", new CrossLineAndShootThree());
 
     
     SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
@@ -150,6 +152,8 @@ public class Robot extends TimedRobot {
         autonomousCommand = new CrossLineAndShoot();
       case 3:
         autonomousCommand = new CrossLineAndShootDiagonal();
+      case 4:
+        autonomousCommand = new CrossLineAndShootThree();
     }
     autonomousCommand.schedule();
     
