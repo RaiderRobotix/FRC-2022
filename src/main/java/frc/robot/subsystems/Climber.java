@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -26,15 +27,13 @@ public class Climber extends SubsystemBase {
 
     private final CANSparkMax leftElevatorMotor;
     private final CANSparkMax rightElevatorMotor;
-    private final CANSparkMax armMotor;
+    private final Spark armMotor;
 
     private final RelativeEncoder leftElevatorEncoder;
     private final RelativeEncoder rightElevatorEncoder;
-    private final RelativeEncoder armEncoder;
 
     private double leftElevatorDistance;
     private double rightElevatorDistance;
-    private double armDistance;
 
     private final TalonSRX leftGrabberMotor;
     private final TalonSRX rightGrabberMotor;
@@ -46,37 +45,32 @@ public class Climber extends SubsystemBase {
 
         this.leftElevatorMotor = new CANSparkMax(Constants.LEFT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
         this.rightElevatorMotor = new CANSparkMax(Constants.RIGHT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
-        this.armMotor = new CANSparkMax(Constants.ARM_CAN_ID, MotorType.kBrushless);
+        this.armMotor = new Spark(Constants.ARM_PWM);
 
         this.leftElevatorMotor.restoreFactoryDefaults();
         this.rightElevatorMotor.restoreFactoryDefaults();
-        this.armMotor.restoreFactoryDefaults();
 
         this.leftElevatorMotor.clearFaults();
         this.rightElevatorMotor.clearFaults();
-        this.armMotor.clearFaults();
 
         this.leftElevatorMotor.setInverted(Constants.LEFT_ELEVATOR_MOTOR_INVERTED);
+        this.leftElevatorMotor.setInverted(true);
         this.rightElevatorMotor.setInverted(Constants.RIGHT_ELEVATOR_MOTOR_INVERTED);
         this.armMotor.setInverted(Constants.ARM_MOTOR_INVERTED);
 
         this.leftElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
         this.rightElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-        this.armMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
         this.leftElevatorMotor.follow(rightElevatorMotor);
 
         this.leftElevatorMotor.setSmartCurrentLimit(80);
         this.rightElevatorMotor.setSmartCurrentLimit(80);
-        this.armMotor.setSmartCurrentLimit(80);
 
         this.leftElevatorEncoder = leftElevatorMotor.getEncoder();
         this.rightElevatorEncoder = rightElevatorMotor.getEncoder();
-        this.armEncoder = armMotor.getEncoder();
 
         this.leftElevatorDistance = this.getLeftElevatorDistance();
         this.rightElevatorDistance = this.getRightElevatorDistance();
-        this.armDistance = this.getArmDistance();
 
     }
 
@@ -91,9 +85,9 @@ public class Climber extends SubsystemBase {
         return m_instance;
     }
 
-    public void setElevatorSpeed(double speed) {
-        this.leftElevatorMotor.set(speed);
-        this.rightElevatorMotor.set(speed);
+    public void setElevatorSpeed(double leftspeed, double rightSpeed) {
+        this.leftElevatorMotor.set(leftspeed);
+        this.rightElevatorMotor.set(rightSpeed);
     }
 
     public double getElevatorSpeed() {
@@ -148,14 +142,6 @@ public class Climber extends SubsystemBase {
 
     public double getArmSpeed() {
         return armMotor.get();
-    }
-
-    private double getArmEncoder() {
-        return (this.armEncoder.getPosition() * Constants.INCHES_PER_REVOLUTION);
-    }
-
-    public double getArmDistance() {
-        return this.getArmEncoder() - this.armDistance;
     }
 
     public void resetEncoders() {

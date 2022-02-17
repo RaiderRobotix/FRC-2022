@@ -35,6 +35,8 @@ public class DefaultClimberCommand extends CommandBase {
         if(oi.getOperatorButton(Constants.OPERATOR_GRABBER_BUTTON)){
             climber.stepGrabber();
         }
+        
+        
 
     }
 

@@ -16,11 +16,10 @@ public final class Constants {
   public static final int RIGHT_ELEVATOR_MOTOR_CAN_ID = 8;
   public static final int LEFT_GRABBER_CAN_ID = 9;
   public static final int RIGHT_GRABBER_CAN_ID = 10;
-  public static final int ARM_CAN_ID = 11; 
+  public static final int ARM_PWM = 4; 
 
   public static final int INTAKE_PWM = 0;
   public static final int CONVEYOR_PWM = 3;
-  public static final int LINE_BREAKER_PWM = 4;
 
   public static final int LINE_BREAKER_DIO = 0;
 
@@ -33,7 +32,7 @@ public final class Constants {
   /**
    * Climber
    */
-  public static final boolean LEFT_ELEVATOR_MOTOR_INVERTED = false;
+  public static final boolean LEFT_ELEVATOR_MOTOR_INVERTED = true;
   public static final boolean RIGHT_ELEVATOR_MOTOR_INVERTED = false;
   public static final boolean ARM_MOTOR_INVERTED = false;
 

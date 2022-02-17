@@ -213,12 +213,23 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Ultrasonic", this.drives.getUltrasonicDistance());
 
     if(oi.getSwitchBox(6)){
-      orchestra.play();
+      System.out.println("switch 6 is down");
+    } else if (oi.getSwitchBox(5)) {
+      System.out.println("switch 5 is down");
+    } else if (oi.getSwitchBox(4)) {
+      System.out.println("switch 4 is down");
+    } else if (oi.getSwitchBox(3)) {
+      System.out.println("switch 3 is down");
+    } else if (oi.getSwitchBox(2)) {
+      System.out.println("switch 2 is down");
+    } else if (oi.getSwitchBox(1)) {
+      System.out.println("switch 1 is down");
     }
-    else {
-      orchestra.stop();
-    }
+    
+    //   orchestra.play();
+    //   orchestra.stop();
   }
+
 
   /**
    * This function is called periodically during test mode.
