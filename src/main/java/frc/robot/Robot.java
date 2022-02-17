@@ -15,9 +15,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Filesystem;
+
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.music.Orchestra;
 
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
@@ -29,7 +34,9 @@ import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 import frc.robot.commands.Intake.DefaultIntakeCommand;
 import frc.robot.commands.Shooter.DefaultShooterCommand;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -52,7 +59,9 @@ public class Robot extends TimedRobot {
 
   private final Shooter shooter;
 
-  private final Climber climber;
+  private final Climber climber;  
+
+  int random_int;  
 
   // private final DigitalInput linebreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
 
@@ -60,6 +69,14 @@ public class Robot extends TimedRobot {
   private Command autonomousCommand;
 
   //private Command autonomousCommand;
+
+  Orchestra orchestra;
+
+  //Array of all falcon motors for music
+  TalonFX[] motors = { new TalonFX(Constants.LEFT_GRABBER_CAN_ID), new TalonFX(Constants.RIGHT_GRABBER_CAN_ID), new TalonFX(Constants.SHOOTER_CAN_ID) };
+  
+  // Place chrp song files in array and in deploy directory to add songs
+  String[] songs = { "AllStar.chrp" };
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -89,6 +106,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().registerSubsystem(this.climber);
     this.climber.setDefaultCommand(new DefaultClimberCommand());
 
+
   }
 
   @Override
@@ -102,6 +120,22 @@ public class Robot extends TimedRobot {
 
     
     SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
+
+    ArrayList<TalonFX> instruments = new ArrayList<TalonFX>();
+    
+    //Creates random variable to randomly select a song everytime
+    this.random_int = (int) Math.floor(Math.random() * (songs.length));
+
+    //Adds all motors in motor array to the instruments array for the music
+    for (int i = 0; i < motors.length; i++){
+      instruments.add(motors[i]);
+    }
+
+    orchestra = new Orchestra(instruments);
+
+    //TODO Make sure this function works on the physical robot
+    orchestra.loadMusic(Filesystem.getDeployDirectory() + songs[random_int]);
+
   }
 
   /**
@@ -177,6 +211,13 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     
     SmartDashboard.putNumber("Ultrasonic", this.drives.getUltrasonicDistance());
+
+    if(oi.getSwitchBox(6)){
+      orchestra.play();
+    }
+    else {
+      orchestra.stop();
+    }
   }
 
   /**
