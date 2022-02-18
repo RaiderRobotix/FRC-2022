@@ -8,6 +8,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 
@@ -73,6 +74,7 @@ public class Climber extends SubsystemBase {
         this.leftElevatorDistance = this.getLeftElevatorDistance();
         this.rightElevatorDistance = this.getRightElevatorDistance();
 
+        this.setGrabberInverted(false, true);
     }
 
     /**
@@ -124,22 +126,35 @@ public class Climber extends SubsystemBase {
         leftGrabberMotor.setInverted(leftState);
         rightGrabberMotor.setInverted(rightState);
     }
+    public void setGrabberBrakeMode(boolean state){
+        if (state){
+            leftGrabberMotor.setNeutralMode(NeutralMode.Brake);
+            rightGrabberMotor.setNeutralMode(NeutralMode.Brake);            
+
+        } else if (state) {
+            leftGrabberMotor.setNeutralMode(NeutralMode.Coast);
+            rightGrabberMotor.setNeutralMode(NeutralMode.Coast);
+        }
+    }
 
     public void stepGrabber() {
-        while (getLeftElevatorDistance() <= 0.5) {
-            setGrabberSpeed(0.1);
-        }
-        setGrabberSpeed(0.0);
-        leftElevatorEncoder.setPosition(0);
-        rightElevatorEncoder.setPosition(0);
+        setGrabberSpeed(0.05);
     }
 
     public double getGrabberSpeed() {
-        return leftGrabberMotor.getSelectedSensorVelocity();
+        return leftGrabberMotor.getSelectedSensorPosition();
+    }
+
+    public double getGrabberPositionLeft() {
+        return leftGrabberMotor.getSelectedSensorPosition();
+    }
+    public double getGrabberPositionRight() {
+        return rightGrabberMotor.getSelectedSensorPosition();
     }
 
     public void setArmSpeed(double speed) {
         this.armMotor.set(speed);
+        
     }
 
     public double getArmSpeed() {

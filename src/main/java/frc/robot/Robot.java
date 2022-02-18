@@ -213,7 +213,7 @@ public class Robot extends TimedRobot {
 
     if(oi.getSwitchBox(6)){
       System.out.println("switch 6 is down");
-      // orchestra.play();
+      orchestra.play();
     } else if (oi.getSwitchBox(5)) {
       System.out.println("switch 5 is down");
     } else if (oi.getSwitchBox(4)) {
@@ -225,10 +225,11 @@ public class Robot extends TimedRobot {
     } else if (oi.getSwitchBox(1)) {
       System.out.println("switch 1 is down");
     } else {
-      // orchestra.stop();
+      orchestra.stop();
 
     }
-    
+    // System.out.println(climber.getGrabberPositionLeft());
+    // System.out.println(climber.getGrabberPositionRight());
   }
 
 
