@@ -45,6 +45,7 @@ public class Climber extends SubsystemBase {
 
         this.leftElevatorMotor = new CANSparkMax(Constants.LEFT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
         this.rightElevatorMotor = new CANSparkMax(Constants.RIGHT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
+        
         this.armMotor = new Spark(Constants.ARM_PWM);
 
         this.leftElevatorMotor.restoreFactoryDefaults();
@@ -85,9 +86,9 @@ public class Climber extends SubsystemBase {
         return m_instance;
     }
 
-    public void setElevatorSpeed(double leftspeed, double rightSpeed) {
-        this.leftElevatorMotor.set(leftspeed);
-        this.rightElevatorMotor.set(rightSpeed);
+    public void setElevatorSpeed(double speed) {
+        this.leftElevatorMotor.set(speed);
+        this.rightElevatorMotor.set(speed);
     }
 
     public double getElevatorSpeed() {
@@ -125,9 +126,10 @@ public class Climber extends SubsystemBase {
     }
 
     public void stepGrabber() {
-        while(getLeftElevatorDistance() <= 0.5){
+        while (getLeftElevatorDistance() <= 0.5) {
             setGrabberSpeed(0.1);
         }
+        setGrabberSpeed(0.0);
         leftElevatorEncoder.setPosition(0);
         rightElevatorEncoder.setPosition(0);
     }

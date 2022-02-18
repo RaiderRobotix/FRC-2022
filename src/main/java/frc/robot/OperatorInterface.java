@@ -117,21 +117,20 @@ public class OperatorInterface {
     return this.operatorStick.getRawButton(button);
   }
 
-  //TODO Find correct raw button values
   public boolean getSwitchBox(int button) {
     switch (button) {
       case 1:
-        return switchBox.getRawButton(1);
-      case 2:
-        return switchBox.getRawButton(2);
-      case 3:
-        return switchBox.getRawButton(3);
-      case 4:
-        return switchBox.getRawButton(4);
-      case 5:
         return switchBox.getRawButton(5);
-      case 6:
+      case 2:
+        return switchBox.getRawButton(12);
+      case 3:
+        return switchBox.getRawButton(7);
+      case 4:
+        return switchBox.getRawButton(11);
+      case 5:
         return switchBox.getRawButton(6);
+      case 6:
+        return switchBox.getRawButton(8);
       default:
         return false;
     }
