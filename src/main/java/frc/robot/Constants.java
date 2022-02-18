@@ -53,6 +53,7 @@ public final class Constants {
   public static final int OPERATOR_GRABBER_BUTTON = 10;
   public static final int OPERATOR_ELEVATOR_OVERRIDE = 7;
   public static final int OPERATOR_ARM_OVERRIDE = 8;
+  public static final int OPERATOR_LINEBREAKER_OVERRIDE = 3;
 
   public static final int RIGHT_SHOOTER_BUTTON = 1;
 

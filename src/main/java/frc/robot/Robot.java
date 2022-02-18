@@ -133,7 +133,6 @@ public class Robot extends TimedRobot {
 
     orchestra = new Orchestra(instruments);
 
-    //TODO Make sure this function works on the physical robot
     orchestra.loadMusic(Filesystem.getDeployDirectory() + songs[random_int]);
 
   }
