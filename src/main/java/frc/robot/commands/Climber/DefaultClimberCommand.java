@@ -31,12 +31,6 @@ public class DefaultClimberCommand extends CommandBase {
 
         if(oi.getOperatorButton(Constants.OPERATOR_ARM_OVERRIDE)){
             //climber.setArmSpeed(oi.getOperatorY());
-            if(climber.getGrabberPositionLeft() == -600 && climber.getGrabberPositionRight() == 2900){
-                climber.setGrabberSpeed(0.0);
-            } else if (climber.getGrabberPositionLeft() == -600 && climber.getGrabberPositionRight() == 2900){
-                climber.setGrabberSpeed(0.0);
-            }
-            climber.setGrabberSpeed(0.05);
         }
         if(oi.getOperatorButton(5)){
             climber.setGrabberSpeed(0.05);

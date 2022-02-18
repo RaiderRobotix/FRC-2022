@@ -48,14 +48,15 @@ public class DefaultShooterCommand extends CommandBase {
         if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON) || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_LINEBREAKER_OVERRIDE)) {
             shooter.startConveyorInverted();
         }
-        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get()) {
-            shooter.startConveyor();
-        }
-        else {
-            shooter.stopConveyor();
-        }
+        // add  && lineBreaker.get()
+        // else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON)  && lineBreaker.get()) {
+        //     shooter.startConveyor();
+        // }
+        // else {
+        //     shooter.stopConveyor();
+        // }
 
-        if(oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && !lineBreaker.get()) {
+        if(oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && !lineBreaker.get() || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get()) {
             shooter.startConveyor();
         } 
         else {

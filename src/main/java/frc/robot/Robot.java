@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.music.Orchestra;
@@ -60,10 +61,10 @@ public class Robot extends TimedRobot {
   private final Shooter shooter;
 
   private final Climber climber;  
-
+  
   int random_int;  
 
-  // private final DigitalInput linebreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
+  // public final DigitalInput linebreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
 
   private SendableChooser<Command> autonomousChooser;
   private Command autonomousCommand;
@@ -77,6 +78,8 @@ public class Robot extends TimedRobot {
   
   // Place chrp song files in array and in deploy directory to add songs
   String[] songs = { "AllStar.chrp" };
+
+
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -105,6 +108,8 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().registerSubsystem(this.climber);
     this.climber.setDefaultCommand(new DefaultClimberCommand());
+
+
 
   }
 
