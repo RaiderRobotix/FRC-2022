@@ -40,11 +40,14 @@ public final class Shooter extends SubsystemBase {
 
     public void startConveyor() {
         this.conveyorSpark.set(1.0);
+        System.out.println(this.conveyorSpark.get());
 
     }
 
-    public void startConveyorInverted() {
+    public void backConveyor() {
         this.conveyorSpark.set(-1.0);
+        System.out.println(this.conveyorSpark.get());
+
     }
 
     public void stopConveyor() {

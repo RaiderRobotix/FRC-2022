@@ -46,7 +46,8 @@ public class DefaultShooterCommand extends CommandBase {
 
 
         if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON) || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_LINEBREAKER_OVERRIDE)) {
-            shooter.startConveyorInverted();
+            System.out.println("entered reverse");
+            shooter.backConveyor();
         }
         // add  && lineBreaker.get()
         // else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON)  && lineBreaker.get()) {
@@ -56,7 +57,8 @@ public class DefaultShooterCommand extends CommandBase {
         //     shooter.stopConveyor();
         // }
 
-        if(oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && !lineBreaker.get() || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get()) {
+        else if((oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON)) && !lineBreaker.get() || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get()) {
+            System.out.println("entered forward");
             shooter.startConveyor();
         } 
         else {

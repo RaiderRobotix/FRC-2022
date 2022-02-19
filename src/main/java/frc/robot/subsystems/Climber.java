@@ -75,6 +75,8 @@ public class Climber extends SubsystemBase {
         this.rightElevatorDistance = this.getRightElevatorDistance();
 
         this.setGrabberInverted(false, true);
+        this.setGrabberBrakeMode(true);
+
     }
 
     /**
@@ -127,11 +129,11 @@ public class Climber extends SubsystemBase {
         rightGrabberMotor.setInverted(rightState);
     }
     public void setGrabberBrakeMode(boolean state){
-        if (state){
+        if (state == true){
             leftGrabberMotor.setNeutralMode(NeutralMode.Brake);
             rightGrabberMotor.setNeutralMode(NeutralMode.Brake);            
 
-        } else if (state) {
+        } else if (state == false) {
             leftGrabberMotor.setNeutralMode(NeutralMode.Coast);
             rightGrabberMotor.setNeutralMode(NeutralMode.Coast);
         }
