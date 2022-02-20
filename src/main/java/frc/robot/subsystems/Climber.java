@@ -52,18 +52,15 @@ public class Climber extends SubsystemBase {
         this.leftElevatorMotor.restoreFactoryDefaults();
         this.rightElevatorMotor.restoreFactoryDefaults();
 
+        this.leftElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        this.rightElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
         this.leftElevatorMotor.clearFaults();
         this.rightElevatorMotor.clearFaults();
 
         this.leftElevatorMotor.setInverted(Constants.LEFT_ELEVATOR_MOTOR_INVERTED);
-        this.leftElevatorMotor.setInverted(true);
         this.rightElevatorMotor.setInverted(Constants.RIGHT_ELEVATOR_MOTOR_INVERTED);
         this.armMotor.setInverted(Constants.ARM_MOTOR_INVERTED);
-
-        this.leftElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-        this.rightElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-
-        this.leftElevatorMotor.follow(rightElevatorMotor);
 
         this.leftElevatorMotor.setSmartCurrentLimit(80);
         this.rightElevatorMotor.setSmartCurrentLimit(80);
@@ -95,6 +92,14 @@ public class Climber extends SubsystemBase {
         this.rightElevatorMotor.set(speed);
     }
 
+    public boolean getRightElevatorInverted(){
+        return rightElevatorMotor.getInverted();
+    }
+
+    public boolean getLeftElevatorInverted(){
+        return leftElevatorMotor.getInverted();
+    }
+
     public double getElevatorSpeed() {
         return rightElevatorMotor.get();
     }
@@ -121,7 +126,7 @@ public class Climber extends SubsystemBase {
 
     public void setGrabberSpeed(double speed) {
         this.leftGrabberMotor.set(ControlMode.PercentOutput, speed);
-        this.rightGrabberMotor.set(ControlMode.PercentOutput, speed);
+        this.rightGrabberMotor.set(ControlMode.PercentOutput, -speed);
     }
 
     public void setGrabberInverted(boolean leftState, boolean rightState) {

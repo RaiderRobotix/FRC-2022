@@ -30,12 +30,6 @@ public class DefaultShooterCommand extends CommandBase {
 
         if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.setShooterSpeed(-0.8);
-            //TODO figure out how to wait for shooter to get up to speed
-            // while (shooter.getShooterSpeed() < 0.25) {
-
-            // }
-            // shooter.startConveyor();
-            // System.out.println("Turning shooter on, speed = " + shooter.getShooterSpeed());
         }
         else if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON)) {
             shooter.setShooterSpeed(0.8);
@@ -46,7 +40,6 @@ public class DefaultShooterCommand extends CommandBase {
 
 
         if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON) || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_LINEBREAKER_OVERRIDE)) {
-            System.out.println("entered reverse");
             shooter.backConveyor();
         }
         // add  && lineBreaker.get()
@@ -58,7 +51,6 @@ public class DefaultShooterCommand extends CommandBase {
         // }
 
         else if((oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON)) && !lineBreaker.get() || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get()) {
-            System.out.println("entered forward");
             shooter.startConveyor();
         } 
         else {

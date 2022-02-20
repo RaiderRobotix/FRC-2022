@@ -25,14 +25,16 @@ public class DefaultClimberCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_OVERRIDE)){
-            climber.setElevatorSpeed(oi.getOperatorY());
+       if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_OVERRIDE)){
+            System.out.println(climber.getLeftElevatorInverted());
+            System.out.println(climber.getRightElevatorInverted());
+            //climber.setElevatorSpeed(oi.getOperatorY());
         }
-
         if(oi.getOperatorButton(Constants.OPERATOR_ARM_OVERRIDE)){
-            //climber.setArmSpeed(oi.getOperatorY());
+            System.out.println("entered arm");
+            climber.setArmSpeed(0.50 * oi.getOperatorY());
         }
-        if(oi.getOperatorButton(5)){
+        /*if(oi.getOperatorButton(5)){
             climber.setGrabberSpeed(0.05);
             if(climber.getGrabberPositionLeft() == -1800 && climber.getGrabberPositionRight() == 1600){
                 climber.setGrabberSpeed(0.0);
@@ -45,7 +47,7 @@ public class DefaultClimberCommand extends CommandBase {
                 climber.setGrabberSpeed(0.0);
             }
 
-        }
+        }*/
         if(oi.getOperatorButton(Constants.OPERATOR_GRABBER_BUTTON_OPEN)){
             climber.setGrabberBrakeMode(false);
             climber.setGrabberSpeed(0.05 * oi.getOperatorY());
