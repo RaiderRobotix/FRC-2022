@@ -15,6 +15,6 @@ public class CrossInitializationLine extends SequentialCommandGroup {
    * Add your docs here.
    */
   public CrossInitializationLine() {
-    addCommands(new DriveStraight(60.0, 0.5));
+    addCommands(new DriveStraight(70.0, 0.5));
   }
 }
