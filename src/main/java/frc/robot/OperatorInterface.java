@@ -102,11 +102,7 @@ public class OperatorInterface {
    * @return
    */
   public double getOperatorY() {
-    double ret = this.operatorStick.getY();
-    if (Math.abs(ret) > Constants.OPERATOR_JOYSTICK_DEADBAND){
-      return ret;
-    }
-    return 0.0;
+    return this.operatorStick.getY();
   }
 
   public boolean getLeftButton(int button) {
