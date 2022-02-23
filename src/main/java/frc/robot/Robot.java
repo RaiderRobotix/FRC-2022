@@ -116,14 +116,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    autonomousChooser = new SendableChooser<Command>();
-    autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
-    autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
-    autonomousChooser.addOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
-    autonomousChooser.addOption("Cross Line and Shoot Three Balls", new CrossLineAndShootThree());
+    // autonomousChooser = new SendableChooser<Command>();
+    // autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
+    // autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
+    // autonomousChooser.addOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
+    // autonomousChooser.addOption("Cross Line and Shoot Three Balls", new CrossLineAndShootThree());
 
     
-    SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
+    // SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
 
     ArrayList<TalonFX> instruments = new ArrayList<TalonFX>();
     
@@ -180,17 +180,24 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     super.autonomousInit();
-    switch (oi.getAutonChosen()) {
-      case 0:
-        autonomousCommand = new DoNothing();
-      case 1:
-        autonomousCommand = new CrossInitializationLine();
-      case 2:
-        autonomousCommand = new CrossLineAndShoot();
-      case 3:
-        autonomousCommand = new CrossLineAndShootDiagonal();
-      case 4:
-        autonomousCommand = new CrossLineAndShootThree();
+    if(oi.getSwitchBox(1)){
+      System.out.println("switch 6 is down");
+      autonomousCommand = new DoNothing();
+    } else if (oi.getSwitchBox(2)) {
+      System.out.println("switch 5 is down");
+      autonomousCommand = new CrossInitializationLine();
+    } else if (oi.getSwitchBox(3)) {
+      System.out.println("switch 4 is down");
+      autonomousCommand = new CrossLineAndShoot();
+    } else if (oi.getSwitchBox(4)) {
+      System.out.println("switch 3 is down");
+      autonomousCommand = new CrossLineAndShootDiagonal();
+    } else if (oi.getSwitchBox(5)) {
+      System.out.println("switch 2 is down");
+      autonomousCommand = new CrossLineAndShootThree();
+    } else {
+      System.out.println("switch 1 is down");
+      autonomousCommand = new DoNothing();
     }
     autonomousCommand.schedule();
     

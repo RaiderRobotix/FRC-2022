@@ -20,22 +20,31 @@ public class CrossLineAndShootThree extends SequentialCommandGroup {
      * Add your docs here.
      */
     public CrossLineAndShootThree() {
+        //SHoots ball
         addCommands(new ToggleShooter(true));
         addCommands(new WaitCommand(2));   
         addCommands(new ToggleConveyor(true));
         addCommands(new ToggleIntake(true));
-        addCommands(new WaitCommand(0.5));
+        addCommands(new WaitCommand(2));
         addCommands(new ToggleConveyor(false));
         addCommands(new ToggleShooter(false));
-        addCommands(new Turn(210.0, 0.6));
-        addCommands(new DriveStraight(95.0, 0.6));    
-        addCommands(new Turn(280, 0.6));
-        addCommands(new DriveStraight(95.0, 0.6));
-        addCommands(new Turn(280, 0.6));
+        
+        //Turns and drives towards balls
+        addCommands(new Turn(200, 0.3));
+        addCommands(new DriveStraight(95.0, 0.3));    
+        addCommands(new Turn(260, 0.3));
+        addCommands(new DriveStraight(95.0, 0.3));
+        addCommands(new Turn(-60, 0.3));
+        addCommands(new DriveStraight(95.0, 0.3));
+       
         addCommands(new ToggleIntake(false));
         addCommands(new ToggleShooter(true));
+
+        //Goes back to hub
         addCommands(new DriveStraight(95.0, 0.6));
         addCommands(new Turn(25.0, .6));
+
+        //Shoots balls
         addCommands(new ToggleConveyor(true));
         addCommands(new WaitCommand(0.5));
         addCommands(new ToggleShooter(false));

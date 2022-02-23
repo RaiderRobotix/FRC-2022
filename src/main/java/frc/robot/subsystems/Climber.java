@@ -58,10 +58,10 @@ public class Climber extends SubsystemBase {
         this.leftElevatorMotor.clearFaults();
         this.rightElevatorMotor.clearFaults();
 
-        this.leftElevatorMotor.setInverted(Constants.LEFT_ELEVATOR_MOTOR_INVERTED);
-        this.rightElevatorMotor.setInverted(Constants.RIGHT_ELEVATOR_MOTOR_INVERTED);
+        // this.leftElevatorMotor.setInverted(Constants.LEFT_ELEVATOR_MOTOR_INVERTED);
+        // this.rightElevatorMotor.setInverted(Constants.RIGHT_ELEVATOR_MOTOR_INVERTED);
         this.armMotor.setInverted(Constants.ARM_MOTOR_INVERTED);
-
+        
         this.leftElevatorMotor.setSmartCurrentLimit(80);
         this.rightElevatorMotor.setSmartCurrentLimit(80);
 
@@ -89,7 +89,7 @@ public class Climber extends SubsystemBase {
 
     public void setElevatorSpeed(double speed) {
         this.leftElevatorMotor.set(speed);
-        this.rightElevatorMotor.set(speed);
+        this.rightElevatorMotor.set(-speed);
     }
 
     public boolean getRightElevatorInverted(){
