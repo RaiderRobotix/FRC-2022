@@ -25,18 +25,18 @@ public class DefaultClimberCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-       if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_OVERRIDE)){
+       if(oi.getRightButton(6)){
+            // System.out.println(climber.getLeftElevatorInverted());
+            // System.out.println(climber.getRightElevatorInverted());
             // climber.setElevatorSpeed(oi.getOperatorY());
-            climber.setElevatorSpeed(0.1);
+            climber.setElevatorSpeed(1.0);
         }
-        else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_OVERRIDE) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)){
-            climber.setElevatorSpeed(-0.1);
-        }
-        else if(oi.getOperatorButton(Constants.OPERATOR_ARM_OVERRIDE) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)){
-            climber.setArmSpeed(-0.1);
+        else if(oi.getRightButton(7)){
+            climber.setElevatorSpeed(-1.0);
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_OVERRIDE)){
-            climber.setArmSpeed(0.1);
+            System.out.println("entered arm");
+            climber.setArmSpeed(0.50 * oi.getOperatorY());
         }
         /*if(oi.getOperatorButton(5)){
             climber.setGrabberSpeed(0.05);
@@ -58,7 +58,10 @@ public class DefaultClimberCommand extends CommandBase {
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_GRABBER_BUTTON_CLOSE)){
             climber.setGrabberSpeed(0.0);
-        }        
+        }  
+        else{
+            climber.setElevatorSpeed(0.0);
+        }
         //TODO fix how grabbers work
         // if(oi.getOperatorButton(Constants.OPERATOR_GRABBER_BUTTON)){
         //     climber.set();

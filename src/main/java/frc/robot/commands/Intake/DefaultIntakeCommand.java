@@ -44,7 +44,7 @@ public class DefaultIntakeCommand extends CommandBase {
     return false;
   }
 
-  // Called once after isFinished returns true
+  // Called once after is Finished returns true
   public void end() {
     intake.stopRoller();
   }

@@ -26,12 +26,9 @@ public class Climber extends SubsystemBase {
 
     private static Climber m_instance;
 
-    private final CANSparkMax leftElevatorMotor;
-    private final CANSparkMax rightElevatorMotor;
+    private final Spark leftElevatorMotor;
+    private final Spark rightElevatorMotor;
     private final Spark armMotor;
-
-    private final RelativeEncoder leftElevatorEncoder;
-    private final RelativeEncoder rightElevatorEncoder;
 
     private double leftElevatorDistance;
     private double rightElevatorDistance;
@@ -43,33 +40,15 @@ public class Climber extends SubsystemBase {
     private Climber() {
         this.leftGrabberMotor = new TalonSRX(Constants.LEFT_GRABBER_CAN_ID);
         this.rightGrabberMotor = new TalonSRX(Constants.RIGHT_GRABBER_CAN_ID);
-
-        this.leftElevatorMotor = new CANSparkMax(Constants.LEFT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
-        this.rightElevatorMotor = new CANSparkMax(Constants.RIGHT_ELEVATOR_MOTOR_CAN_ID, MotorType.kBrushless);
+// CHANGE TO PWM PORTS
+        this.leftElevatorMotor = new Spark(Constants.LEFT_ELEVATOR_MOTOR_CAN_ID);
+        this.rightElevatorMotor = new Spark(Constants.RIGHT_ELEVATOR_MOTOR_CAN_ID);
         
         this.armMotor = new Spark(Constants.ARM_PWM);
-
-        this.leftElevatorMotor.restoreFactoryDefaults();
-        this.rightElevatorMotor.restoreFactoryDefaults();
-
-        this.leftElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-        this.rightElevatorMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
-
-        this.leftElevatorMotor.clearFaults();
-        this.rightElevatorMotor.clearFaults();
 
         // this.leftElevatorMotor.setInverted(Constants.LEFT_ELEVATOR_MOTOR_INVERTED);
         // this.rightElevatorMotor.setInverted(Constants.RIGHT_ELEVATOR_MOTOR_INVERTED);
         this.armMotor.setInverted(Constants.ARM_MOTOR_INVERTED);
-        
-        this.leftElevatorMotor.setSmartCurrentLimit(80);
-        this.rightElevatorMotor.setSmartCurrentLimit(80);
-
-        this.leftElevatorEncoder = leftElevatorMotor.getEncoder();
-        this.rightElevatorEncoder = rightElevatorMotor.getEncoder();
-
-        this.leftElevatorDistance = this.getLeftElevatorDistance();
-        this.rightElevatorDistance = this.getRightElevatorDistance();
 
         this.setGrabberInverted(false, true);
         this.setGrabberBrakeMode(true);
@@ -102,26 +81,6 @@ public class Climber extends SubsystemBase {
 
     public double getElevatorSpeed() {
         return rightElevatorMotor.get();
-    }
-
-    private double getLeftElevatorEncoder() {
-        return (this.leftElevatorEncoder.getPosition() * Constants.INCHES_PER_REVOLUTION);
-    }
-
-    private double getRightElevatorEncoder() {
-        return (this.rightElevatorEncoder.getPosition() * Constants.INCHES_PER_REVOLUTION);
-    }
-
-    public double getAverageElevatorDistance() {
-        return (getLeftElevatorDistance() + getRightElevatorDistance()) / 2.0;
-    }
-
-    public double getLeftElevatorDistance() {
-        return this.getLeftElevatorEncoder() - this.leftElevatorDistance;
-    }
-
-    public double getRightElevatorDistance() {
-        return this.getRightElevatorEncoder() - this.rightElevatorDistance;
     }
 
     public void setGrabberSpeed(double speed) {
@@ -166,11 +125,6 @@ public class Climber extends SubsystemBase {
 
     public double getArmSpeed() {
         return armMotor.get();
-    }
-
-    public void resetEncoders() {
-        this.leftElevatorDistance = this.getLeftElevatorEncoder();
-        this.rightElevatorDistance = this.getRightElevatorDistance();
     }
 
     public void initDefaultCommand() {
