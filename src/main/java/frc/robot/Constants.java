@@ -19,7 +19,7 @@ public final class Constants {
   public static final int CONVEYOR_PWM = 3;
   public static final int ARM_PWM = 4; 
   public static final int LEFT_ELEVATOR_MOTOR_PWM = 5;
-  public static final int RIGHT_ELEVATOR_MOTOR_CAN_ID = 6;
+  public static final int RIGHT_ELEVATOR_MOTOR_PWM = 6;
 
 
   public static final int LINE_BREAKER_DIO = 0;
