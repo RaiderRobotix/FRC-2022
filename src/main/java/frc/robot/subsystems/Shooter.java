@@ -20,14 +20,10 @@ public final class Shooter extends SubsystemBase {
     //Fast-spinning motor that launches the balls
     private final TalonSRX shooterTalon;
 
-    private boolean isShooterRotating;
-
     private Shooter() {
         this.conveyorSpark = new Spark(Constants.CONVEYOR_PWM);
         this.conveyorSpark.setInverted(true);
-        this.shooterTalon = new TalonSRX(Constants.SHOOTER_CAN_ID);
-        this.isShooterRotating = false;
-
+        this.shooterTalon = new TalonSRX(Constants.SHOOTER_CAN_ID);    
     }
 
     public static Shooter getInstance() {
@@ -37,39 +33,23 @@ public final class Shooter extends SubsystemBase {
         return m_instance;
     }
 
+    public void startConveyor() { this.conveyorSpark.set(1.0); }
 
-    public void startConveyor() {
-        this.conveyorSpark.set(1.0);
-    }
+    public void backConveyor() { this.conveyorSpark.set(-1.0); }
 
-    public void backConveyor() {
-        this.conveyorSpark.set(-1.0);
-    }
+    public void stopConveyor() { this.conveyorSpark.set(0.0); }
 
-    public void stopConveyor() {
-        this.conveyorSpark.set(0.0);
-    }
+    public void setShooterSpeed(double speed) { this.shooterTalon.set(ControlMode.PercentOutput, speed); }
 
-    public void setShooterSpeed(double speed) {
-        this.shooterTalon.set(ControlMode.PercentOutput, speed);
-        this.isShooterRotating = true;
-    }
-
-    public void setShooterInverted(boolean state) {
-        shooterTalon.setInverted(state);
-
-    }
+    public void setShooterInverted(boolean state) { shooterTalon.setInverted(state); }
 
     public double getConveyorSpeed() { return conveyorSpark.get(); }
 
-    //TODO determine how to return shooter speed correctly
     public double getShooterSpeed() { return shooterTalon.getSelectedSensorVelocity(); }
 
     public boolean isConveyorInverted() { return conveyorSpark.getInverted(); }
 
     public boolean isShooterInverted() { return shooterTalon.getInverted();}
-
-    public boolean isShooterRotating(){ return isShooterRotating;}
 
     public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

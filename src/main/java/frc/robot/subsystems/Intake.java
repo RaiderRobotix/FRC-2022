@@ -10,11 +10,8 @@ public final class Intake extends SubsystemBase {
 
 	private final Spark rollerSpark;
 
-	private boolean isRotating = false;  
-
 	private Intake() {
 		this.rollerSpark = new Spark(Constants.INTAKE_PWM);
-        this.isRotating = false;        
 	}
 
 	public static Intake getInstance() {
@@ -24,37 +21,17 @@ public final class Intake extends SubsystemBase {
 		return m_instance;
 	}
 
-	public void startRoller() {
-		this.rollerSpark.set(1.0);
-        this.isRotating = true;
-	}
+	public void startRoller() { this.rollerSpark.set(1.0); }
 
-    public void stopRoller() {
-        this.rollerSpark.set(0.0);
-        this.isRotating = false;
-    }
+    public void stopRoller() { this.rollerSpark.set(0.0); }
 	
-	public double getSpeed() {
-        return rollerSpark.get();
+	public double getSpeed() { return rollerSpark.get(); }
 
-	}
+	public void setInverted(boolean state) { rollerSpark.setInverted(state); }
 
-	public void setInverted(boolean state) {
-		rollerSpark.setInverted(state);
-	}
+    public boolean isInverted() { return rollerSpark.getInverted(); }
 
-    public boolean isInverted() {
-        return rollerSpark.getInverted();
-
-	}
-
-	public void startRollerInverted() {
-		rollerSpark.set(-1.0);
-	}
-
-	public boolean isRotating(){
-		return isRotating;
-	}
+	public void startRollerInverted() { rollerSpark.set(-1.0); }
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

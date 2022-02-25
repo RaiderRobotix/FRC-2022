@@ -12,14 +12,14 @@ public final class Constants {
 
   //TODO Find the correct CAN ID values
   public static final int SHOOTER_CAN_ID = 6;
-  public static final int LEFT_ELEVATOR_MOTOR_CAN_ID = 7;
-  public static final int RIGHT_ELEVATOR_MOTOR_CAN_ID = 8;
   public static final int LEFT_GRABBER_CAN_ID = 9;
   public static final int RIGHT_GRABBER_CAN_ID = 10;
 
   public static final int INTAKE_PWM = 0;
   public static final int CONVEYOR_PWM = 3;
   public static final int ARM_PWM = 4; 
+  public static final int LEFT_ELEVATOR_MOTOR_PWM = 5;
+  public static final int RIGHT_ELEVATOR_MOTOR_CAN_ID = 6;
 
 
   public static final int LINE_BREAKER_DIO = 0;
@@ -35,6 +35,8 @@ public final class Constants {
    */
   public static final boolean LEFT_ELEVATOR_MOTOR_INVERTED = false;
   public static final boolean RIGHT_ELEVATOR_MOTOR_INVERTED = true;
+  public static final boolean LEFT_GRABBER_MOTOR_INVERTED = false;
+  public static final boolean RIGHT_GRABBER_MOTOR_INVERTED = true;
   public static final boolean ARM_MOTOR_INVERTED = false;
 
 
@@ -52,18 +54,13 @@ public final class Constants {
   public static final int OPERATOR_ROLLER_BUTTON = 12;
   public static final int OPERATOR_CONVEYOR_BUTTON = 11;
   public static final int OPERATOR_SHOOTER_BUTTON = 1;
-  public static final int OPERATOR_GRABBER_BUTTON_OPEN = 10;
-  public static final int OPERATOR_GRABBER_BUTTON_CLOSE = 9;
-  public static final int OPERATOR_ELEVATOR_OVERRIDE = 8;
-  public static final int OPERATOR_ARM_OVERRIDE = 7;
+  public static final int OPERATOR_GRABBER_BUTTON = 10;
+  public static final int OPERATOR_ELEVATOR_BUTTON = 8;
+  public static final int OPERATOR_ARM_BUTTON = 7;
   public static final int OPERATOR_LINEBREAKER_OVERRIDE = 3;
-
   public static final int RIGHT_SHOOTER_BUTTON = 11;
 
-
-
-  public static final int SENSOR_RESET_BUTTON = 8;
-  public static final int HATCH_RELEASE_BUTTON = 7;
+  public static final int OPERATOR_DRIVE_SENSOR_RESET_BUTTON = 6;
 
   /**
    * DRIVEBASE.

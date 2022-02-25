@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.commands.DriveBase;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -36,7 +29,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
 
     drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
 
-    if (oi.getRightButton(Constants.SENSOR_RESET_BUTTON)) {
+    if (oi.getRightButton(Constants.OPERATOR_DRIVE_SENSOR_RESET_BUTTON)) {
       drives.resetGyro();
       drives.resetEncoders();
     }
