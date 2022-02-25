@@ -72,7 +72,6 @@ public class DriveBase extends SubsystemBase {
     this.leftBackSpark.setSmartCurrentLimit(80);
     this.rightBackSpark.setSmartCurrentLimit(80);
 
-
     this.leftEncoder = leftFrontSpark.getEncoder();
     this.rightEncoder = rightFrontSpark.getEncoder();
 
@@ -83,7 +82,6 @@ public class DriveBase extends SubsystemBase {
 
     navX = new AHRS(Port.kUSB1);
     headingYaw = 0.0;
-
   }
 
   /**
@@ -93,13 +91,10 @@ public class DriveBase extends SubsystemBase {
     if (m_instance == null) {
       m_instance = new DriveBase();
     }
-
     return m_instance;
   }
 
-  public void setSpeed(double speed) {
-    setSpeed(speed, speed);
-  }
+  public void setSpeed(double speed) { setSpeed(speed, speed); }
 
   public void setSpeed(double leftSpeed, double rightSpeed) {
     this.leftFrontSpark.set(leftSpeed);
@@ -126,42 +121,26 @@ public class DriveBase extends SubsystemBase {
     return 0.0;
   }
 
-  private double getLeftEncoder() {
-    return (this.leftEncoder.getPosition() * Constants.INCHES_PER_REVOLUTION);
-  }
+  private double getLeftEncoder() { return (this.leftEncoder.getPosition() * Constants.INCHES_PER_REVOLUTION); }
 
-  private double getRightEncoder() {
-    return (this.rightEncoder.getPosition() * Constants.INCHES_PER_REVOLUTION);
-  }
+  private double getRightEncoder() { return (this.rightEncoder.getPosition() * Constants.INCHES_PER_REVOLUTION); }
 
-  public double getAverageDistance() {
-    return (getLeftDistance() + getRightDistance()) / 2.0;
-  }
+  public double getAverageDistance() { return (getLeftDistance() + getRightDistance()) / 2.0; }
 
-  public double getLeftDistance() {
-    return this.getLeftEncoder() - this.leftDistance;
-  }
+  public double getLeftDistance() { return this.getLeftEncoder() - this.leftDistance; }
 
-  public double getRightDistance() {
-    return this.getRightEncoder() - this.rightDistance;
-  }
+  public double getRightDistance() { return this.getRightEncoder() - this.rightDistance; }
 
   public void resetEncoders() {
     this.leftDistance = this.getLeftEncoder();
     this.rightDistance = this.getRightEncoder();
   }
 
-  public double getUltrasonicDistance() {
-    return ultrasonic.getVoltage();
-  }
+  public double getUltrasonicDistance() { return ultrasonic.getVoltage(); }
 
-  public double getGyroAngle() {
-		return navX.getAngle() - this.headingYaw;
-  }
+  public double getGyroAngle() { return navX.getAngle() - this.headingYaw; }
   
-  public void resetGyro() {
-		headingYaw = navX.getAngle();
-	}
+  public void resetGyro() { headingYaw = navX.getAngle(); }
 
   public ArrayList<String[]> getCanIdFirmwarePairs() {
     ArrayList<String[]> pairs = new ArrayList<String[]>();

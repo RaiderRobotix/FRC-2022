@@ -48,11 +48,7 @@ import java.util.Random;
  */
 public class Robot extends TimedRobot {
 
-  //private final Compressor compressor;
-
   private final DriveBase drives;
-
-  //private final Vision vision;
 
   private final OperatorInterface oi;
 
@@ -79,17 +75,11 @@ public class Robot extends TimedRobot {
   // Place chrp song files in array and in deploy directory to add songs
   String[] songs = { "AllStar.chrp" };
 
-
-
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
    */
-
   Robot() {
-
-    //this.compressor = new Compressor(Constants.PCM_CAN_ADDRESS, PneumaticsModuleType.CTREPCM);
-    // this.compressor.setClosedLoopControl(1, true);
 
     this.drives = DriveBase.getInstance();
     this.oi = OperatorInterface.getInstance();
@@ -108,9 +98,6 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().registerSubsystem(this.climber);
     this.climber.setDefaultCommand(new DefaultClimberCommand());
-
-
-
   }
 
   @Override
@@ -121,8 +108,6 @@ public class Robot extends TimedRobot {
     // autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
     // autonomousChooser.addOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
     // autonomousChooser.addOption("Cross Line and Shoot Three Balls", new CrossLineAndShootThree());
-
-    
     // SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
 
     ArrayList<TalonFX> instruments = new ArrayList<TalonFX>();
@@ -179,25 +164,37 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    SmartDashboard.putString("Autonomous mode chosen", "None");
     super.autonomousInit();
     if(oi.getSwitchBox(1)){
       System.out.println("switch 6 is down");
       autonomousCommand = new DoNothing();
-    } else if (oi.getSwitchBox(2)) {
+      SmartDashboard.putString("Autonomous mode chosen", "(Switch 6) Do Nothing");
+    } 
+    else if (oi.getSwitchBox(2)) {
       System.out.println("switch 5 is down");
       autonomousCommand = new CrossInitializationLine();
-    } else if (oi.getSwitchBox(3)) {
+      SmartDashboard.putString("Autonomous mode chosen", "(Switch 5) Cross Initialization Line");
+    } 
+    else if (oi.getSwitchBox(3)) {
       System.out.println("switch 4 is down");
       autonomousCommand = new CrossLineAndShoot();
-    } else if (oi.getSwitchBox(4)) {
+      SmartDashboard.putString("Autonomous mode chosen", "(Switch 4) Cross Line and Shoot");
+    } 
+    else if (oi.getSwitchBox(4)) {
       System.out.println("switch 3 is down");
       autonomousCommand = new CrossLineAndShootDiagonal();
-    } else if (oi.getSwitchBox(5)) {
+      SmartDashboard.putString("Autonomous mode chosen", "(Switch 3) Cross Line and Shoot Diagonal");
+    } 
+    else if (oi.getSwitchBox(5)) {
       System.out.println("switch 2 is down");
       autonomousCommand = new CrossLineAndShootThree();
-    } else {
+      SmartDashboard.putString("Autonomous mode chosen", "(Switch 2) Cross Line and Shoot Three");
+    } 
+    else {
       System.out.println("switch 1 is down");
       autonomousCommand = new DoNothing();
+      SmartDashboard.putString("Autonomous mode chosen", "(Switch 1) Do Nothing");
     }
     autonomousCommand.schedule();
     
@@ -224,28 +221,33 @@ public class Robot extends TimedRobot {
     if(oi.getSwitchBox(6)){
       System.out.println("switch 6 is down");
       orchestra.play();
-    } else if (oi.getSwitchBox(5)) {
+    } 
+    else if (oi.getSwitchBox(5)) {
       System.out.println("switch 5 is down");
-    } else if (oi.getSwitchBox(4)) {
+    } 
+    else if (oi.getSwitchBox(4)) {
       System.out.println("switch 4 is down");
-    } else if (oi.getSwitchBox(3)) {
+    } 
+    else if (oi.getSwitchBox(3)) {
       System.out.println("switch 3 is down");
-    } else if (oi.getSwitchBox(2)) {
+    } 
+    else if (oi.getSwitchBox(2)) {
       System.out.println("switch 2 is down");
-    } else if (oi.getSwitchBox(1)) {
+    } 
+    else if (oi.getSwitchBox(1)) {
       System.out.println("switch 1 is down");
-    } else {
+    } 
+    else {
       orchestra.stop();
-
     }
   }
-
 
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
+
   }
 
   @Override

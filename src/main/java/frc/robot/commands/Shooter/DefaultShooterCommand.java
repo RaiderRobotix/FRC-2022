@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import frc.robot.Constants;
 import frc.robot.OperatorInterface;
-import frc.robot.Robot;
 import frc.robot.subsystems.Shooter;
 
 public class DefaultShooterCommand extends CommandBase {
@@ -28,6 +27,8 @@ public class DefaultShooterCommand extends CommandBase {
     @Override
     public void execute() {
 
+        boolean BALL_PRESENT = !lineBreaker.get();
+
         if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.setShooterSpeed(-0.8);
         }
@@ -38,21 +39,14 @@ public class DefaultShooterCommand extends CommandBase {
             shooter.setShooterSpeed(0.0);
         }
 
-
-        if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON) || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_LINEBREAKER_OVERRIDE)) {
+        if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.backConveyor();
         }
-        // add  && lineBreaker.get()
-        // else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON)  && lineBreaker.get()) {
-        //     shooter.startConveyor();
-        // }
-        // else {
-        //     shooter.stopConveyor();
-        // }
-
-        else if((oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON)) && !lineBreaker.get() || oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get()) {
+        else if ((oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && !BALL_PRESENT) 
+        || (oi.getOperatorButton(Constants.OPERATOR_LINEBREAKER_OVERRIDE)) 
+        || (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && BALL_PRESENT)) {
             shooter.startConveyor();
-        } 
+        }
         else {
             shooter.stopConveyor();
         }
