@@ -25,11 +25,11 @@ public class DefaultClimberCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-       if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_BUTTON)){
-            climber.setElevatorSpeed(1.0);
+       if(oi.getOperatorButton(4)){
+            climber.setElevatorSpeed(1);
         }
-        else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)){
-            climber.setElevatorSpeed(-1.0);
+        else if(oi.getOperatorButton(3)){
+            climber.setElevatorSpeed(-1);
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
             climber.setArmSpeed(0.50 * oi.getOperatorY());
