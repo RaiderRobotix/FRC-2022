@@ -28,7 +28,7 @@ public class DefaultClimberCommand extends CommandBase {
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_BUTTON)){
             climber.setElevatorSpeed(1);
         }
-        else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)){
+        else if(oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)){
             climber.setElevatorSpeed(-1);
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
@@ -44,6 +44,7 @@ public class DefaultClimberCommand extends CommandBase {
         }  
     }
 
+    
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) { 
