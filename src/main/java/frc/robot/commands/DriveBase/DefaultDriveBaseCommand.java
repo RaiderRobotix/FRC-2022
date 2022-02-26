@@ -29,7 +29,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
 
     drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
 
-    if (oi.getRightButton(Constants.OPERATOR_DRIVE_SENSOR_RESET_BUTTON)) {
+    if (oi.getLeftButton(Constants.DRIVE_SENSOR_RESET_BUTTON)) {
       drives.resetGyro();
       drives.resetEncoders();
     }

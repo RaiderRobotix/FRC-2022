@@ -60,7 +60,7 @@ public class Climber extends SubsystemBase {
 
     public void setGrabberSpeed(double speed) {
         this.leftGrabberMotor.set(ControlMode.PercentOutput, speed);
-        this.rightGrabberMotor.set(ControlMode.PercentOutput, -speed);
+        this.rightGrabberMotor.set(ControlMode.PercentOutput, speed);
     }
 
     public void setGrabberBrakeMode(boolean state){

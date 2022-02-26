@@ -22,12 +22,7 @@ public final class Constants {
   public static final int RIGHT_ELEVATOR_MOTOR_PWM = 6;
 
 
-  public static final int LINE_BREAKER_DIO = 0;
-
-
-  // Pneumatic Solenoid Ports
-  public static final int ELEVATOR_TILT_SOLENOID = 0;
-  public static final int HATCH_GRABBER_SOLENOID = 7;
+  public static final int LINE_BREAKER_DIO = 2;
 
  
   /**
@@ -60,7 +55,7 @@ public final class Constants {
   public static final int OPERATOR_LINEBREAKER_OVERRIDE = 3;
   public static final int RIGHT_SHOOTER_BUTTON = 11;
 
-  public static final int OPERATOR_DRIVE_SENSOR_RESET_BUTTON = 6;
+  public static final int DRIVE_SENSOR_RESET_BUTTON = 7;
 
   /**
    * DRIVEBASE.
@@ -91,39 +86,7 @@ public final class Constants {
   /**
    * ELEVATOR.
    */
-  public static final int ELEVATOR_ENCODER_DIO_A = 0;
-  public static final int ELEVATOR_ENCODER_DIO_B = 1;
-  public static boolean ELEVATOR_ENCODER_INVERTED = false;
-  
-  // Elevator range and tolerance constants
-  public static final double ELEVATOR_UP_SCALED_RANGE_START = 20.0;
-  public static final double ELEVATOR_UP_SCALED_RANGE_END = 0.5 * ELEVATOR_UP_SCALED_RANGE_START;
-  public static final double ELEVATOR_SCALE_START_SPEED = 1.0;
-  public static final double ELEVATOR_SCALE_END_SPEED = 0.8;
 
-  public static final double ELEVATOR_MANUAL_DOWN_RATE = 0.40;
-
-  public static final double ELEVATOR_DOWN_SPEED_NEAR_TARGET = -0.8;
-  public static final double ELEVATOR_DOWN_SPEED = -1.0;
-  
-  public static final double ELEVATOR_LOWER_LIMIT = 0.0;
-  public static final double ELEVATOR_UPPER_LIMIT = 96.0; 
-  public static final double ALLOWED_ELEVATOR_DEVIATION = 1.0; // in inches
-  
-  // ELEVATOR PRESET HEIGHT POSITIONS
-  public static final double ELEVATOR_LOW_PRESET = 1.0; // TODOs
-  public static final double ELEVATOR_MIDDLE_PRESET = 56.0; // TODOs
-  public static final double ELEVATOR_HIGH_PRESET = 84; // TODOs
-
-  // BALL ARM WRIST PRESET POSITIONS
-  public static final double WRIST_PICKUP_POSITION = 244;
-
-  public static final double WRIST_HP_CARGOSHIP_POSITION = 112;
-  public static final double WRIST_MID_ROCKET_POSITION = 80;
-  public static final double WRIST_LOW_SCORE_POSITION = 0;
-  public static final double WRIST_TOLERANCE = 5;
-  public static final double WRIST_LOWER_LIMIT = WRIST_LOW_SCORE_POSITION;
-  public static final double WRIST_UPPER_LIMIT = WRIST_PICKUP_POSITION;
 
 
 }
