@@ -51,7 +51,8 @@ public final class Constants {
   public static final int OPERATOR_CONVEYOR_BUTTON = 11;
   public static final int OPERATOR_SHOOTER_BUTTON = 1;
   public static final int OPERATOR_GRABBER_BUTTON = 10;
-  public static final int OPERATOR_ELEVATOR_BUTTON = 8;
+  public static final int OPERATOR_ELEVATOR_UP_BUTTON = 8;
+  public static final int OPERATOR_ELEVATOR_DOWN_BUTTON = 3;
   public static final int OPERATOR_ARM_BUTTON = 7;
   public static final int OPERATOR_LINEBREAKER_OVERRIDE = 4;
   public static final int RIGHT_SHOOTER_BUTTON = 11;
