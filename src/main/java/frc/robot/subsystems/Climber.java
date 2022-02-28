@@ -6,7 +6,8 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,6 +22,7 @@ public class Climber extends SubsystemBase {
     private final Spark armMotor;
 
     private final Encoder elevatorEncoder;
+    private final AnalogPotentiometer tenTurn;
 
     private final TalonSRX leftGrabberMotor;
     private final TalonSRX rightGrabberMotor;
@@ -41,6 +43,8 @@ public class Climber extends SubsystemBase {
 
         leftGrabberMotor.setInverted(Constants.LEFT_GRABBER_MOTOR_INVERTED);
         rightGrabberMotor.setInverted(Constants.RIGHT_GRABBER_MOTOR_INVERTED);
+
+        this.tenTurn = new AnalogPotentiometer(1);
 
         this.setGrabberBrakeMode(true);
 
@@ -91,8 +95,8 @@ public class Climber extends SubsystemBase {
 
     public double getAverageGrabberPosition() { return (rightGrabberMotor.getSelectedSensorPosition()+leftGrabberMotor.getSelectedSensorPosition())/2; }
 
-    public double getHeight(){
-        return elevatorEncoder.getDistance();
+    public double tenTurnPot(){
+        return tenTurn.get();
     }
     
     public void setArmSpeed(double speed) { this.armMotor.set(speed); }

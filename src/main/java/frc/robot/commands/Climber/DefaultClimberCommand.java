@@ -3,7 +3,10 @@ package frc.robot.commands.Climber;
 import frc.robot.subsystems.Climber;
 import frc.robot.Constants;
 import frc.robot.OperatorInterface;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.simulation.AnalogInputSim;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
@@ -27,13 +30,20 @@ public class DefaultClimberCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        System.out.println("10 Turn: " + climber.tenTurnPot());
 
-        System.out.println("Height: " + climber.getHeight());
+
 
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_BUTTON)){
             climber.setElevatorSpeed(1);
         }
         else if(oi.getOperatorButton(3)){
+            if(climber.tenTurnPot() <= 0.31){
+                climber.setElevatorSpeed(0.0);
+            }
+            if(climber.tenTurnPot() >= 0.7){
+                climber.setElevatorSpeed(0.0);
+            }
             climber.setElevatorSpeed(-1);
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
