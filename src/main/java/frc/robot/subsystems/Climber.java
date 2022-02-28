@@ -5,6 +5,8 @@ import frc.robot.commands.Climber.DefaultClimberCommand;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -19,6 +21,7 @@ public class Climber extends SubsystemBase {
 
     private final TalonSRX leftGrabberMotor;
     private final TalonSRX rightGrabberMotor;
+
 
     private Climber() {
         this.leftGrabberMotor = new TalonSRX(Constants.LEFT_GRABBER_CAN_ID);
@@ -35,6 +38,7 @@ public class Climber extends SubsystemBase {
         rightGrabberMotor.setInverted(Constants.RIGHT_GRABBER_MOTOR_INVERTED);
 
         this.setGrabberBrakeMode(true);
+
     }
 
     /**

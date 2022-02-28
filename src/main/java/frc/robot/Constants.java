@@ -23,6 +23,7 @@ public final class Constants {
 
 
   public static final int LINE_BREAKER_DIO = 2;
+  public static final int LIMIT_SWITCH_DIO = 7;
 
 
   // Pneumatic Solenoid Ports
@@ -57,7 +58,7 @@ public final class Constants {
   public static final int OPERATOR_GRABBER_BUTTON = 10;
   public static final int OPERATOR_ELEVATOR_BUTTON = 8;
   public static final int OPERATOR_ARM_BUTTON = 7;
-  public static final int OPERATOR_LINEBREAKER_OVERRIDE = 3;
+  public static final int OPERATOR_LINEBREAKER_OVERRIDE = 4;
   public static final int RIGHT_SHOOTER_BUTTON = 11;
 
   public static final int OPERATOR_DRIVE_SENSOR_RESET_BUTTON = 7;
