@@ -11,7 +11,6 @@ public class DefaultClimberCommand extends CommandBase {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private Climber climber;
     private OperatorInterface oi;
-    private final DigitalInput elevatorLimitSwitch = new DigitalInput(Constants.LIMIT_SWITCH_DIO);
 
 
     public DefaultClimberCommand() {
@@ -29,16 +28,13 @@ public class DefaultClimberCommand extends CommandBase {
     @Override
     public void execute() {
 
+        System.out.println("Height: " + climber.getHeight());
+
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_BUTTON)){
             climber.setElevatorSpeed(1);
         }
         else if(oi.getOperatorButton(3)){
-            if(!elevatorLimitSwitch.get()){
-                climber.setElevatorSpeed(0.0);
-            }
-            else{
-                climber.setElevatorSpeed(-0.9);
-            }
+            climber.setElevatorSpeed(-1);
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
             climber.setArmSpeed(0.50 * oi.getOperatorY());
@@ -62,7 +58,6 @@ public class DefaultClimberCommand extends CommandBase {
         }  
     }
 
-    
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) { 
