@@ -32,8 +32,6 @@ public class DefaultClimberCommand extends CommandBase {
     public void execute() {
         System.out.println("10 Turn: " + climber.tenTurnPot());
 
-
-
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_DOWN_BUTTON)){
            if(climber.tenTurnPot() > 0.315){
                climber.setElevatorSpeed(0.0);
@@ -42,12 +40,12 @@ public class DefaultClimberCommand extends CommandBase {
            }
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_UP_BUTTON)){
-            if(climber.tenTurnPot() <= 0.1525){
+            //correct limit = 0.1525
+            if(climber.tenTurnPot() <= 0.0){
                 climber.setElevatorSpeed(0.0);
             } else{
                 climber.setElevatorSpeed(1);
-            }
-           
+            }    
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
             climber.setArmSpeed(0.50 * oi.getOperatorY());

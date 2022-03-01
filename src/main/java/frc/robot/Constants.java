@@ -59,6 +59,15 @@ public final class Constants {
 
   public static final int DRIVE_SENSOR_RESET_BUTTON = 7;
 
+  public static final double UPPER_LIMIT = 0.1525;
+  public static final double UPPER_LIMIT_2 = 0.23;
+
+  public static final double LOWER_LIMIT = 0.315;
+
+
+
+
+
   /**
    * DRIVEBASE.
    */
