@@ -21,7 +21,7 @@ public class CrossLineAndShoot extends SequentialCommandGroup {
     //Drive straight then shoot
     addCommands(new WaitCommand(0.3));
     addCommands(new DriveStraight(105.0, 0.3));
-    addCommands(new Turn(-15, 0.3));
+    addCommands(new Turn(10, 0.3));
     // addCommands(new WaitCommand(1));
     addCommands(new ToggleShooter(true));
     addCommands(new WaitCommand(2));

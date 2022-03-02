@@ -24,22 +24,22 @@ public class CrossLineAndShootDiagonal extends SequentialCommandGroup {
   public CrossLineAndShootDiagonal() {
     //Pickup ball and turn
     addCommands(new ToggleIntake(true));
-    addCommands(new DriveStraight(100.0, 0.6));
+    addCommands(new DriveStraight(100.0, 0.3));
     addCommands(new ToggleIntake(false));
     addCommands(new WaitCommand(0.5));
-    addCommands(new Turn(180, 0.6));
+    addCommands(new Turn(180, 0.25));
 
     //Drive straight then shoot
     addCommands(new WaitCommand(0.3));
-    addCommands(new DriveStraight(110.0, 0.6));
-    addCommands(new WaitCommand(1));
-    addCommands(new Turn(-45, 0.6));
+    addCommands(new DriveStraight(110.0, 0.3));
+    addCommands(new WaitCommand(0.25));
+    addCommands(new Turn(-45, 0.3));
     // addCommands(new WaitCommand(0.3));
     addCommands(new ToggleShooter(true));
     addCommands(new WaitCommand(2));
     addCommands(new ToggleIntake(true));
     addCommands(new ToggleConveyor(true));
-    addCommands(new WaitCommand(5));
+    addCommands(new WaitCommand(3));
     addCommands(new ToggleIntake(false));
     addCommands(new ToggleShooter(false));
     addCommands(new ToggleConveyor(false));

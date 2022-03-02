@@ -6,6 +6,6 @@ import frc.robot.commands.DriveBase.DriveStraight;
 public class CrossInitializationLine extends SequentialCommandGroup {
 
   public CrossInitializationLine() {
-    addCommands(new DriveStraight(70.0, 0.5));
+    addCommands(new DriveStraight(70.0, 0.25));
   }
 }
