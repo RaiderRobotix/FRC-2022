@@ -39,6 +39,11 @@ public class DefaultClimberCommand extends CommandBase {
             climber.setElevatorSpeed(-1);
            }
         }
+        
+        else if (oi.getLeftButton(9)){
+            climber.setElevatorSpeed(-0.33);
+         }
+
         else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_UP_BUTTON)){
             //correct limit = 0.1525
             if(oi.getRightButton(4)){
@@ -49,27 +54,33 @@ public class DefaultClimberCommand extends CommandBase {
                     climber.setElevatorSpeed(1); 
                 } 
             }
+        
+
             else if(climber.tenTurnPot() <= 0.1525){
+                System.out.println(climber.tenTurnPot());
                 climber.setElevatorSpeed(0.0);
             } else{
+                System.out.println(climber.tenTurnPot());
                 climber.setElevatorSpeed(1);
             }    
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
             climber.setArmSpeed(0.50 * oi.getOperatorY());
             if(oi.getOperatorButton(5)){
-                climber.setGrabberSpeed(0.15);
+                climber.setGrabberSpeed(-0.15);
             } 
             else if(oi.getOperatorButton(6)){
-                climber.setGrabberSpeed(-0.75);
+                climber.setGrabberSpeed(0.15);
             }  
         }
-        else if(oi.getRightButton(3)){
+
+
+       /* else if(oi.getRightButton(3)){
             climber.setGrabberSpeed(0.15);
         } 
         else if(oi.getLeftButton(3)){
             climber.setGrabberSpeed(-0.8);
-        }  
+        } */ 
         else{
             climber.setElevatorSpeed(0.0);
             climber.setArmSpeed(0.0);
