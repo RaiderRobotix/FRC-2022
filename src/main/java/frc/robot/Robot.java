@@ -192,10 +192,14 @@ public class Robot extends TimedRobot {
       autonomousCommand = new CrossLineAndShootThree();
       SmartDashboard.putString("Autonomous mode chosen", "(Switch 5) Cross Line and Shoot Three");
     } 
-    else {
+    else if (oi.getSwitchBox(6)){
       System.out.println("switch 6 is down");
       autonomousCommand = new DoNothing();
       SmartDashboard.putString("Autonomous mode chosen", "(Switch 6) Do Nothing");
+    }
+    else{
+      System.out.println("default selected");
+      autonomousCommand = new CrossLineAndShoot();
     }
     autonomousCommand.schedule();
     

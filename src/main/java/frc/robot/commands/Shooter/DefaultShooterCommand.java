@@ -27,13 +27,11 @@ public class DefaultShooterCommand extends CommandBase {
     @Override
     public void execute() {
 
-        boolean BALL_PRESENT = !lineBreaker.get();
-
         if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
-            shooter.setShooterSpeed(-0.8);
+            shooter.setShooterSpeed(-0.7);
         }
         else if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON)) {
-            shooter.setShooterSpeed(0.8);
+            shooter.setShooterSpeed(0.7);
         }
         else {
             shooter.setShooterSpeed(0.0);
@@ -42,9 +40,7 @@ public class DefaultShooterCommand extends CommandBase {
         if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.backConveyor();
         }
-        else if ((oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && !BALL_PRESENT) 
-        || (oi.getOperatorButton(Constants.OPERATOR_LINEBREAKER_OVERRIDE)) 
-        || (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && BALL_PRESENT)) {
+        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON)) {
             shooter.startConveyor();
         }
         else {

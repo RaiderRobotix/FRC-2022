@@ -32,7 +32,7 @@ public class ToggleShooter extends CommandBase {
   @Override
   public boolean isFinished() {
     if (this.state) {
-        shooter.setShooterSpeed(0.75);
+        shooter.setShooterSpeed(0.70);
     } else {
         shooter.setShooterSpeed(0.0);
     }
