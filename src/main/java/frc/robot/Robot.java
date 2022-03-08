@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.AnalogInput;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.music.Orchestra;
@@ -34,6 +35,8 @@ import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 import frc.robot.commands.Intake.DefaultIntakeCommand;
 import frc.robot.commands.Shooter.DefaultShooterCommand;
+
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,6 +60,8 @@ public class Robot extends TimedRobot {
   private final Shooter shooter;
 
   private final Climber climber;  
+
+  private final AnalogInput ultraSonic = new AnalogInput(2);;
   
   int random_int;  
 
@@ -218,6 +223,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+
+    System.out.println(ultraSonic.getValue());
 
     CommandScheduler.getInstance().run();
     
