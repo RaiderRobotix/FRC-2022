@@ -23,7 +23,6 @@ public final class Constants {
 
 
   public static final int LINE_BREAKER_DIO = 2;
-  public static final int LIMIT_SWITCH_DIO = 7;
 
  
   /**

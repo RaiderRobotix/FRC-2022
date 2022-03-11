@@ -11,17 +11,13 @@ package frc.robot;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.cameraserver.CameraServer;
+
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.music.Orchestra;
@@ -107,6 +103,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
+
+    CameraServer.startAutomaticCapture();
+
+    // SmartDashboard.put
 
     // autonomousChooser = new SendableChooser<Command>();
     // autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());

@@ -30,7 +30,7 @@ public class CrossLineAndShoot extends SequentialCommandGroup {
     addCommands(new WaitCommand(2));
     addCommands(new ToggleIntake(true));
     addCommands(new ToggleConveyor(true));
-    addCommands(new WaitCommand(5));
+    addCommands(new WaitCommand(2));
     addCommands(new ToggleIntake(false));
     addCommands(new ToggleShooter(false));
     System.out.println("shooter off");
