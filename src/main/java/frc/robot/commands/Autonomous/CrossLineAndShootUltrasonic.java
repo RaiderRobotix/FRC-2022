@@ -1,5 +1,6 @@
 package frc.robot.commands.Autonomous;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DriveBase.*;
@@ -8,9 +9,10 @@ import frc.robot.commands.Shooter.ToggleConveyor;
 import frc.robot.commands.Shooter.ToggleShooter;
 
 
-public class CrossLineAndShoot extends SequentialCommandGroup {
+public class CrossLineAndShootUltrasonic extends SequentialCommandGroup {
 
-  public CrossLineAndShoot() {
+
+  public CrossLineAndShootUltrasonic() {
     //Pickup ball and turn
     addCommands(new ToggleIntake(true));
     addCommands(new DriveStraight(50.0, 0.3));
@@ -21,7 +23,7 @@ public class CrossLineAndShoot extends SequentialCommandGroup {
     System.out.println("turned 180");
     //Drive straight then shoot
     addCommands(new WaitCommand(0.3));
-    addCommands(new DriveStraight(100.0, 0.3));
+    addCommands(new DriveStraightUltrasonic());
     System.out.println("drive straight #2");
    // addCommands(new Turn(10, 0.3));
     //addCommands(new WaitCommand(1));

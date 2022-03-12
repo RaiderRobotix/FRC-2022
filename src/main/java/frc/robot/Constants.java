@@ -33,7 +33,15 @@ public final class Constants {
   public static final boolean LEFT_GRABBER_MOTOR_INVERTED = false;
   public static final boolean RIGHT_GRABBER_MOTOR_INVERTED = true;
   public static final boolean ARM_MOTOR_INVERTED = false;
+  
 
+  //value according to ultrasonic it is okay to climb
+  //TODO find correct climbingLimit
+  public static final int climbingLimitUpper = 0;
+  public static final int climbingLimitLower = 0;
+
+  public static final int shootingLimitUpper = 0;
+  public static final int shootingLimitLower = 0;
 
   /**
    * OPERATOR INTERFACE.

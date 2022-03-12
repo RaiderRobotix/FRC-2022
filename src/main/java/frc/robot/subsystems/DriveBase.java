@@ -34,7 +34,7 @@ public class DriveBase extends SubsystemBase {
   private double leftDistance;
   private double rightDistance;
 
-  private final AnalogInput ultrasonic;
+  // private final AnalogInput ultrasonic;
 
   private final AHRS navX;
   private double headingYaw;
@@ -78,7 +78,7 @@ public class DriveBase extends SubsystemBase {
     this.leftDistance = this.getLeftEncoder();
     this.rightDistance = this.getRightEncoder();
 
-    ultrasonic = new AnalogInput(0);
+    // ultrasonic = new AnalogInput(0);
 
     navX = new AHRS(Port.kUSB1);
     headingYaw = 0.0;
@@ -136,20 +136,11 @@ public class DriveBase extends SubsystemBase {
     this.rightDistance = this.getRightEncoder();
   }
 
-  public double getUltrasonicDistance() { return ultrasonic.getVoltage(); }
+  // public double getUltrasonicDistance() { return ultrasonic.getVoltage(); }
 
   public double getGyroAngle() { return navX.getAngle() - this.headingYaw; }
   
   public void resetGyro() { headingYaw = navX.getAngle(); }
-
-  public ArrayList<String[]> getCanIdFirmwarePairs() {
-    ArrayList<String[]> pairs = new ArrayList<String[]>();
-    pairs.add(new String[]{"Drive CAN ID Left Front " + Constants.LEFT_FRONT_DRIVE_CAN_ID, this.leftFrontSpark.getFirmwareString()});
-    pairs.add(new String[]{"Drive CAN ID Left Back  " + Constants.LEFT_BACK_DRIVE_CAN_ID, this.leftBackSpark.getFirmwareString()});
-    pairs.add(new String[]{"Drive CAN ID Right Front" + Constants.RIGHT_FRONT_DRIVE_CAN_ID, this.rightFrontSpark.getFirmwareString()});
-    pairs.add(new String[]{"Drive CAN ID Right Back " + Constants.RIGHT_BACK_DRIVE_CAN_ID, this.rightBackSpark.getFirmwareString()});
-    return pairs;
-  }
 
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.

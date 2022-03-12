@@ -12,6 +12,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Filesystem;
@@ -26,6 +27,7 @@ import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
 import frc.robot.commands.Autonomous.CrossLineAndShootDiagonal;
 import frc.robot.commands.Autonomous.CrossLineAndShootThree;
+import frc.robot.commands.Autonomous.CrossLineAndShootUltrasonic;
 import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
@@ -57,9 +59,13 @@ public class Robot extends TimedRobot {
 
   private final Climber climber;  
 
-  private final AnalogInput ultraSonic = new AnalogInput(2);;
+  private final AnalogInput ultraSonic = new AnalogInput(2);
   
   int random_int;  
+
+  boolean canClimb;
+
+  boolean canShoot;
 
   // public final DigitalInput linebreaker = new DigitalInput(Constants.LINE_BREAKER_DIO);
 
@@ -106,14 +112,6 @@ public class Robot extends TimedRobot {
 
     CameraServer.startAutomaticCapture();
 
-    // SmartDashboard.put
-
-    // autonomousChooser = new SendableChooser<Command>();
-    // autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
-    // autonomousChooser.addOption("Cross Line and Shoot", new CrossLineAndShoot());
-    // autonomousChooser.addOption("Cross Line and Shoot Diagonal", new CrossLineAndShootDiagonal());
-    // autonomousChooser.addOption("Cross Line and Shoot Three Balls", new CrossLineAndShootThree());
-    // SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
 
     ArrayList<TalonFX> instruments = new ArrayList<TalonFX>();
     
@@ -142,19 +140,35 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if (ultraSonic.getValue() > Constants.shootingLimitUpper){
+      canShoot = true;
+    } else {
+      canShoot = false;
+    }
+
+    if (climber.tenTurnPot() > Constants.climbingLimitUpper){
+      canClimb = true;
+    } else {
+      canClimb = false;
+    }
+
+    // System.out.println(ultraSonic.getValue());
+
+    CommandScheduler.getInstance().run();
+    
+    SmartDashboard.putNumber("Ultrasonic", ultraSonic.getValue());
+
+    SmartDashboard.putNumber("Pot", climber.tenTurnPot());
+
+    SmartDashboard.putBoolean("Shooting Position", canShoot);
+
+    SmartDashboard.putBoolean("Climbing Position", canClimb);
 
   }
 
   @Override
   public void disabledPeriodic() {
     CommandScheduler.getInstance().run();
-
-    ArrayList<String[]> subsystemCanIdFirmwarePairs = new ArrayList<>();
-    subsystemCanIdFirmwarePairs.addAll(this.drives.getCanIdFirmwarePairs());
-    
-      for (String[] pair : subsystemCanIdFirmwarePairs) {
-        SmartDashboard.putString(pair[0] + " ", pair[1]);
-    }
   }
 
   /**
@@ -170,37 +184,30 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    SmartDashboard.putString("Autonomous mode chosen", "None");
     super.autonomousInit();
     if(oi.getSwitchBox(1)){
       System.out.println("switch 1 is down");
       autonomousCommand = new DoNothing();
-      SmartDashboard.putString("Autonomous mode chosen", "(Switch 1) Do Nothing");
     } 
     else if (oi.getSwitchBox(2)) {
       System.out.println("switch 2 is down");
       autonomousCommand = new CrossInitializationLine();
-      SmartDashboard.putString("Autonomous mode chosen", "(Switch 2) Cross Initialization Line");
     } 
     else if (oi.getSwitchBox(3)) {
       System.out.println("switch 3 is down");
       autonomousCommand = new CrossLineAndShoot();
-      SmartDashboard.putString("Autonomous mode chosen", "(Switch 3) Cross Line and Shoot");
-    } 
+   } 
     else if (oi.getSwitchBox(4)) {
       System.out.println("switch 4 is down");
       autonomousCommand = new CrossLineAndShootDiagonal();
-      SmartDashboard.putString("Autonomous mode chosen", "(Switch 4) Cross Line and Shoot Diagonal");
     } 
     else if (oi.getSwitchBox(5)) {
       System.out.println("switch 5 is down");
-      autonomousCommand = new CrossLineAndShootThree();
-      SmartDashboard.putString("Autonomous mode chosen", "(Switch 5) Cross Line and Shoot Three");
+      autonomousCommand = new CrossLineAndShootUltrasonic();
     } 
     else if (oi.getSwitchBox(6)){
       System.out.println("switch 6 is down");
       autonomousCommand = new DoNothing();
-      SmartDashboard.putString("Autonomous mode chosen", "(Switch 6) Do Nothing");
     }
     else{
       System.out.println("default selected");
@@ -224,11 +231,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-    System.out.println(ultraSonic.getValue());
-
-    CommandScheduler.getInstance().run();
-    
-    SmartDashboard.putNumber("Ultrasonic", this.drives.getUltrasonicDistance());
 
     if(oi.getSwitchBox(6)){
       System.out.println("switch 6 is down");

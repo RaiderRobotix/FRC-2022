@@ -32,8 +32,7 @@ public class DefaultShooterCommand extends CommandBase {
             shooter.setShooterSpeed(-0.7);
         }
         else if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON)) {
-           //temp for testing cross peice, set back to 0.7 when finished! 
-            shooter.setShooterSpeed(0.5);
+            shooter.setShooterSpeed(0.8);
         }
         else {
             shooter.setShooterSpeed(0.0);
@@ -43,6 +42,9 @@ public class DefaultShooterCommand extends CommandBase {
             shooter.backConveyor();
         }
         else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get() ||  oi.getOperatorButton(4)) {
+            shooter.startConveyor();
+        }
+        else if (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && !lineBreaker.get()){
             shooter.startConveyor();
         }
         else {
