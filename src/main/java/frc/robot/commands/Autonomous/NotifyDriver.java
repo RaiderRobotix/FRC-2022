@@ -16,6 +16,5 @@ public class NotifyDriver extends InstantCommand {
 
   // Called once when the command executes
   public void initialize() {
-    SmartDashboard.putString("Autonomous: ", this.message);
   }
 }

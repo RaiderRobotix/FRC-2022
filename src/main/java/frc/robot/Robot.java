@@ -140,13 +140,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if (ultraSonic.getValue() > Constants.shootingLimitUpper){
+    if (ultraSonic.getValue() > Constants.shootingLimitUpper 
+    && ultraSonic.getValue() < Constants.shootingLimitLower){
       canShoot = true;
     } else {
       canShoot = false;
     }
 
-    if (climber.tenTurnPot() > Constants.climbingLimitUpper){
+    if (climber.tenTurnPot() > Constants.climbingLimitUpper 
+    && ultraSonic.getValue() < Constants.climbingLimitLower){
       canClimb = true;
     } else {
       canClimb = false;

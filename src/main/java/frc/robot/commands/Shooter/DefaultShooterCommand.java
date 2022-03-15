@@ -41,10 +41,10 @@ public class DefaultShooterCommand extends CommandBase {
         if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.backConveyor();
         }
-        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && lineBreaker.get() ||  oi.getOperatorButton(4)) {
+        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) ||  oi.getOperatorButton(4)) {
             shooter.startConveyor();
         }
-        else if (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && !lineBreaker.get()){
+        else if (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON)){
             shooter.startConveyor();
         }
         else {
