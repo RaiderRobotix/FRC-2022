@@ -26,6 +26,7 @@ public class DefaultShooterCommand extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
+        boolean BALL_PRESENT = !lineBreaker.get();
 
         if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             
@@ -41,10 +42,9 @@ public class DefaultShooterCommand extends CommandBase {
         if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && oi.getOperatorButton(Constants.OPERATOR_REVERSE_BUTTON)) {
             shooter.backConveyor();
         }
-        else if (oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) ||  oi.getOperatorButton(4)) {
-            shooter.startConveyor();
-        }
-        else if (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON)){
+        else if ((oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && !BALL_PRESENT) 
+        || (oi.getOperatorButton(4)) 
+        || (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && BALL_PRESENT)) {
             shooter.startConveyor();
         }
         else {

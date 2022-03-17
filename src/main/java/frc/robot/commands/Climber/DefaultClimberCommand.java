@@ -33,13 +33,14 @@ public class DefaultClimberCommand extends CommandBase {
         System.out.println("10 Turn: " + climber.tenTurnPot());
 
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_DOWN_BUTTON)){
-           if(climber.tenTurnPot() > 0.475 
+          /* if(climber.tenTurnPot() > 0.475 
            && climber.tenTurnPot() > 0 
            && climber.tenTurnPot() < 1){
                climber.setElevatorSpeed(0.0);
            } else{
+               */
             climber.setElevatorSpeed(-1);
-           }
+     //  } 
         }
         
         else if (oi.getLeftButton(9)){
@@ -58,15 +59,16 @@ public class DefaultClimberCommand extends CommandBase {
             }
         
 
-            else if(climber.tenTurnPot() <= 0.118 
+           /* else if(climber.tenTurnPot() <= 0.118 
             && climber.tenTurnPot() > 0
             && climber.tenTurnPot() < 1){
                 System.out.println(climber.tenTurnPot());
                 climber.setElevatorSpeed(0.0);
             } else{
                 System.out.println(climber.tenTurnPot());
+                */
                 climber.setElevatorSpeed(1);
-            }    
+          //  }    
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
             climber.setArmSpeed(0.50 * oi.getOperatorY());
