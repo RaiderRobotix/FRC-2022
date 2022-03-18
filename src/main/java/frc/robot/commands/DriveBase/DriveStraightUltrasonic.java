@@ -7,8 +7,8 @@ import frc.robot.subsystems.DriveBase;
 public class DriveStraightUltrasonic extends CommandBase {
 
   private final DriveBase drives;
-
-  private final AnalogInput ultrasonic = new AnalogInput(2);
+q
+  // private final AnalogInput ultraSonic = new AnalogInput(2);
 
 
   public DriveStraightUltrasonic() {
@@ -26,12 +26,13 @@ public class DriveStraightUltrasonic extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    System.out.println("entered");
-    // while(ultrasonic.getValue() > 100){
-    // //drives.setSpeed(0.3, 0.3);
+    // if (ultraSonic.getValue() > 240){
+    //   System.out.println("entered");
+    //   drives.setSpeed(0.3);  
     // }
-    // System.out.println("exited");
-    // //drives.setSpeed(0, 0);
+    System.out.println("exited");
+    drives.setSpeed(0.1);
+    return;
 }
 
   // Make this return true when this Command no longer needs to run execute()

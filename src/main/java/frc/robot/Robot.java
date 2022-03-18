@@ -12,6 +12,7 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -59,7 +60,7 @@ public class Robot extends TimedRobot {
 
   private final Climber climber;  
 
-  private final AnalogInput ultraSonic = new AnalogInput(2);
+  public final AnalogInput ultraSonic = new AnalogInput(2);
   
   int random_int;  
 
@@ -140,15 +141,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if (ultraSonic.getValue() > Constants.shootingLimitUpper 
-    && ultraSonic.getValue() < Constants.shootingLimitLower){
+    if (ultraSonic.getValue() < Constants.shootingLimitUpper 
+    && ultraSonic.getValue() > Constants.shootingLimitLower){
       canShoot = true;
     } else {
       canShoot = false;
     }
 
-    if (climber.tenTurnPot() > Constants.climbingLimitUpper 
-    && ultraSonic.getValue() < Constants.climbingLimitLower){
+    if (climber.tenTurnPot() < Constants.climbingLimitUpper 
+    && ultraSonic.getValue() > Constants.climbingLimitLower){
       canClimb = true;
     } else {
       canClimb = false;
@@ -158,6 +159,7 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().run();
     
+
     SmartDashboard.putNumber("Ultrasonic", ultraSonic.getValue());
 
     SmartDashboard.putNumber("Pot", climber.tenTurnPot());
@@ -165,6 +167,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Shooting Position", canShoot);
 
     SmartDashboard.putBoolean("Climbing Position", canClimb);
+
+    System.out.println("10 Turn: " + climber.tenTurnPot() + " Ultrasonic: " + ultraSonic.getValue() + " ultrasonic Voltage: " + ultraSonic.getVoltage());
 
   }
 

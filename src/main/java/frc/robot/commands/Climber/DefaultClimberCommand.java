@@ -30,45 +30,50 @@ public class DefaultClimberCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        System.out.println("10 Turn: " + climber.tenTurnPot());
-
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_DOWN_BUTTON)){
-          /* if(climber.tenTurnPot() > 0.475 
-           && climber.tenTurnPot() > 0 
+           //Lowerlimit
+           if(climber.tenTurnPot() > 0.91 
            && climber.tenTurnPot() < 1){
                climber.setElevatorSpeed(0.0);
            } else{
-               */
             climber.setElevatorSpeed(-1);
-     //  } 
+            } 
         }
         
         else if (oi.getLeftButton(9)){
             climber.setElevatorSpeed(-0.66);
          }
+        
+        else if (oi.getOperatorButton(5)){
+            if(climber.tenTurnPot() <= .534 
+            && climber.tenTurnPot() > 0) {
+                climber.setElevatorSpeed(0.0);
+            } 
+            else {
+                climber.setElevatorSpeed(1);
+            }
+        }
 
         else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_UP_BUTTON)){
-            //correct limit = 0.1525
+            //Override Upper Limit .2
             if(oi.getRightButton(4)){
-                if(climber.tenTurnPot() <= 0.08){
+                if(climber.tenTurnPot() <= 0.2
+                && climber.tenTurnPot() > 0){
                     climber.setElevatorSpeed(0.0);
                 }
                 else{
                     climber.setElevatorSpeed(1); 
                 } 
             }
-        
-
-           /* else if(climber.tenTurnPot() <= 0.118 
-            && climber.tenTurnPot() > 0
-            && climber.tenTurnPot() < 1){
-                System.out.println(climber.tenTurnPot());
+            //Upperlimit
+            //Angled is .354
+            //Straight .534
+            else if(climber.tenTurnPot() <= 0.354
+            && climber.tenTurnPot() > 0){
                 climber.setElevatorSpeed(0.0);
             } else{
-                System.out.println(climber.tenTurnPot());
-                */
                 climber.setElevatorSpeed(1);
-          //  }    
+           }   
         }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
             climber.setArmSpeed(0.50 * oi.getOperatorY());
