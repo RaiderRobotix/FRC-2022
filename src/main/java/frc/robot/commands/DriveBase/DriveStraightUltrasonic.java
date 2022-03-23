@@ -7,11 +7,11 @@ import frc.robot.subsystems.DriveBase;
 public class DriveStraightUltrasonic extends CommandBase {
 
   private final DriveBase drives;
-q
+
   // private final AnalogInput ultraSonic = new AnalogInput(2);
 
 
-  public DriveStraightUltrasonic() {
+  public  DriveStraightUltrasonic() {
     drives = DriveBase.getInstance();
     addRequirements(drives);
   }
@@ -52,3 +52,4 @@ q
     end();
   }
 }
+

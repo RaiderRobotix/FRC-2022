@@ -32,8 +32,7 @@ public class DefaultClimberCommand extends CommandBase {
     public void execute() {
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_DOWN_BUTTON)){
            //Lowerlimit
-           if(climber.tenTurnPot() > 0.91 
-           && climber.tenTurnPot() < 1){
+            if(climber.tenTurnPot() > 0.98){
                climber.setElevatorSpeed(0.0);
            } else{
             climber.setElevatorSpeed(-1);
@@ -43,46 +42,44 @@ public class DefaultClimberCommand extends CommandBase {
         else if (oi.getLeftButton(9)){
             climber.setElevatorSpeed(-0.66);
          }
-        
-        else if (oi.getOperatorButton(5)){
-            if(climber.tenTurnPot() <= .534 
-            && climber.tenTurnPot() > 0) {
-                climber.setElevatorSpeed(0.0);
-            } 
-            else {
-                climber.setElevatorSpeed(1);
-            }
-        }
+        //.55
+        // else if (oi.getOperatorButton(5)){
+        //     if(climber.tenTurnPot() <= 0.16) {
+        //         climber.setElevatorSpeed(0.0);
+        //     } 
+        //     else {
+        //         climber.setElevatorSpeed(1);
+        //     }
+        // }
 
         else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_UP_BUTTON)){
             //Override Upper Limit .2
             if(oi.getRightButton(4)){
-                if(climber.tenTurnPot() <= 0.2
-                && climber.tenTurnPot() > 0){
+                if(climber.tenTurnPot() <= 0.16){
                     climber.setElevatorSpeed(0.0);
                 }
-                else{
+               else{
                     climber.setElevatorSpeed(1); 
                 } 
             }
             //Upperlimit
-            //Angled is .354
-            //Straight .534
-            else if(climber.tenTurnPot() <= 0.354
-            && climber.tenTurnPot() > 0){
+            else if(climber.tenTurnPot() <= 0.25){
                 climber.setElevatorSpeed(0.0);
             } else{
                 climber.setElevatorSpeed(1);
            }   
-        }
+       }
         else if(oi.getOperatorButton(Constants.OPERATOR_ARM_BUTTON)){
             climber.setArmSpeed(0.50 * oi.getOperatorY());
-            // if(oi.getOperatorButton(5)){
-            //     climber.setGrabberSpeed(-0.15);
-            // } 
-            // else if(oi.getOperatorButton(6)){
-            //     climber.setGrabberSpeed(0.15);
-            // }  
+        }
+
+        else if(oi.getOperatorButton(5)){
+            if(climber.tenTurnPot() <= 0.56){
+                climber.setElevatorSpeed(0);
+            }
+            else{
+                climber.setElevatorSpeed(1);
+            }
         }
 
 
