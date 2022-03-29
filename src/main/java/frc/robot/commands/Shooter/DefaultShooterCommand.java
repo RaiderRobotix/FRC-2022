@@ -33,7 +33,7 @@ public class DefaultShooterCommand extends CommandBase {
             shooter.setShooterSpeed(-0.7);
         }
         else if (oi.getOperatorButton(Constants.OPERATOR_SHOOTER_BUTTON)) {
-            shooter.setShooterSpeed(0.8);
+            shooter.setShooterSpeed(0.75);
         }
         else {
             shooter.setShooterSpeed(0.0);
