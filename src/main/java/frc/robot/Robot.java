@@ -28,7 +28,7 @@ import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.CrossLineAndShoot;
 import frc.robot.commands.Autonomous.CrossLineAndShootDiagonal;
 import frc.robot.commands.Autonomous.CrossLineAndShootThree;
-import frc.robot.commands.Autonomous.CrossLineAndShootUltrasonic;
+import frc.robot.commands.Autonomous.CrossLineFromSideShoot;
 import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
@@ -160,6 +160,8 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     
 
+    SmartDashboard.putNumber("Gyro", drives.getGyroAngle());
+
     SmartDashboard.putNumber("Ultrasonic", ultraSonic.getValue());
 
     SmartDashboard.putNumber("Pot", climber.tenTurnPot());
@@ -209,7 +211,7 @@ public class Robot extends TimedRobot {
     } 
     else if (oi.getSwitchBox(5)) {
       System.out.println("switch 5 is down");
-      autonomousCommand = new CrossLineAndShootUltrasonic();
+      autonomousCommand = new CrossLineFromSideShoot();
     } 
     else if (oi.getSwitchBox(6)){
       System.out.println("switch 6 is down");

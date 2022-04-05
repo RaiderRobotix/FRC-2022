@@ -40,8 +40,8 @@ public final class Constants {
   public static final int climbingLimitUpper = 0;
   public static final int climbingLimitLower = 0;
 
-  public static final int shootingLimitUpper = 0;
-  public static final int shootingLimitLower = 0;
+  public static final int shootingLimitUpper = 650;
+  public static final int shootingLimitLower = 550;
 
   /**
    * OPERATOR INTERFACE.

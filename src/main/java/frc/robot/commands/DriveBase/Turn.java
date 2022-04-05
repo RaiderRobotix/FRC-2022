@@ -33,13 +33,12 @@ public class Turn extends CommandBase {
   @Override
   public void execute() {
     if ((turningClockwise && drives.getGyroAngle() > targetAngle)
-      || (!turningClockwise && drives.getGyroAngle() < targetAngle)
-      || (Math.abs(drives.getGyroAngle() - targetAngle) < Constants.TURN_TOLERANCE)) {
+        || (!turningClockwise && drives.getGyroAngle() < targetAngle)
+        || (Math.abs(drives.getGyroAngle() - targetAngle) < Constants.TURN_TOLERANCE)) {
       isDone = true;
       drives.setSpeed(0.0);
       return;
-    } 
-    else {
+    } else {
       drives.setSpeed(speed, -speed);
     }
   }
