@@ -32,7 +32,7 @@ public class DefaultClimberCommand extends CommandBase {
     public void execute() {
        if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_DOWN_BUTTON)){
            //Lowerlimit
-            if(climber.tenTurnPot() > 0.969){
+            if(climber.tenTurnPot() > Constants.LOWER_LIMIT){
                climber.setElevatorSpeed(0.0);
            } else{
             climber.setElevatorSpeed(-1);
@@ -42,15 +42,6 @@ public class DefaultClimberCommand extends CommandBase {
         else if (oi.getLeftButton(9)){
             climber.setElevatorSpeed(-0.66);
          }
-        //.55
-        // else if (oi.getOperatorButton(5)){
-        //     if(climber.tenTurnPot() <= 0.16) {
-        //         climber.setElevatorSpeed(0.0);
-        //     } 
-        //     else {
-        //         climber.setElevatorSpeed(1);
-        //     }
-        // }
 
         else if(oi.getOperatorButton(Constants.OPERATOR_ELEVATOR_UP_BUTTON)){
             //Override Upper Limit .2
@@ -63,7 +54,7 @@ public class DefaultClimberCommand extends CommandBase {
                 } 
             }
             //Upperlimit
-            else if(climber.tenTurnPot() <= 0.23){
+            else if(climber.tenTurnPot() <= Constants.UPPER_LIMIT){
                 climber.setElevatorSpeed(0.0);
             } else{
                 climber.setElevatorSpeed(1);
@@ -77,7 +68,7 @@ public class DefaultClimberCommand extends CommandBase {
         }
 
         else if(oi.getOperatorButton(5)){
-            if(climber.tenTurnPot() <= 0.56){
+            if(climber.tenTurnPot() <= Constants.MID_BAR_LIMIT){
                 climber.setElevatorSpeed(0);
             }
             else{

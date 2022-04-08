@@ -99,17 +99,6 @@ public class Climber extends SubsystemBase {
         return tenTurn.get();
     }
     
-    public void elevatorAuton() throws InterruptedException{
-        while(tenTurnPot() <= Constants.UPPER_LIMIT_2){
-            setElevatorSpeed(1);
-        }
-        setArmSpeed(0.8);
-        Thread.sleep(500);
-        setArmSpeed(0.0);
-        while(tenTurnPot() <= Constants.UPPER_LIMIT){
-            setElevatorSpeed(1);
-        }
-    }
     public void setArmSpeed(double speed) { this.armMotor.set(speed); }
 
     public double getArmSpeed() { return armMotor.get(); }

@@ -44,7 +44,8 @@ public class DefaultShooterCommand extends CommandBase {
         }
         else if ((oi.getOperatorButton(Constants.OPERATOR_CONVEYOR_BUTTON) && !BALL_PRESENT) 
         || (oi.getOperatorButton(4)) 
-        || (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && BALL_PRESENT)) {
+        || (oi.getRightButton(Constants.RIGHT_SHOOTER_BUTTON) && BALL_PRESENT)
+        ) {
             shooter.startConveyor();
         }
         else {

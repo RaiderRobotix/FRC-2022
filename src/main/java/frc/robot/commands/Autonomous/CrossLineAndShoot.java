@@ -12,16 +12,16 @@ public class CrossLineAndShoot extends SequentialCommandGroup {
   public CrossLineAndShoot() {
     // Pickup ball and turn
     addCommands(new ToggleIntake(true));
-    addCommands(new DriveStraight(55.0, 0.3));
+    addCommands(new DriveStraight(60.0, 0.3));
     System.out.println("drove straight");
     addCommands(new WaitCommand(0.5));
     addCommands(new ToggleIntake(false));
-    addCommands(new Turn(180, 0.3));
+    addCommands(new Turn(175, 0.3));
     System.out.println("turned 180");
     // Drive straight then shoot
     addCommands(new WaitCommand(0.3));
     addCommands(new ToggleShooter(true));
-    addCommands(new DriveStraight(90.0, 0.3));
+    addCommands(new DriveStraight(85.0, 0.3));
     System.out.println("drive straight #2");
     // addCommands(new Turn(10, 0.3));
     // addCommands(new WaitCommand(1));
