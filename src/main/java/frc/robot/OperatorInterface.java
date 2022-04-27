@@ -9,10 +9,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Shooter.DefaultShooterCommand;
-import frc.robot.commands.Intake.DefaultIntakeCommand;
-
-import frc.robot.subsystems.Intake;
 
 
 public class OperatorInterface {

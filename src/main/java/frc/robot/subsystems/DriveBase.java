@@ -96,7 +96,7 @@ public class DriveBase extends SubsystemBase {
 
   public void setSpeed(double speed) { setSpeed(speed, speed); }
 
-  public void setSpeed(double leftSpeed, double rightSpeed) {
+  public void   setSpeed(double leftSpeed, double rightSpeed) {
     this.leftFrontSpark.set(leftSpeed);
     this.rightFrontSpark.set(rightSpeed);
   }

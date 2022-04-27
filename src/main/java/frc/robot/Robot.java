@@ -27,14 +27,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.music.Orchestra;
 
 import frc.robot.commands.Autonomous.CrossInitializationLine;
-import frc.robot.commands.Autonomous.CrossLineAndShoot;
-import frc.robot.commands.Autonomous.CrossLineAndShootDiagonal;
-import frc.robot.commands.Autonomous.CrossLineAndShootThree;
 import frc.robot.commands.Autonomous.DoNothing;
-import frc.robot.commands.Climber.DefaultClimberCommand;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
-import frc.robot.commands.Intake.DefaultIntakeCommand;
-import frc.robot.commands.Shooter.DefaultShooterCommand;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,13 +45,7 @@ public class Robot extends TimedRobot {
 
   private final DriveBase drives;
 
-  private final OperatorInterface oi;
-
-  private final Intake intake;
-
-  private final Shooter shooter;
-
-  private final Climber climber;  
+  private final OperatorInterface oi; 
 
 
   private boolean m_LimelightHasValidTarget = false;
@@ -73,13 +61,8 @@ public class Robot extends TimedRobot {
 
   //private Command autonomousCommand;
 
-  Orchestra orchestra;
 
-  //Array of all falcon motors for music
-  TalonFX[] motors = { new TalonFX(Constants.LEFT_GRABBER_CAN_ID), new TalonFX(Constants.RIGHT_GRABBER_CAN_ID), new TalonFX(Constants.SHOOTER_CAN_ID) };
-  
-  // Place chrp song files in array and in deploy directory to add songs
-  String[] songs = { "AllStar.chrp" };
+
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -89,21 +72,6 @@ public class Robot extends TimedRobot {
 
     this.drives = DriveBase.getInstance();
     this.oi = OperatorInterface.getInstance();
-    this.intake = Intake.getInstance();
-    this.shooter = Shooter.getInstance();
-    this.climber = Climber.getInstance();
-
-    CommandScheduler.getInstance().registerSubsystem(this.drives);
-    this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
-
-    CommandScheduler.getInstance().registerSubsystem(this.intake);
-    this.intake.setDefaultCommand(new DefaultIntakeCommand());
-
-    CommandScheduler.getInstance().registerSubsystem(this.shooter);
-    this.shooter.setDefaultCommand(new DefaultShooterCommand());
-
-    CommandScheduler.getInstance().registerSubsystem(this.climber);
-    this.climber.setDefaultCommand(new DefaultClimberCommand());
   }
 
   @Override
@@ -116,21 +84,7 @@ public class Robot extends TimedRobot {
     // autonomousChooser.addOption("Cross Line and Shoot Three Balls", new CrossLineAndShootThree());
     // SmartDashboard.putData("Autonomous mode chooser", autonomousChooser);
 
-    ArrayList<TalonFX> instruments = new ArrayList<TalonFX>();
     
-    //Creates random variable to randomly select a song everytime
-    this.random_int = (int) Math.floor(Math.random() * (songs.length));
-
-    //Adds all motors in motor array to the instruments array for the music
-    for (int i = 0; i < motors.length; i++){
-      instruments.add(motors[i]);
-    }
-
-    orchestra = new Orchestra(instruments);
-
-
-    //TODO Make sure this function works on the physical robot
-    orchestra.loadMusic(Filesystem.getDeployDirectory() + "\\" + songs[random_int]);
   }
 
   /**
@@ -185,17 +139,14 @@ public class Robot extends TimedRobot {
     } 
     else if (oi.getSwitchBox(3)) {
       System.out.println("switch 3 is down");
-      autonomousCommand = new CrossLineAndShoot();
       SmartDashboard.putString("Autonomous mode chosen", "(Switch 3) Cross Line and Shoot");
     } 
     else if (oi.getSwitchBox(4)) {
       System.out.println("switch 4 is down");
-      autonomousCommand = new CrossLineAndShootDiagonal();
       SmartDashboard.putString("Autonomous mode chosen", "(Switch 4) Cross Line and Shoot Diagonal");
     } 
     else if (oi.getSwitchBox(5)) {
       System.out.println("switch 5 is down");
-      autonomousCommand = new CrossLineAndShootThree();
       SmartDashboard.putString("Autonomous mode chosen", "(Switch 5) Cross Line and Shoot Three");
     } 
     else if (oi.getSwitchBox(6)){
@@ -205,7 +156,7 @@ public class Robot extends TimedRobot {
     }
     else{
       System.out.println("default selected");
-      autonomousCommand = new CrossLineAndShoot();
+      autonomousCommand = new DoNothing();
     }
     autonomousCommand.schedule();
     
@@ -228,31 +179,7 @@ public class Robot extends TimedRobot {
     Update_Limelight_Tracking();
 
     CommandScheduler.getInstance().run();
-    
-    SmartDashboard.putNumber("Ultrasonic", this.drives.getUltrasonicDistance());
 
-    if(oi.getSwitchBox(6)){
-      System.out.println("switch 6 is down");
-      orchestra.play();
-    } 
-    else if (oi.getSwitchBox(5)) {
-      System.out.println("switch 5 is down");
-    } 
-    else if (oi.getSwitchBox(4)) {
-      System.out.println("switch 4 is down");
-    } 
-    else if (oi.getSwitchBox(3)) {
-      System.out.println("switch 3 is down");
-    } 
-    else if (oi.getSwitchBox(2)) {
-      System.out.println("switch 2 is down");
-    } 
-    else if (oi.getSwitchBox(1)) {
-      System.out.println("switch 1 is down");
-    } 
-    else {
-      orchestra.stop();
-    }
   }
 
   /**
