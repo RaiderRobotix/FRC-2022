@@ -70,7 +70,7 @@ public class OperatorInterface {
     if (m_instance == null) {
       m_instance = new OperatorInterface();
     }
-
+    System.out.println("Operator");
     return m_instance;
   }
 

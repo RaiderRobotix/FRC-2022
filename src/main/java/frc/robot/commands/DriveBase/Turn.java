@@ -26,22 +26,21 @@ public class Turn extends CommandBase {
   @Override
   public void initialize() {
     isDone = false;
-    drives.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    if ((turningClockwise && drives.getGyroAngle() > targetAngle)
-      || (!turningClockwise && drives.getGyroAngle() < targetAngle)
-      || (Math.abs(drives.getGyroAngle() - targetAngle) < Constants.TURN_TOLERANCE)) {
-      isDone = true;
-      drives.setSpeed(0.0);
-      return;
-    } 
-    else {
-      drives.setSpeed(speed, -speed);
-    }
+    // if ((turningClockwise && drives.getGyroAngle() > targetAngle)
+    //   || (!turningClockwise && drives.getGyroAngle() < targetAngle)
+    //   || (Math.abs(drives.getGyroAngle() - targetAngle) < Constants.TURN_TOLERANCE)) {
+    //   isDone = true;
+    //   drives.setSpeed(0.0);
+    //   return;
+    // } 
+    // else {
+    //   drives.setSpeed(speed, -speed);
+    // }
   }
 
   // Make this return true when this Command no longer needs to run execute()

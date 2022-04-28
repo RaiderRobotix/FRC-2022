@@ -16,8 +16,7 @@ public class ResetDriveSensors extends CommandBase {
 
   // Called just before this Command runs the first time
   public void initialize() {
-    drives.resetEncoders();
-    drives.resetGyro();
+    // drives.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run

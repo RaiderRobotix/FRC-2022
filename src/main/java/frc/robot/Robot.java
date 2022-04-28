@@ -11,28 +11,13 @@ package frc.robot;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.networktables.*;
-
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.music.Orchestra;
 
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.DoNothing;
-import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -103,13 +88,6 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     CommandScheduler.getInstance().run();
-
-    ArrayList<String[]> subsystemCanIdFirmwarePairs = new ArrayList<>();
-    subsystemCanIdFirmwarePairs.addAll(this.drives.getCanIdFirmwarePairs());
-    
-      for (String[] pair : subsystemCanIdFirmwarePairs) {
-        SmartDashboard.putString(pair[0] + " ", pair[1]);
-    }
   }
 
   /**

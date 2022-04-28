@@ -20,18 +20,18 @@ public class DefaultDriveBaseCommand extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
+    System.out.println("Drivebase");
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-
+    System.out.println("passed default");
     drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
 
     if (oi.getLeftButton(Constants.DRIVE_SENSOR_RESET_BUTTON)) {
-      drives.resetGyro();
-      drives.resetEncoders();
+      // drives.resetGyro();
     }
 
   }

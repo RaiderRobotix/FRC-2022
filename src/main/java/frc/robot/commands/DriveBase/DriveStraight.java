@@ -27,13 +27,10 @@ public class DriveStraight extends CommandBase {
   @Override
   public void initialize() {
     this.isDone = false;
-    this.drives.resetEncoders();
-    this.drives.resetGyro();
+
+    // this.drives.resetGyro();
   }
 
-  private double getDistanceTraveledSinceStart() {
-    return drives.getLeftDistance();
-  }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
@@ -41,35 +38,36 @@ public class DriveStraight extends CommandBase {
     double leftSpeed = this.startSpeed;
     double rightSpeed = this.startSpeed;
 
-   if ((goingForward && (getDistanceTraveledSinceStart() > this.targetDistance)
-      || (!goingForward && (getDistanceTraveledSinceStart() < this.targetDistance))
-      || (Math.abs(getDistanceTraveledSinceStart() - this.targetDistance) < Constants.DRIVE_STRAIGHT_DISTANCE_TOLERANCE))) {
-      drives.setSpeed(0.0);
-      isDone = true;
-      return;
-    } 
-    else if (Math.abs(drives.getGyroAngle()) 
-      > Constants.DRIVE_STRAIGHT_ANGLE_TOLERANCE) {
-      // Adjust speeds for in case of veering
-      if (drives.getGyroAngle() > 0) { // Too far clockwise
-        if (this.targetDistance > 0)
-          leftSpeed -= Constants.DRIVE_SPEED_CORRECTION;
-        else
-          rightSpeed += Constants.DRIVE_SPEED_CORRECTION;
-      } 
-      else { // Too far counterclockwise
-        if (this.targetDistance > 0)
-          rightSpeed -= Constants.DRIVE_SPEED_CORRECTION;
-        else
-          leftSpeed += Constants.DRIVE_SPEED_CORRECTION;
-      }
-      drives.setSpeed(leftSpeed, rightSpeed);
-    } 
-    else {
-      drives.setSpeed(leftSpeed, rightSpeed);
-    }  
-  }
+  drives.setSpeed(leftSpeed, rightSpeed);
 
+  // //  if ((goingForward && (getDistanceTraveledSinceStart() > this.targetDistance)
+  // //     || (!goingForward && (getDistanceTraveledSinceStart() < this.targetDistance))
+  // //     || (Math.abs(getDistanceTraveledSinceStart() - this.targetDistance) < Constants.DRIVE_STRAIGHT_DISTANCE_TOLERANCE))) {
+  // //     drives.setSpeed(0.0);
+  // //     isDone = true;
+  // //     return;
+  // //   } 
+  //   else if (Math.abs(drives.getGyroAngle()) 
+  //     > Constants.DRIVE_STRAIGHT_ANGLE_TOLERANCE) {
+  //     // Adjust speeds for in case of veering
+  //     if (drives.getGyroAngle() > 0) { // Too far clockwise
+  //       if (this.targetDistance > 0)
+  //         leftSpeed -= Constants.DRIVE_SPEED_CORRECTION;
+  //       else
+  //         rightSpeed += Constants.DRIVE_SPEED_CORRECTION;
+  //     } 
+  //     else { // Too far counterclockwise
+  //       if (this.targetDistance > 0)
+  //         rightSpeed -= Constants.DRIVE_SPEED_CORRECTION;
+  //       else
+  //         leftSpeed += Constants.DRIVE_SPEED_CORRECTION;
+  //     }
+  //     drives.setSpeed(leftSpeed, rightSpeed);
+  //   } 
+  //   else {
+  //     drives.setSpeed(leftSpeed, rightSpeed);
+  //   }  
+  }
   // Make this return true when this Command no longer needs to run execute()
   @Override
   public boolean isFinished() {
