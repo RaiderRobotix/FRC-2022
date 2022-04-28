@@ -1,42 +1,31 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
-
-import com.kauailabs.navx.frc.AHRS;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.PowerDistribution;
-import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
-import edu.wpi.first.wpilibj.SerialPort.Port;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-
-import java.util.ArrayList;
 
 public class DriveBase extends SubsystemBase {
   
   private static DriveBase m_instance;
 
-  private final TalonSRX leftFrontTalon;
-  private final TalonSRX leftBackTalon;
-  private final TalonSRX rightFrontTalon;
-  private final TalonSRX rightBackTalon;
+  private final VictorSP leftFrontTalon;
+  private final VictorSP leftBackTalon;
+  private final VictorSP rightFrontTalon;
+  private final VictorSP rightBackTalon;
 
   private double leftDistance;
   private double rightDistance;
 
   private DriveBase() {
 
-    this.leftFrontTalon = new TalonSRX(Constants.LEFT_FRONT_DRIVE_CAN_ID);
-    this.leftBackTalon = new TalonSRX(Constants.LEFT_BACK_DRIVE_CAN_ID);
-    this.rightFrontTalon = new TalonSRX(Constants.RIGHT_FRONT_DRIVE_CAN_ID);
-    this.rightBackTalon = new TalonSRX(Constants.RIGHT_BACK_DRIVE_CAN_ID);
+    this.leftFrontTalon = new VictorSP(Constants.LEFT_FRONT_DRIVE_CAN_ID);
+    this.leftBackTalon = new VictorSP(Constants.LEFT_BACK_DRIVE_CAN_ID);
+    this.rightFrontTalon = new VictorSP(Constants.RIGHT_FRONT_DRIVE_CAN_ID);
+    this.rightBackTalon = new VictorSP(Constants.RIGHT_BACK_DRIVE_CAN_ID);
 
     this.leftBackTalon.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontTalon.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
@@ -46,13 +35,13 @@ public class DriveBase extends SubsystemBase {
     // this.rightBackTalon.setIdleMode(CANSparkMax.IdleMode.kCoast);
     // this.rightFrontTalon.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
-    this.leftBackTalon.follow(leftFrontTalon);
-    this.rightBackTalon.follow(rightFrontTalon);
+    // this.leftBackTalon.follow(leftFrontTalon);
+    // this.rightBackTalon.follow(rightFrontTalon);
 
-    this.leftFrontTalon.configPeakCurrentLimit(80);
-    this.rightFrontTalon.configPeakCurrentLimit(80);
-    this.leftBackTalon.configPeakCurrentLimit(80);
-    this.rightBackTalon.configPeakCurrentLimit(80);
+    // this.leftFrontTalon.configPeakCurrentLimit(80);
+    // this.rightFrontTalon.configPeakCurrentLimit(80);
+    // this.leftBackTalon.configPeakCurrentLimit(80);
+    // this.rightBackTalon.configPeakCurrentLimit(80);
   }
 
   /**
@@ -68,14 +57,15 @@ public class DriveBase extends SubsystemBase {
 
   public void setSpeed(double speed){
     System.out.println("a");
-    this.leftFrontTalon.set(ControlMode.PercentOutput, speed);
-    this.rightFrontTalon.set(ControlMode.PercentOutput, speed);
+    this.leftFrontTalon.set(speed);
+    this.rightFrontTalon.set(speed);
   }
 
   public void setSpeed(double leftSpeed, double rightSpeed) {
     System.out.println("Passed");
-    this.leftFrontTalon.set(ControlMode.PercentOutput,leftSpeed);
-    this.rightFrontTalon.set(ControlMode.PercentOutput, rightSpeed);
+    System.out.println(this.leftBackTalon);
+    this.leftFrontTalon.set(leftSpeed);
+    this.rightFrontTalon.set(rightSpeed);
   }
  
   public double getSpeed(int CANID) {

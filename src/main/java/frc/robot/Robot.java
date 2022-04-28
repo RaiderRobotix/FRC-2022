@@ -18,6 +18,7 @@ import edu.wpi.first.networktables.*;
 
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.DoNothing;
+import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -57,6 +58,9 @@ public class Robot extends TimedRobot {
 
     this.drives = DriveBase.getInstance();
     this.oi = OperatorInterface.getInstance();
+
+    CommandScheduler.getInstance().registerSubsystem(this.drives);
+    this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
   }
 
   @Override

@@ -27,7 +27,9 @@ public class DefaultDriveBaseCommand extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    System.out.println("passed default");
+    System.out.println(oi.getLeftY());
+    System.out.println(oi.getRightY());
+
     drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
 
     if (oi.getLeftButton(Constants.DRIVE_SENSOR_RESET_BUTTON)) {
