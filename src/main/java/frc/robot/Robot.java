@@ -182,13 +182,15 @@ public class Robot extends TimedRobot {
         // These numbers must be tuned for your Robot!  Be careful!
         final double STEER_K = 0.03;                    // how hard to turn toward the target
         final double DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
-        final double DESIRED_TARGET_AREA = 13.0;        // Area of the target when the robot reaches the wall
-        final double MAX_DRIVE = 0.7;                   // Simple speed limit so we don't drive too fast
+        final double DESIRED_TARGET_AREA = 2;        // Area of the target when the robot reaches the wall
+        final double MAX_DRIVE = 0.1;                   // Simple speed limit so we don't drive too fast
 
         double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
         double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
         double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+
+    
 
         if (tv < 1.0)
         {
@@ -212,6 +214,42 @@ public class Robot extends TimedRobot {
         {
           drive_cmd = MAX_DRIVE;
         }
+
+        if(ta < 3){
+          drives.setSpeed(0.4);
+        }
+        //else{
+          //drives.setSpeed(0);
+        //}
+
         m_LimelightDriveCommand = drive_cmd;
+
+        
+        System.out.println("target area " + ta);
+      
   }
+ /* public int getDistance(){
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    NetworkTableEntry ty = table.getEntry("ty");
+    double targetOffsetAngle_Vertical = ty.getDouble(0.0);
+
+    // how many degrees back is your limelight rotated from perfectly vertical?
+    double limelightMountAngleDegrees = 60.0;
+
+    // distance from the center of the Limelight lens to the floor
+    double limelightLensHeightInches = 13.5;
+
+    // distance from the target to the floor
+    double goalHeightInches = 30.0;
+
+    double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
+    double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+
+    // calculate distance
+    double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)
+        / Math.tan(angleToGoalRadians);
+        System.out.println("Distance is " + (int) distanceFromLimelightToGoalInches);
+        return (int) distanceFromLimelightToGoalInches;
+
+  }*/
 }
