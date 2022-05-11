@@ -157,8 +157,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-
-    Update_Limelight_Tracking();
+    if (oi.getRightButton(8)) {
+      Update_Limelight_Tracking();
+    }
 
     CommandScheduler.getInstance().run();
 
@@ -177,7 +178,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
   }
 
-    public void Update_Limelight_Tracking()
+  public void Update_Limelight_Tracking()
   {
         // These numbers must be tuned for your Robot!  Be careful!
         final double STEER_K = 0.03;                    // how hard to turn toward the target
@@ -215,13 +216,27 @@ public class Robot extends TimedRobot {
           drive_cmd = MAX_DRIVE;
         }
 
-        if(ta < 3){
-          drives.setSpeed(0.4);
-        }
-        //else{
-          //drives.setSpeed(0);
-        //}
+        // if(ta < 2.500){
+        //   drives.setSpeed(1, 1);
+        // } else if (ta > 2.5){
+        //   drives.setSpeed(-1,-1);
+        // } else {
+        //   drives.setSpeed(0.0);
+        // }
+      
+       while(ta > 0.0){
+         if(ta < 2.3){
+           drives.setSpeed(0.2,0.2);
+         }
+         else if(ta > 2.6){
+           drives.setSpeed(-0.2,-0.2);
+         }
+         else{
+           drives.setSpeed(0,0);
+         }
+       }
 
+        
         m_LimelightDriveCommand = drive_cmd;
 
         

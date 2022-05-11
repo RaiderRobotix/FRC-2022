@@ -27,8 +27,8 @@ public class DefaultDriveBaseCommand extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    System.out.println(oi.getLeftY());
-    System.out.println(oi.getRightY());
+    // System.out.println(oi.getLeftY());
+    // System.out.println(oi.getRightY());
 
     drives.setSpeed(-1.0 * oi.getLeftY(), -1.0 * oi.getRightY());
 
