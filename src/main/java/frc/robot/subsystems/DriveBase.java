@@ -56,7 +56,7 @@ public class DriveBase extends SubsystemBase {
   }
 
   public void setSpeed(double speed){
-    System.out.println("a");
+    //System.out.println("a");
     this.leftFrontTalon.set(speed);
     this.rightFrontTalon.set(speed);
   }

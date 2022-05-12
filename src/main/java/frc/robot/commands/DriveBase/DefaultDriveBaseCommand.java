@@ -20,7 +20,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    System.out.println("Drivebase");
+    //System.out.println("Drivebase");
 
   }
 

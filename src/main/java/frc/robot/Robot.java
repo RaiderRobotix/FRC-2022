@@ -7,18 +7,19 @@
 
 package frc.robot;
 
-//import frc.robot.commands.Autonomous.*;
-import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.networktables.*;
-
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
+//import frc.robot.commands.Autonomous.*;
+import frc.robot.subsystems.DriveBase;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -157,9 +158,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if (oi.getRightButton(8)) {
-      Update_Limelight_Tracking();
-    }
+    
+    Update_Limelight_Tracking();
+    
 
     CommandScheduler.getInstance().run();
 
@@ -180,91 +181,59 @@ public class Robot extends TimedRobot {
 
   public void Update_Limelight_Tracking()
   {
-        // These numbers must be tuned for your Robot!  Be careful!
-        final double STEER_K = 0.03;                    // how hard to turn toward the target
-        final double DRIVE_K = 0.26;                    // how hard to drive fwd toward the target
-        final double DESIRED_TARGET_AREA = 2;        // Area of the target when the robot reaches the wall
-        final double MAX_DRIVE = 0.1;                   // Simple speed limit so we don't drive too fast
 
-        double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-        double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-        double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-        double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+        double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); //If Target is Found
+        double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal Offset
+        double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical Offset
+        double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); //Target Area 
 
-    
+        while(tv == 0){
+            drives.setSpeed(-0.2, 0.2);
+            System.out.println("Searching for Target!!");
+        }
+        if (tv == 1){
+          System.out.println("Target Found!!"); 
+          
+          while( tx > 4 && tx < -4 && tx != 0 ){
+            System.out.println("Alligning With Target!!");
+            drives.setSpeed(-0.2, 0.2);
+          }
+          System.out.println("Success Alligned With Target!! ");
+          
+          while(getDistance() != 30 ){
+              while(getDistance() > 30){
+                drives.setSpeed(0.2, 0.2);
+                System.out.println("Moving Forward");
+              }
+              while(getDistance() < 30){
+                drives.setSpeed(-0.2, -0.2);
+                System.out.println("Moving Backward");
+              }
+          }
+          System.out.println("Target Locked");
 
-        if (tv < 1.0)
-        {
-          m_LimelightHasValidTarget = false;
-          m_LimelightDriveCommand = 0.0;
-          m_LimelightSteerCommand = 0.0;
-          return;
+
         }
 
-        m_LimelightHasValidTarget = true;
-
-        // Start with proportional steering
-        double steer_cmd = tx * STEER_K;
-        m_LimelightSteerCommand = steer_cmd;
-
-        // try to drive forward until the target area reaches our desired area
-        double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
-
-        // don't let the robot drive too fast into the goal
-        if (drive_cmd > MAX_DRIVE)
-        {
-          drive_cmd = MAX_DRIVE;
-        }
-
-        // if(ta < 2.500){
-        //   drives.setSpeed(1, 1);
-        // } else if (ta > 2.5){
-        //   drives.setSpeed(-1,-1);
-        // } else {
-        //   drives.setSpeed(0.0);
-        // }
-      
-       while(ta > 0.0){
-         if(ta < 2.3){
-           drives.setSpeed(0.2,0.2);
-         }
-         else if(ta > 2.6){
-           drives.setSpeed(-0.2,-0.2);
-         }
-         else{
-           drives.setSpeed(0,0);
-         }
-       }
-
         
-        m_LimelightDriveCommand = drive_cmd;
-
-        
-        System.out.println("target area " + ta);
-      
   }
- /* public int getDistance(){
+
+  public double getDistance(){
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry ty = table.getEntry("ty");
     double targetOffsetAngle_Vertical = ty.getDouble(0.0);
-
     // how many degrees back is your limelight rotated from perfectly vertical?
-    double limelightMountAngleDegrees = 60.0;
-
+    double limelightMountAngleDegrees = 20.0;
     // distance from the center of the Limelight lens to the floor
     double limelightLensHeightInches = 13.5;
-
     // distance from the target to the floor
-    double goalHeightInches = 30.0;
-
+    double goalHeightInches = 44.4375;
     double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
     double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
-
     // calculate distance
-    double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)
-        / Math.tan(angleToGoalRadians);
-        System.out.println("Distance is " + (int) distanceFromLimelightToGoalInches);
-        return (int) distanceFromLimelightToGoalInches;
+    double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)/ Math.tan(angleToGoalRadians);
+    System.out.println("Distance is " + distanceFromLimelightToGoalInches);
 
-  }*/
+    return distanceFromLimelightToGoalInches;
+  }
 }
