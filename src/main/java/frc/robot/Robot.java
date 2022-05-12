@@ -18,8 +18,10 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.DoNothing;
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
+import frc.robot.commands.limelight.DefaultLimeLightCommand;
 //import frc.robot.commands.Autonomous.*;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.LimeLight;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,6 +35,8 @@ public class Robot extends TimedRobot {
   private final DriveBase drives;
 
   private final OperatorInterface oi; 
+
+  private final LimeLight ll;
 
 
   private boolean m_LimelightHasValidTarget = false;
@@ -59,13 +63,18 @@ public class Robot extends TimedRobot {
 
     this.drives = DriveBase.getInstance();
     this.oi = OperatorInterface.getInstance();
+    this.ll = LimeLight.getInstance();
 
     CommandScheduler.getInstance().registerSubsystem(this.drives);
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
+
+    CommandScheduler.getInstance().registerSubsystem(this.ll);
+    this.ll.setDefaultCommand(new DefaultLimeLightCommand(null));
   }
 
   @Override
   public void robotInit() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipline").setNumber(1);
 
     // autonomousChooser = new SendableChooser<Command>();
     // autonomousChooser.setDefaultOption("Cross Initialization Line", new CrossInitializationLine());
@@ -87,7 +96,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    double tx = table.getEntry("tx").getDouble(0);
+    double ty = table.getEntry("ty").getDouble(0);
+    double ta = table.getEntry("ta").getDouble(0);
+    double tv = table.getEntry("tv").getDouble(0);
+    System.out.println("Tx: " + tx + " Ty: " + ty + " Ta: " + ta + " Tv: " + tv);
   }
 
   @Override
@@ -158,9 +172,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
-    Update_Limelight_Tracking();
-    
+    if(oi.getLeftButton(8)){
+     Update_Limelight_Tracking();
+    }
 
     CommandScheduler.getInstance().run();
 
@@ -186,17 +200,26 @@ public class Robot extends TimedRobot {
         double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal Offset
         double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical Offset
         double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); //Target Area 
-
+        
+        
         while(tv == 0){
             drives.setSpeed(-0.2, 0.2);
             System.out.println("Searching for Target!!");
+            if(tv == 1){
+              drives.setSpeed(0);
+              break;
+              
+            }
         }
-        if (tv == 1){
+
+        if(tv == 1){
+      
+      
           System.out.println("Target Found!!"); 
           
           while( tx > 4 && tx < -4 && tx != 0 ){
             System.out.println("Alligning With Target!!");
-            drives.setSpeed(-0.2, 0.2);
+            drives.setSpeed( -0.2, 0.2);
           }
           System.out.println("Success Alligned With Target!! ");
           
@@ -216,7 +239,7 @@ public class Robot extends TimedRobot {
             System.out.println("Target Locked");
             
           }
-
+          
         }
 
         

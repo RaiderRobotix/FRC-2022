@@ -27,9 +27,10 @@ public class DriveBase extends SubsystemBase {
     this.rightFrontTalon = new VictorSP(Constants.RIGHT_FRONT_DRIVE_CAN_ID);
     this.rightBackTalon = new VictorSP(Constants.RIGHT_BACK_DRIVE_CAN_ID);
 
+    this.leftFrontTalon.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.leftBackTalon.setInverted(Constants.LEFT_DRIVE_MOTORS_INVERTED);
     this.rightFrontTalon.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
-
+    this.rightBackTalon.setInverted(Constants.RIGHT_DRIVE_MOTORS_INVERTED);
     // this.leftFrontTalon.setIdleMode(CANSparkMax.IdleMode.kBrake);
     // this.leftBackTalon.setIdleMode(CANSparkMax.IdleMode.kCoast);
     // this.rightBackTalon.setIdleMode(CANSparkMax.IdleMode.kCoast);
@@ -58,6 +59,8 @@ public class DriveBase extends SubsystemBase {
   public void setSpeed(double speed){
     //System.out.println("a");
     this.leftFrontTalon.set(speed);
+    this.leftBackTalon.set(speed);
+    this.rightBackTalon.set(speed);
     this.rightFrontTalon.set(speed);
   }
 
@@ -65,6 +68,8 @@ public class DriveBase extends SubsystemBase {
     // System.out.println("Passed");
     // System.out.println(this.leftBackTalon);
     this.leftFrontTalon.set(leftSpeed);
+    this.leftBackTalon.set(leftSpeed);
+    this.rightBackTalon.set(rightSpeed);
     this.rightFrontTalon.set(rightSpeed);
   }
  
