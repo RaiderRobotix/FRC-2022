@@ -210,8 +210,12 @@ public class Robot extends TimedRobot {
                 System.out.println("Moving Backward");
               }
           }
-          System.out.println("Target Locked");
 
+          if(getDistance() == 30){
+            drives.setSpeed(0, 0);
+            System.out.println("Target Locked");
+            
+          }
 
         }
 
