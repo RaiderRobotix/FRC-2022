@@ -69,7 +69,7 @@ public class Robot extends TimedRobot {
     this.drives.setDefaultCommand(new DefaultDriveBaseCommand());
 
     CommandScheduler.getInstance().registerSubsystem(this.ll);
-    this.ll.setDefaultCommand(new DefaultLimeLightCommand(null));
+    this.ll.setDefaultCommand(new DefaultLimeLightCommand());
   }
 
   @Override

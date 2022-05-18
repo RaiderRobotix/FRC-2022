@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveBase;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -14,18 +15,22 @@ public class LimeLight extends SubsystemBase {
     /** Creates a new ExampleSubsystem. */
     private static LimeLight m_instance;
 
-    private final DriveBase drives;
+    private static DriveBase drives;
 
     double tv;
     double tx;
     double ty;
     double ta;
 
-    public LimeLight() {
-        tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); // If Target is                                                                                        // Found
-        tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal       // Offset
-        ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical// Offset
-        ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); // Target Area
+    double distanceFromLimelightToGoalInches;
+
+    double motorsGivenInstructions;
+
+    private LimeLight() {
+        this.tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); // If Target is                                                                                        // Found
+        this.tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal       // Offset
+        this.ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical// Offset
+        this.ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); // Target Area
     }
 
     public static LimeLight getInstance() {
@@ -51,24 +56,18 @@ public class LimeLight extends SubsystemBase {
         
     }
 
-    public void Update_Limelight_Tracking() {
+    public void Update_Tracking() {
+        this.tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); // Target Found
+        this.tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal
+        this.ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical                                                                                    // Offset
+        this.ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); // Target Area
+    }
 
-        double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); // If Target is
-                                                                                                         // Found
-        double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal
-                                                                                                         // Offset
-        double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical
-                                                                                                         // Offset
-        double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); // Target Area
+    public void Find_Target() {
+        Update_Tracking();
 
-        while (tv == 0) {
-            drives.setSpeed(-0.2, 0.2);
-            System.out.println("Searching for Target!!");
-            if (tv == 1) {
-                drives.setSpeed(0);
-                break;
-
-            }
+        if(tv == 0) {
+            drives.setSpeed(Constants.SENTRY_SPEED);
         }
 
         if (tv == 1) {
@@ -119,7 +118,7 @@ public class LimeLight extends SubsystemBase {
                 / Math.tan(angleToGoalRadians);
         System.out.println("Distance is " + distanceFromLimelightToGoalInches);
 
-        return distanceFromLimelightToGoalInches;
+        return this.distanceFromLimelightToGoalInches;
     }
 
 }

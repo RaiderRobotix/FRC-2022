@@ -93,9 +93,9 @@ public final class Constants {
   public static final double ELEVATOR_INCHES_PER_REVOLUTION = 29.125;
    public static final double ELEVATOR_INCHES_PER_COUNT = ELEVATOR_INCHES_PER_REVOLUTION / COUNTS_PER_REVOLUTION;
 
-  /**
-   * ELEVATOR.
-   */
+   // LimeLight Speeds
+
+   public static final double SENTRY_SPEED = 0.2;
 
 
 

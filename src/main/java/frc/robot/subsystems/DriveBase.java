@@ -74,13 +74,29 @@ public class DriveBase extends SubsystemBase {
   }
  
   public double getSpeed(int CANID) {
-    // switch (CANID) {
-      // case 1: return leftFrontTalon.get();
-      // case 2: return leftBackTalon.get();
-      // case 3: return rightBackTalon.get();
-      // case 4: return rightFrontTalon.get();
-    // }
+    switch (CANID) {
+      case 1: return leftFrontTalon.get();
+      case 2: return leftBackTalon.get();
+      case 3: return rightBackTalon.get();
+      case 4: return rightFrontTalon.get();
+    }
     return 0.0;
+    }
+
+  public double getSpeed() {
+    for (int i = 0; i < 4; i++) {
+      if (getSpeed(i) != 0.0) {
+        return getSpeed(i);
+      }
+    }
+    return 0.0;
+  }
+  public boolean getMoving() {
+    if (getSpeed() != 0.0){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public void initDefaultCommand() {
