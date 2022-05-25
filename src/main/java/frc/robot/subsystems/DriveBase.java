@@ -12,10 +12,10 @@ public class DriveBase extends SubsystemBase {
   
   private static DriveBase m_instance;
 
-  private final VictorSP leftFrontTalon;
+  public final VictorSP leftFrontTalon;
   private final VictorSP leftBackTalon;
   private final VictorSP rightFrontTalon;
-  private final VictorSP rightBackTalon;
+  public final VictorSP rightBackTalon;
 
   private double leftDistance;
   private double rightDistance;
@@ -73,8 +73,8 @@ public class DriveBase extends SubsystemBase {
     this.rightFrontTalon.set(rightSpeed);
   }
  
-  public double getSpeed(int CANID) {
-    switch (CANID) {
+  public double getSpeed(int d) {
+    switch (d) {
       case 1: return leftFrontTalon.get();
       case 2: return leftBackTalon.get();
       case 3: return rightBackTalon.get();
