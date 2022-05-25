@@ -44,6 +44,12 @@ public class LimeLight extends SubsystemBase {
 
     @Override
     public void periodic() {
+        Update_Tracking();
+        if (tv == 1) {
+            Find_Target();
+            Align_Target();
+            Move_To_Target();
+        }
         // This method will be called once per scheduler run
     }
 
@@ -64,41 +70,33 @@ public class LimeLight extends SubsystemBase {
     }
 
     public void Find_Target() {
-        Update_Tracking();
-
-        if(tv == 0) {
+        if(tv == 0 && drives.getSpeed() != Constants.SENTRY_SPEED) {
             drives.setSpeed(Constants.SENTRY_SPEED);
         }
+    }
 
-        if (tv == 1) {
-
-            System.out.println("Target Found!!");
-
-            while (tx > 4 && tx < -4 && tx != 0) {
-                System.out.println("Alligning With Target!!");
-                drives.setSpeed(-0.2, 0.2);
-            }
-            System.out.println("Success Alligned With Target!! ");
-
-            while (getDistance() != 30) {
-                while (getDistance() > 30) {
-                    drives.setSpeed(0.2, 0.2);
-                    System.out.println("Moving Forward");
-                }
-                while (getDistance() < 30) {
-                    drives.setSpeed(-0.2, -0.2);
-                    System.out.println("Moving Backward");
-                }
-            }
-
-            if (getDistance() == 30) {
-                drives.setSpeed(0, 0);
-                System.out.println("Target Locked");
-
-            }
-
+    public void Align_Target() {
+        if (tx > 4 && tx < -4 && tx != 0 
+        && drives.getSpeed(Constants.LEFT_FRONT_DRIVE_CAN_ID) != -0.2 
+        && drives.getSpeed(Constants.RIGHT_FRONT_DRIVE_CAN_ID) != 0.2) {
+            System.out.println("Alligning With Target!!");
+            drives.setSpeed(-0.2, 0.2);
         }
+    }
 
+    public void Move_To_Target() {    
+        if (getDistance() > 30
+        && drives.getSpeed() != 0.2) {
+            drives.setSpeed(0.2, 0.2);
+            System.out.println("Moving Forward");
+        } else if (getDistance() < 30
+        && drives.getSpeed() != -0.2) {
+            drives.setSpeed(-0.2, -0.2);
+            System.out.println("Moving Backward");
+        } else if (getDistance() == 30) {
+            drives.setSpeed(0, 0);
+            System.out.println("Target Locked");
+        }
     }
 
     public double getDistance() {
