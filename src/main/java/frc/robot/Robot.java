@@ -11,15 +11,19 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.commands.Autonomous.CrossInitializationLine;
 import frc.robot.commands.Autonomous.DoNothing;
+
 import frc.robot.commands.DriveBase.DefaultDriveBaseCommand;
-import frc.robot.commands.limelight.DefaultLimeLightCommand;
-//import frc.robot.commands.Autonomous.*;
+
+import frc.robot.commands.Limelight.DefaultLimeLightCommand;
+
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.LimeLight;
 
@@ -39,9 +43,10 @@ public class Robot extends TimedRobot {
   private final LimeLight ll;
 
 
-  private boolean m_LimelightHasValidTarget = false;
-  private double m_LimelightDriveCommand = 0.0;
-  private double m_LimelightSteerCommand = 0.0;
+  double tv;
+  double tx;
+  double ty;
+  double ta;
   
   int random_int;  
 
@@ -51,9 +56,6 @@ public class Robot extends TimedRobot {
   private Command autonomousCommand;
 
   //private Command autonomousCommand;
-
-
-
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -101,7 +103,13 @@ public class Robot extends TimedRobot {
     double ty = table.getEntry("ty").getDouble(0);
     double ta = table.getEntry("ta").getDouble(0);
     double tv = table.getEntry("tv").getDouble(0);
-    System.out.println("Tx: " + tx + " Ty: " + ty + " Ta: " + ta + " Tv: " + tv);
+    System.out.println("Tx: " + formatDecimal(tx) + " Ty: " + formatDecimal(ty) + " Ta: " + formatDecimal(ta)
+                    + " Tv: " + tv + " Distance: " + formatDecimal(ll.getDistance()));
+  }
+
+  //Rounds decimals to 3 digits
+  private String formatDecimal(double number) {
+    return String.format("%3.3f", number);
   }
 
   @Override
@@ -172,10 +180,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if(oi.getLeftButton(8)){
-     Update_Limelight_Tracking();
-    }
-
     CommandScheduler.getInstance().run();
 
   }
@@ -191,76 +195,5 @@ public class Robot extends TimedRobot {
   @Override
   public void simulationPeriodic() {
     CommandScheduler.getInstance().run();
-  }
-
-  public void Update_Limelight_Tracking()
-  {
-
-        double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); //If Target is Found
-        double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal Offset
-        double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical Offset
-        double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0); //Target Area 
-        
-        
-        while(tv == 0){
-            drives.setSpeed(-0.2, 0.2);
-            System.out.println("Searching for Target!!");
-            if(tv == 1){
-              drives.setSpeed(0);
-              break;
-              
-            }
-        }
-
-        if(tv == 1){
-      
-      
-          System.out.println("Target Found!!"); 
-          
-          while( tx > 4 && tx < -4 && tx != 0 ){
-            System.out.println("Alligning With Target!!");
-            drives.setSpeed( -0.2, 0.2);
-          }
-          System.out.println("Success Alligned With Target!! ");
-          
-          while(getDistance() != 30 ){
-              while(getDistance() > 30){
-                drives.setSpeed(0.2, 0.2);
-                System.out.println("Moving Forward");
-              }
-              while(getDistance() < 30){
-                drives.setSpeed(-0.2, -0.2);
-                System.out.println("Moving Backward");
-              }
-          }
-
-          if(getDistance() == 30){
-            drives.setSpeed(0, 0);
-            System.out.println("Target Locked");
-            
-          }
-          
-        }
-
-        
-  }
-
-  public double getDistance(){
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry ty = table.getEntry("ty");
-    double targetOffsetAngle_Vertical = ty.getDouble(0.0);
-    // how many degrees back is your limelight rotated from perfectly vertical?
-    double limelightMountAngleDegrees = 20.0;
-    // distance from the center of the Limelight lens to the floor
-    double limelightLensHeightInches = 13.5;
-    // distance from the target to the floor
-    double goalHeightInches = 44.4375;
-    double angleToGoalDegrees = limelightMountAngleDegrees + targetOffsetAngle_Vertical;
-    double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
-    // calculate distance
-    double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)/ Math.tan(angleToGoalRadians);
-    System.out.println("Distance is " + distanceFromLimelightToGoalInches);
-
-    return distanceFromLimelightToGoalInches;
   }
 }

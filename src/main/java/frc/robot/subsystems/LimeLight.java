@@ -17,16 +17,20 @@ public class LimeLight extends SubsystemBase {
 
     private static DriveBase drives;
 
-    double tv;
-    double tx;
-    double ty;
-    double ta;
+    public double tv;
+    public double tx;
+    public double ty;
+    public double ta;
+    public double leftSpeed;
+    public double rightSpeed;
 
     double distanceFromLimelightToGoalInches;
 
     double motorsGivenInstructions;
 
-    private LimeLight() {
+    public LimeLight() {
+        drives = DriveBase.getInstance();
+
         this.tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); // If Target is                                                                                        // Found
         this.tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal       // Offset
         this.ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0); // Vertical// Offset
@@ -41,27 +45,6 @@ public class LimeLight extends SubsystemBase {
         return m_instance;
     }
 
-
-    @Override
-    public void periodic() {
-        Update_Tracking();
-        if (tv == 1) {
-            Find_Target();
-            Align_Target();
-            Move_To_Target();
-        }
-        // This method will be called once per scheduler run
-    }
-
-    @Override
-    public void simulationPeriodic() {
-        // This method will be called once per scheduler run during simulation
-    }
-    
-    public void teleopPeriodic() {
-        
-    }
-
     public void Update_Tracking() {
         this.tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0); // Target Found
         this.tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0); // Horazontal
@@ -70,31 +53,47 @@ public class LimeLight extends SubsystemBase {
     }
 
     public void Find_Target() {
-        if(tv == 0 && drives.getSpeed() != Constants.SENTRY_SPEED) {
-            drives.setSpeed(Constants.SENTRY_SPEED);
+        System.out.println("Finding Target ");
+        if (!targetFound()) {
+            drives.setSpeed(Constants.SENTRY_SPEED, -Constants.SENTRY_SPEED);
+        }
+        if (targetFound()) {
+            drives.setSpeed(0);
         }
     }
 
     public void Align_Target() {
-        if (tx > 4 && tx < -4 && tx != 0 
-        && drives.getSpeed(Constants.LEFT_FRONT_DRIVE_CAN_ID) != -0.2 
-        && drives.getSpeed(Constants.RIGHT_FRONT_DRIVE_CAN_ID) != 0.2) {
-            System.out.println("Alligning With Target!!");
-            drives.setSpeed(-0.2, 0.2);
+        if (tx > 1){
+            this.leftSpeed = .2;
+            this.rightSpeed = 0;
+        } else if (tx < -1) {
+            this.leftSpeed = 0;
+            this.rightSpeed = .2;
         }
     }
 
-    public void Move_To_Target() {    
-        if (getDistance() > 30
-        && drives.getSpeed() != 0.2) {
+    public boolean targetFound(){
+        if (tv == 1
+        && tx <= Constants.HORIZONTAL_THRESHOLD
+        && tx >= -Constants.HORIZONTAL_THRESHOLD) {
+            System.out.println("Target Found!!");
+            return true;
+        }
+        System.out.println("Target Not Found!!");
+        return false;
+    }
+
+    public void Move_To_Target() {
+        drives.setSpeed(0.2);
+        if (getDistance() > 30) {
             drives.setSpeed(0.2, 0.2);
             System.out.println("Moving Forward");
         } else if (getDistance() < 30
-        && drives.getSpeed() != -0.2) {
+                && drives.getSpeed() != -0.2) {
             drives.setSpeed(-0.2, -0.2);
             System.out.println("Moving Backward");
         } else if (getDistance() == 30) {
-            drives.setSpeed(0, 0);
+            // drives.setSpeed(0, 0);
             System.out.println("Target Locked");
         }
     }
@@ -116,7 +115,7 @@ public class LimeLight extends SubsystemBase {
                 / Math.tan(angleToGoalRadians);
         System.out.println("Distance is " + distanceFromLimelightToGoalInches);
 
-        return this.distanceFromLimelightToGoalInches;
+        return distanceFromLimelightToGoalInches;
     }
 
 }

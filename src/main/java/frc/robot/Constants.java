@@ -95,7 +95,8 @@ public final class Constants {
 
    // LimeLight Speeds
 
-   public static final double SENTRY_SPEED = 0.2;
+   public static final double SENTRY_SPEED = 0.5;
+   public static final double HORIZONTAL_THRESHOLD = 10;
 
 
 
