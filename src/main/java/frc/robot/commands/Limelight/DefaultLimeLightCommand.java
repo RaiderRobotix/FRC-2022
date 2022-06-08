@@ -33,9 +33,14 @@ public class DefaultLimeLightCommand extends CommandBase {
       if (ll.targetFound()) {
         ll.Align_Target();
         System.out.println("Speed" + ll.leftSpeed + "   " + ll.rightSpeed);
-        drives.setSpeed(ll.leftSpeed + .1, ll.rightSpeed + .1);
-        if(ll.getDistance() <= 55) {
+        //TODO Change to use ll Move_To_Target
+        if(ll.getDistance() <= 55
+        && ll.getDistance() >= 50) {
           drives.setSpeed(0.0);
+        } else if (ll.getDistance() > 55) {
+          drives.setSpeed(ll.leftSpeed + .1, ll.rightSpeed + .1);
+        } else if (ll.getDistance() < 50) {
+          drives.setSpeed(-(ll.leftSpeed + .1), -( -ll.rightSpeed + .1));
         }
       } else {
         ll.Find_Target();

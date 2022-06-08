@@ -84,8 +84,7 @@ public class LimeLight extends SubsystemBase {
     }
 
     public void Move_To_Target() {
-        drives.setSpeed(0.2);
-        if (getDistance() > 30) {
+        if (getDistance() > 50) {
             drives.setSpeed(0.2, 0.2);
             System.out.println("Moving Forward");
         } else if (getDistance() < 30
